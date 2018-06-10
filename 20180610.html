@@ -128,7 +128,6 @@
     }
 
     var aaaaaa = callLater(sumObj, 1, 2);
-    setTimeout(aaaaaa, 1000)
   </script>
   <script>
     console.clear()
@@ -165,7 +164,6 @@
     }
 
     var func = callLater(sumObj, 1, 2);
-    setTimeout(func, 1000)
     // 인자를 받은만큼 늦게출력
 
     var str = getCompletedStr('zzoon', 'seoul', 16);
@@ -261,7 +259,56 @@
       return result / a.length
     }
     console.log('1',average([1,2,3]))
+    console.clear()
 
+    let origibal = '원본';
+    let copy = origibal;
+    console.log('copy의 값은?',copy);
+
+    copy = '복제품';
+    console.log('origibal',origibal);
+    console.log('copy',copy);
+
+    var t1 = ['원본'];
+    var t2 = t1;
+    t2[0] = '복제품'
+    console.log(t1[0]);
+    console.log(t2[0]);
+    //새로운 객체를 다시 넣으면 다른게 되지만, 원래 값을 수정하면 동일하게 수정됨.
+    var t3 = Array.prototype.slice.call(t1);
+    console.log(t3);
+    t3[0] = 'SLICE CALL';
+    console.log(t3);
+
+    let Person = function(arg){
+      let name = arg?arg:'zzoon';
+
+      return {
+        getName:function(){
+          return name;
+        },
+        setName: function(arg){
+          name = arg;
+        }
+      }
+    }
+
+    let me = Person();
+    console.log(me.getName());
+    me.setName('junyeong');
+    console.log(me.getName())
+
+
+    let ArrCreate = function(arg){
+      let arr = [1,2,3];
+
+      return {
+        getArr:function(){
+          return arr;
+        }
+      }
+    }
+    
 
 
 
