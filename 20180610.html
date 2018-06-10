@@ -6,72 +6,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    .wrap {
+      width: 1200px;
+      margin: auto;
+    }
+
+    .bb {
+      background: orange;
+    }
+  </style>
 </head>
 
 <body>
-2018-06-10 start
+  2018-06-10 start
+
+  <div class="wrap">
+    <div id="header" class="header">HEADER</div>
+    <ul>
+      <li class="abc"></li>
+      <li class="abc"></li>
+      <li class="abc"></li>
+      <li class="abc"></li>
+      <li class="abc"></li>
+    </ul>
+  </div>
   <script>
     //신나게해보 ><
     const testA = " game game is fuck ! i will rich!";
     const testB = '1235346346 235 26'
     console.log(testA.concat(testB))
-    console.log(testA.indexOf('game',2));
+    console.log(testA.indexOf('game', 2));
     console.log(testA.lastIndexOf('game'));
-    console.log(testA.replace('game','ya'));
+    console.log(testA.replace('game', 'ya'));
     console.log(testA.repeat(2));
-    console.log(testA.slice(1,3))//앞까지
-    console.log(testA.substr(5,2))//slice와 마찬가지 앞
-    console.log(testA.substring(5,2))//뒤쪽 index가 낮으면 앞으로 자름
+    console.log(testA.slice(1, 3)) //앞까지
+    console.log(testA.substr(5, 2)) //slice와 마찬가지 앞
+    console.log(testA.substring(5, 2)) //뒤쪽 index가 낮으면 앞으로 자름
     console.log(testA.toLowerCase());
     console.log(testA.toUpperCase());
     console.log(testA.includes('fuck'));
     console.log(testA.startsWith('game'));
-    console.log('trim',testA.trim());
+    console.log('trim', testA.trim());
     console.log(testA.valueOf());
     console.clear();
-    let arrayA = ['Hello','world','baby','a','b','a'];
-    let arrayB = [1,2,3,4,5,6,7,8,9,10,11,12,123,54,54051,56,,510,5105,];
+    let arrayA = ['Hello', 'world', 'baby', 'a', 'b', 'a'];
+    let arrayB = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 123, 54, 54051, 56, , 510, 5105, ];
     console.log(arrayA.concat(arrayB));
     console.log(arrayA.join('-'));
     console.log(arrayA.pop());
     console.log(arrayA.push('c'));
     console.log(arrayA.shift());
     console.log(arrayA.unshift('h'));
-    console.log(arrayA.slice(1,2));
+    console.log(arrayA.slice(1, 2));
     console.log(arrayB.sort());
-    console.log(arrayB.sort((x,b)=>x-b));
-    console.log(arrayB.sort((x,b)=>b-x));
+    console.log(arrayB.sort((x, b) => x - b));
+    console.log(arrayB.sort((x, b) => b - x));
     console.log(arrayB.reverse());
-    console.log(arrayA.splice(1,2));
+    console.log(arrayA.splice(1, 2));
     console.log(arrayA);
     console.log(arrayA.toString());
     console.log(arrayA.valueOf());
     console.log(arrayA.length);
-    console.log(arrayA.map((x)=>x+'d'));
-    console.log(arrayA.filter(x=>x[0]));
-    console.log(arrayB.every(x=>x>20));
-    console.log(arrayB.some(x=>x>50));
-    console.log(arrayB.reduce((x,y)=>x+y));
+    console.log(arrayA.map((x) => x + 'd'));
+    console.log(arrayA.filter(x => x[0]));
+    console.log(arrayB.every(x => x > 20));
+    console.log(arrayB.some(x => x > 50));
+    console.log(arrayB.reduce((x, y) => x + y));
     console.clear();
-    let gemi = arrayB.map(x=>x+2);console.log(gemi);
-    let amy = arrayB.filter(x=>x>20);console.log(amy);
-    let guy = arrayB.forEach(x=>console.log(x));console.log(guy);
+    let gemi = arrayB.map(x => x + 2);
+    console.log(gemi);
+    let amy = arrayB.filter(x => x > 20);
+    console.log(amy);
+    let guy = arrayB.forEach(x => console.log(x));
+    console.log(guy);
     console.clear()
-    let obj1 = {name:'jun',age:100,job:';0;',willjob:'developer'}
+    let obj1 = {
+      name: 'jun',
+      age: 100,
+      job: ';0;',
+      willjob: 'developer'
+    }
     Object.freeze(obj1);
     console.log(Object.isFrozen());
-    obj1.job='lol';
+    obj1.job = 'lol';
     console.log(obj1);
     console.log(Object.seal())
     console.log(Object.isFrozen());
-    console.log(Math.abs(5,55555555));
+    console.log(Math.abs(5, 55555555));
     console.log(Math.ceil(2.2));
-    console.log(Math.max(5,1,3,5555));
-    console.log(Math.floor(5,5555555));
-    console.log(Math.min(5,5,5,2,0));
-    console.log(Math.pow(5,2));
+    console.log(Math.max(5, 1, 3, 5555));
+    console.log(Math.floor(5, 5555555));
+    console.log(Math.min(5, 5, 5, 2, 0));
+    console.log(Math.pow(5, 2));
     console.log(Math.random());
-    console.log(Math.floor(Math.random()*10));
+    console.log(Math.floor(Math.random() * 10));
     console.log(Math.round(5.4));
     console.log(Math.sqrt(4));
     let num = 5.35465;
@@ -79,7 +108,159 @@
     console.log(num.toPrecision(4));
     console.log(obj1.hasOwnProperty());
     console.clear();
-    
+
+    //function start
+    let f1 = (x, y) => {
+      return;
+    }
+    console.log(f1.length);
+    console.log(f1.name);
+    console.log();
+
+    function callLater(obj, a, b) {
+      return (function () {
+        obj['sum'] = a + b;
+        console.log(obj['sum']);
+      })
+    }
+    var sumObj = {
+      sum: 0
+    }
+
+    var aaaaaa = callLater(sumObj, 1, 2);
+    setTimeout(aaaaaa, 1000)
+  </script>
+  <script>
+    console.clear()
+
+    var getCompletedStr = (function () {
+      var buffAr = [
+        'I am ',
+        '',
+        '. I live in ',
+        '',
+        '. I\'am ',
+        '',
+        ' years old',
+      ];
+
+      return (function (name, city, age) {
+        buffAr[1] = name;
+        buffAr[3] = city;
+        buffAr[5] = age;
+
+        return buffAr.join('');
+      })
+    })()
+
+    function callLater(obj, a, b) {
+      return (function () {
+        obj['sum'] = a + b;
+        console.log(obj['sum']);
+      })
+    }
+
+    var sumObj = {
+      sum: 0
+    }
+
+    var func = callLater(sumObj, 1, 2);
+    setTimeout(func, 1000)
+    // 인자를 받은만큼 늦게출력
+
+    var str = getCompletedStr('zzoon', 'seoul', 16);
+    console.log(str);
+
+
+    function cc() {
+      const HEADER = document.getElementById('header');
+      HEADER.addEventListener('click', function () {
+        console.log('gggg');
+      })
+    }
+    cc();
+
+    for (var i = 0; i < 10; i++) {
+      if (i == 2) {
+        console.log('wow');
+        continue; //돌려보내라 내려가게하지말고
+      }
+      if (i == 5) {
+        console.log('hello');
+        break //끊어줘라
+      }
+    }
+
+    function makeAdder(a) {
+      console.log("parenet", a);
+      return function (b) {
+        console.log('b', b);
+        console.log('son', a)
+        return a + b;
+      }
+      console.log('aaa', a);
+    }
+
+    x = makeAdder(5);
+    console.log(x(6));
+
+    const ABC = document.getElementsByClassName('abc');
+    console.log(ABC[0].className += ' bb')
+
+
+
+    let ob1 = {
+      a: 1
+    };
+    let pb1 = ob1;
+    ob1.a = 2;
+    console.log(ob1 === pb1);
+    ob1 = {
+      a: 2
+    };
+    console.log(ob1 === pb1);
+
+    let o4 = {
+      a: 1
+    };
+    let p4 = o4;
+    o4.a = 2;
+    console.log(o4 === p4);
+    o4 = {
+      a: 2
+    };
+    console.log(o4 === p4);
+
+    let numbers = {
+      numberA: 5,
+      numberB: 10,
+      sum: function () {
+        console.log(this === numbers);
+
+        function calculate() {
+          console.log(this === numbers);
+          return this.numberA + this.numberB;
+        }
+        return calculate.call(this);
+      }
+    };
+
+    let ga = {
+      x: 1
+    };
+    let bba = function (y) {
+      console.log(this.x + y)
+    };
+    console.log(bba.call(ga, 1));
+
+
+    function average(array){
+      let a = Array.prototype.slice.call(array);
+      let result=0;
+      a.forEach(x=> result+=x);
+      return result / a.length
+    }
+    console.log('1',average([1,2,3]))
 
 
 
