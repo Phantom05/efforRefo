@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .bbb{
+      transform: rotate(90deg);
+      margin: 100px;
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+  <span class="bbb">헬로</span>
+  
+  <ul class="abc">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <script>
+    var str='abcdef';
+    var pattern = /a./i;
+    pattern.exec(str);//추출 필요한 정보를 추출해냄.
+    pattern.test(str);//테스트//존재하는지 또는 가능한건지 true false 반환
+    str.match(pattern);//치환
+    console.log(pattern.exec(str));
+    console.log(str.replace(pattern,'A'));
+
+    var xg = /a/g;
+    console.log(
+      'abcdea'.match(xg)
+    )
+
+    var group = /(\w+)\s(\w+)/i;
+    //  ()은 그루핑임, \w 은 A-Za-z0-9
+    // +은 1개 이상
+    // \s은 스페이스, 공백1개라는 뜻임
+
+    var gamer = 'codung everybody';
+    var result  = gamer.replace(group, "$2,$1");
+    //보면 그룹이 ()이 $1 $2 이렇게 되있는것임. replace로 위치를 바꿔준것
+    console.log(result);
+
+    'ust strict'
+    var urlPattenrn = /https?:\/\/(\w*:\w*@)?[-\w.]+(:\d+)?(\/([\w/_.]*(\?\S+)?)?)?/gim;
+    var content = '구글 : http://google.com입니다. 네이버 : http://naver.com 입니다.';
+
+    var ressl = content.replace(urlPattenrn,function(url){
+      console.log(`function 동작중 ${url}`)
+      return `<a href="${url}" target="_blank">${url}</a>`;
+    });
+    console.log(ressl);
+
+    //찾고자 하는 텍스트가 있으면 그대로적어줌.
+
+    var trgx = /hello/;
+    var tstr = 'Hello';
+   console.log( trgx.exec(tstr));
+   // ^캐럿 뒤에나오는 패턴은 앞에 ^who 이렇게하면 who가 맨앞에 들어감. 
+   // $는 맨뒤에 이런 문자가 붙어있는 만큼 찾음
+   // $를 문자로 사용하고싶다면 \$ 역슬래쉬~ ^\$ \$$
+   // .은어떤거와써도됨 g하면 전체를 선택 \.  \..\. 하면 .R. 이러한것을 찾음
+
+   var strg = /[you]/i;
+   var stea = 'How do you do?';
+   console.log(strg.exec(stea));
+   // [you]이렇게 되면 you중에 1개를 선택하라는것. [gw][gr]이렇게있으면 gw중에1개 gr중에1개
+   // 글자가 많으면 [a-z]이런식으로 사용
+   // 서브패턴 (on||use)
+
+   // * => 0~여러개 다만 *앞에있는 문자를 타게팅함 a*b이면 a가 100개고b가 1개 이런식
+   // 주의 *는 바로앞에있는것을 가져옴으로 [-@]* 이렇게 있으면 []요기 안에있는게 -이거나 @이거나
+   // +은 1개이상 ?은 없거나 1개
+
+    // .{5} 수량자 5글자 [els]{1,3}
+    // r.*? 이렇게 하게되면 연산자 뒤에 연산자가 붙는건대, 문법의 의미가 달라짐 *이 0~1의 앞부분 0이되는것임. 
+    // r.*+ 가된다면? *이 1이되겠지 그래서 .1개를 가져오게될거임
+    // \w 은 [A-z0-9_]와같음 \W 는 [^A-z0-9_]와 같음
+    // \d 는 [0-9]와 같고 \D는 [^0-9]와같음
+    // \b 바운더리는 붙는곳의 특성을 기준으로 경계선을 나눠주는것임 \b\w을 하면 word에 포함되지 않는것을 기준으로 나뉘어줌 앞쪽으로 \w\b를 해주면 뒤쪽으로 나뉘어줌
+    // \B는 바운더리된걸 제외하고 모든것을 셀렉함
+
+
+    let 천재 = /(천재||바보)+/gim;
+    let 말이여방구여 = '풀스택은 천재 인가요? 바보 일 수도 있어.';
+    console.log(천재.exec(말이여방구여))
+  </script>
+</body>
+</html>
