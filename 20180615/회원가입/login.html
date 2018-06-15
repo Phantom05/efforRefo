@@ -5,42 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    *{
+      box-sizing: border-box;
+      padding: 0;margin: 0;
+    }
+    h1{
+      font-size: 2rem;
+      padding: 5px 40px;
+      border-bottom: 1px solid rgb(201, 201, 201);
+    }
+    .signup{
+      width: 300px;
+      margin:100px auto;
+      text-align: center;
+    }
+    .text-input{
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    h2{
+      margin-bottom: 5px;
+      font-size: 2rem;
+    }
+    .info{
+      font-size: .8rem;
+      margin-bottom: 10px;
+    }
+    .button{
+      cursor: pointer;
+      width: 100%;
+      padding: 10px;
+      background: rgba(18, 89, 241, 0.726);
+      color: white;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-  회원가입
-
+  <h1>
+      Welcome
+  </h1>
+  <div class="signup">
+  <h2>회원가입</h2>
+  <p class="info">회원가입 후 다양한 서비스를 즐겨보세요.^-^</p>
   <form action="" id="customer" onsubmit="submitCustomer(event)">
-    <p><label for="">아이디</label> <input type="text" required name="nickname" autocomplete="off"></p>
-    <p><label for="">비밀번호</label> <input type="password" required name="password" autocomplete="off"></p>
-    <p><label for="">전화번호</label> <input type="text" required name="call" autocomplete="off"></p>
-    <p><label for="">이메일</label><input type="email" required name="email" autocomplete="off"></p>
-    <p><label for="">주소</label> <input type="text" required name="address" autocomplete="off"></p>
-    <p><label for="">성별:</label> 
-      남<input type="radio" name="gender" checked value="남">
-      여<input type="radio" name="gender" value="여"></p>
-    <button type="submit">회원가입</button>
+    <p><input class="text-input" type="text" required name="nickname" autocomplete="off" placeholder="아이디"></p>
+    <p><input class="text-input" type="email" required name="email" autocomplete="off" placeholder="이메일"></p>
+    <p><input class="text-input" type="password" required name="password" autocomplete="off" placeholder="비밀번호"></p>
+    <p>
+      남 <input type="radio" name="gender" checked value="남">
+      여 <input type="radio" name="gender" value="여"></p>
+      <p><input class="text-input" type="password" required name="passwordCheck" autocomplete="off" placeholder="비밀번호 확인"></p>
+    <button type="submit" class="button">가입하기</button>
   </form>
-
+</div>
 
   <fieldset>
-      <legend>회원정보</legend>
+      <legend>고객정보</legend>
       <p id="result"></p>
     </fieldset>
   <script>
     const CUSTOMER = document.getElementById('customer');
     let store={};
-    const RESULT = document.getElementById('result')
+    const RESULT = document.getElementById('result');
 
     function submitCustomer(e){
-      store.nickname=CUSTOMER.nickname.value;
-      store.password=CUSTOMER.password.value;
-      store.call=CUSTOMER.call.value;
-      store.email=CUSTOMER.email.value
-      store.address=CUSTOMER.address.value;
-      store.gender=CUSTOMER.gender.value;
-      RESULT.textContent=JSON.stringify(store);
-      e.preventDefault();
-      alert(`회원가입을 축하합니다. ${CUSTOMER.nickname.value}님`);
+      if(CUSTOMER.password.value === CUSTOMER.passwordCheck.value){
+        store.아이디=CUSTOMER.nickname.value;
+        store.비밀번호=CUSTOMER.password.value;
+        store.이메일=CUSTOMER.email.value;
+        store.성별=CUSTOMER.gender.value;
+        RESULT.textContent='현재 서버로 보냄 '+JSON.stringify(store);
+        e.preventDefault();
+        alert(`회원가입을 축하합니다. ${CUSTOMER.nickname.value}님`);
+        CUSTOMER.nickname.value='';
+        CUSTOMER.password.value='';
+        CUSTOMER.email.value='';
+        CUSTOMER.gender.value='남';
+        CUSTOMER.passwordCheck.value='';
+      }else{
+        e.preventDefault();
+        alert('비밀번호를 확인해주세요.');
+      }
+      
     }
 
     
