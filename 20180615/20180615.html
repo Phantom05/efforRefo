@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .customer{
+      width: 300px;
+      height: 400px;
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="customer">
+    <strong>동의하기</strong>  
+    본 이용약관은 카카오가 제공하는 스토리채널 서비스(이하 `서비스`라 합니다)를 이용하고자 하는 자의 이용신청에 대해 카카오가 승낙함으로써 성립됩니다. 카카오는 이용승낙의 의사를 스토리채널 홈페이지에 게시하거나 전자메일 또는 기타 방법으로 이용신청자에게 통지할 수 있습니다.
+
+      이용신청자가 허위 또는 타인의 정보를 도용하여 이용 신청을 하는 경우 승낙이 거절될 수 있으며 승낙 후에도 별도의 사전 고지 없이 탈퇴 처리될 수 있습니다. 이용신청자가 이용 신청시 제공 해야 하는 상세 정보는 서비스 내 가입 화면을 통해 확인할 수 있습니다.
+      카카오는 다음과 같은 사유가 있는 경우, 이용신청에 대한 승낙을 거절할 수 있습니다.
+      
+      1. 이미 가입된 이용자이거나 동일한 계정이 존재하는 경우
+      
+      2. 본 이용약관 또는 카카오 서비스 약관을 위반하여 카카오로부터 서비스 이용의 제한을 받은 이용자가 이용 제한 또는 재가입금지 기간 중에 이용을 신청한 경우
+      
+      3. 본 이용약관의 조건에 위반되는 부당한 이용신청이거나 위법한 이용신청인 경우
+      
+      4. 기타 사회 일반의 정서 등을 이유로 카카오가 이용신청의 거절이 필요하다고 합리적으로 판단하는 경우
+      
+      이용자의 계정이 카카오스토리에 가입되지 않은 계정인 경우에는 카카오스토리에 가입 후 스토리채널 가입 및 이용이 가능합니다.
+      
+      이용신청자는 가입 신청시 정확한 정보를 기재하여야 하며, 기재한 사항이 잘못되었거나 변경되었을 경우 즉시 해당 사항을 수정해야 합니다. 이용신청자가 작성하는 정보에 대해 카카오는 임의로 수정할 수 없습니다.
+      
+      잘못된 정보 또는 기재한 정보가 변경되었음에도 해당 사항을 수정하지 않음으로써 발생한 손해는 당해 이용자가 부담하여야 하며, 카카오는 이에 대하여 아무런 책임을 지지 않습니다.
+      
+      이용자에 대한 통지
+      카카오가 이용자에 대한 통지를 하는 경우, 서비스 내 공지사항 또는 이용자가 카카오에 제출한 전자우편주소, 서비스의 알림(앱 푸시, 알림센터 등)으로 통지할 수 있습니다.
+      카카오는 불특정다수의 이용자에 대한 통지의 경우 1주일 이상 스토리채널 서비스에 연결된 화면에 게시함으로써 개별 통지에 갈음할 수 있습니다.
+  </div>
+
+  <form action="javascript:console.log('전송완료')">
+    <label for="target">위 사항에 동의합니다</label> <input type="checkbox" id="target">
+    <button type="submit" onclick="check(event)">확인</button>
+  </form>
+
+  <script>
+    const target = document.getElementById('target');
+
+    function check(e){
+      (target.checked)?true:(e.preventDefault(),alert('이용약관에 동의해주세요'))
+    }
+    
+    
+
+    // function getAverage(marks) {
+    //   return Math.floor(marks.reduce((x, y) => x + y)/marks.length)
+    // }
+    /*     getAverage = (marks) => Math.floor(marks.reduce((x, y) => x + y) / marks.length)
+        console.log(getAverage([1, 1, 1, 1, 1, 1, 2])) */
+    // function solution(s) {
+    //   return s.charAt((s.length%2==0)?0:Math.floor(s.split('').length/2))
+    // }
+    /*      function solution(s) {
+           return (s.length%2===0)?s.substr(s.length/2-1,2):s.charAt(Math.floor(s.length/2));
+         } */
+    /*       function solution(s) {
+           return s.substr(Math.ceil(s.length/2)-1,(s.length%2===0)?2:1)
+         } */
+    // console.log('abcd'.split('').slice((this.length%2==0)?(0,1):2,5))
+    // console.log('홀수',solution('abcaffvde'));
+    // console.log('짝수',solution('abde'));
+
+
+    // var array = [1,2,3,4,5,6,7,8,9,10];
+
+    // var sum =0;
+    // var output ='';
+    // array.forEach(function(el,index,array){
+    //   sum+=el;
+    //   output+=index +':'+el+'→'+sum+'\n';
+    // })
+
+    // alert(output)
+
+    var object ={
+      name:'윤인성',
+      region:'서울특별시'
+    };
+    let copy = JSON.parse(JSON.stringify(object));
+    // alert(copy.name+':'+copy.region);
+
+    var object ={
+      name:'object',
+      prop:'object',
+      toJSON:function(){
+        return{
+          custom:'custom'
+        }
+      }
+    }
+
+    // alert(JSON.stringify(object))
+
+  </script>
+</body>
+
+</html>
