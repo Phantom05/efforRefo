@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./underscore.js"></script>
+  <script>alert('process -0')</script>
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <script>alert('process -1')</script>
+    <h1>World</h1>
+    <script>alert('process -2')</script>
+    <h1>Guys</h1>
+    <script>alert('process -3')</script>
+  <script>
+    // function feast(beast, dish) {
+    //   return (beast.charAt(0) === dish.charAt(0))?(beast.charAt(beast.length-1)===dish.charAt(dish.length-1))?true:false:false
+    // }
+    function beast(beast, dish) {
+      return beast[0]===dish[0] && beast[beast.length-1] ===dish[dish.length-1]
+    }
+    function geast(beast, dish) {
+      return beast.startsWith(dish[0]) && beast.slice(-1) ===dish.slice(-1)//endsWith
+    }
+    function teast(beast, dish) {
+      return beast.startsWith(dish[0]) && beast.slice(-1) ===dish.slice(-1)//endsWith
+    }
+    const feast = (...args) => /^(.).*(.),\1.*\2$/.test(args);
+
+  // 매개변수 1번쨰과 2번째가 모두 같아야함 
+
+    console.log(feast('afdf afds3s','a s ssh','asfasfd dsf sdw s'));
+    console.log(beast('afdf afds3s','asfasfd dsf sdw sgs'));
+    console.log(geast('afdf afds3s','asfasfd dsf sdw sgs'));
+
+    var students =[
+      {
+        이름:'이준영',국어:98,수학:67,영어:97,과학:99
+      },
+      {
+        이름:'선뚝백',국어:46,수학:10,영어:11,과학:07
+      },
+      {
+        이름:'똑똑이',국어:99,수학:98,영어:100,과학:95
+      },
+      {
+        이름:'똑똑이',국어:97,수학:86,영어:92,과학:89
+      },
+      {
+        이름:'모질이',국어:12,수학:09,영어:17,과학:50
+      }
+    ]
+
+    let success={
+      '통과한 학생':[
+
+      ],
+      "통과하지 못한 학생":[
+
+      ]
+    }
+
+    let filterB = students.forEach((x)=>{
+      return (((x.국어+x.수학+x.영어+x.과학)/students.length) > 50)?success['통과한 학생'].push(x.이름) :success['통과하지 못한 학생'].push(x.이름)
+    })
+
+    console.log('통과한 학생',success['통과한 학생'],'\n통과하지 못한 학생',success['통과하지 못한 학생']);
+
+    let sortByScience = _.sortBy(students,(item)=>item.과학).slice(0,3);
+    console.log(JSON.stringify(sortByScience,null,2))
+
+
+    // let child = window.open('','','width=300, height=200');
+    
+    // if(child){
+    //   child.document.write('<h1>From Parent Window</h1>')
+    // }else{
+    //   alert('팝업 차단을 해제해주세요')
+    // }
+
+    // child.resizeTo(500,100);
+    
+    // let i = 0;
+    // setInterval(function(){
+    //   i++;
+    //   child.moveBy(1,1);
+    //   child.resizeBy(i,i);
+    // },100)
+
+  // let width = screen.width;
+  // let height =screen.height;
+
+  // child.moveTo(0,0);
+  // child.resizeTo(width,height);
+
+  // setInterval(function(){
+  //   child.resizeBy(-20,-20);
+  //   child.moveBy(10,10);
+  // },1000)
+
+  let output='';
+  for(let key in location){
+    output +='●'+key+': '+location[key]+'\n';
+  }
+
+  window.onload=function(){
+
+  };
+
+  </script>
+</body>
+
+</html>
