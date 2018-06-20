@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    span {
+      display: inline-block;
+      border: 1px solid red;
+      width: 50%;
+      height: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+<span></span>
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+<h2 id="will-remove">Header</h2>
+
+<h3 id="clock"></h3> -->
+
+  <!-- <h1 id="sun">@</h1>
+  <h1 id="earth">0</h1>
+  <h1 id="moon">*</h1> -->
+
+
+
+  <script>
+    console.log([1, 2, 3, 5, 4].some(x => x > 4));
+    console.log([1, 2, 3, 5, 4].every(x => x > 4));
+    console.log([1, 2, 3, 5, 4].every(x => x > 0));
+
+    // window.onload= function(){
+    //   var img = document.createElement('img');
+    //   img.setAttribute('src','../../../../457373.png');
+    //   img.setAttribute('width',500);
+    //   img.setAttribute('height',500);
+
+    //   document.body.appendChild(img);
+
+    //   var output = '';
+    //   output+='<ul>';
+    //   output+='<li>Javascript</li>';
+    //   output+='<li>jQuery</li>';
+    //   output+='<li>Ajax</li>';
+    //   output+='</ul>'
+
+    // }
+
+    // var headers = document.getElementsByTagName('h1');
+
+    // for(var i = 0;i<headers.length;i++){
+    //   headers[i].innerHTML='width getElmentByTagName'
+    // }
+
+    // var willRemove=document.getElementById('will-remove');
+    // document.body.removeChild(willRemove);
+
+    // var clock=document.getElementById('clock');
+
+    // setInterval(function(){
+    //   clock.innerHTML= new Date().toString();
+    // },1000);
+
+
+    // window.onload = function () {
+    //   var sun = document.getElementById('sun');
+    //   var moon = document.getElementById('moon');
+    //   var earth = document.getElementById('earth');
+
+    //   sun.style.position = 'absolute';
+    //   earth.style.position = 'absolute';
+    //   moon.style.position = 'absolute';
+    //   sun.style.left = 250 + 'px';
+    //   sun.style.top = 200 + 'px';
+
+    //   var earthAngle = 0;
+    //   var moonAngle = 0;
+
+    //   setInterval(function () {
+    //     var earthLeft = 250 + 150 * Math.cos(earthAngle);
+    //     var earthTop = 200 + 150 * Math.sin(earthAngle);
+    //     var moonLeft = earthLeft + 50 * Math.cos(moonAngle);
+    //     var moonTop = earthTop + 50 * Math.sin(moonAngle);
+
+    //     earth.style.left = earthLeft + 'px';
+    //     earth.style.right = earthTop + 'px';
+    //     moon.style.left = moonLeft + 'px';
+    //     moon.style.right = moonTop + 'px';
+
+    //     earthAngle += 0.1;
+    //     moonAngle += 0.3;
+    //   }, 1000 / 30)
+    // }
+
+    // function abbrevName(name) {
+    //   return name.match(/[A-Z]+/g).join(".")
+    // }
+
+    // function abbrevName(name) {
+    //   return name.split(' ').map(x=>x[0].match(/[A-Z]/)).join('.')
+    // }
+
+    // function abbrevName(name) {
+    //   return name.split(' ').map(x=>(x[0]===/[\cX]/)?x[0]:x[0].toUpperCase()).join('.')
+    // }
+    function abbrevName(name) {
+      return name.split(' ').map(i => i[0]).join('.').toUpperCase()
+    }
+
+    console.log(abbrevName('sam Harrs'))
+
+    window.onload = function () {
+
+
+    }
+
+    function nextRandomInteger(limit) {
+      return Math.round(Math.random() * limit);
+    }
+
+    var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    function randomAlpabet() {
+      return alphabet.charAt(nextRandomInteger(25))
+    }
+
+    function randomSpeed(maxSpeed) {
+      return Math.random() * maxSpeed - Math.random() * maxSpeed;
+    }
+
+    var canvasWidth = 700;
+    var canvasHeight = 400;
+
+    function movingText() {
+
+      this.x = nextRandomInteger(canvasWidth);
+      this.y = nextRandomInterger(canvasHeight);
+      this.vx = randomSpeed(10);
+      this.vy = randomSpeed(10);
+
+      this.body = document.createElement('h1')
+
+    }
+
+
+
+    // function remove(s, n) {
+    //   let arr = s.split('');
+    //   let con = n;
+
+    //   for(var i=0; i<arr.length;i++){
+    //     if(s[i]==='!'){
+    //       arr[i]='';
+    //       con--;
+    //     if(con<=0) break
+    //     }
+    //   }
+    //   return arr.join('')
+    // }
+
+    // function remove(s, n) {
+    //   let arr = s.split('');
+    //   let con = n;
+
+    //   for(r in arr){
+    //     if(arr[r]==='!'){
+    //       arr[r]='';
+    //       con--;
+    //       if(con<=0) break
+    //     }
+    //   }
+    //   return arr.join('');
+    // }
+
+    // function remove(s, n) {
+    //   return n>0?remove(s.replace('!',''),n-1):s;
+    // }
+
+    function remove(s, n) {
+      while(n){
+        s = s.replace("!","");
+        n--;
+      }
+      return s
+    }
+    
+
+    let ggg='abcde';
+    console.log(remove(ggg[3],3))
+    
+    console.log(remove('!!!Hi !!!!!!hi hi hi !!!',2))
+
+
+  </script>
+</body>
+
+</html>
