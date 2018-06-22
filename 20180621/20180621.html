@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    function reverseWords(str) {
+      return str.split(' ').reverse().join(' ')
+    }
+    console.log(reverseWords("The greatest victory is that which requires no battle"));
+
+
+    // var summation = function (num) {
+    //   let result = 0;
+    //   for (var i = 1; i <= num; i++) {
+    //     result += i;
+    //   }
+    //   return result;
+    // }
+
+    var summation = function (num) {
+      return num * (num + 1) / 2
+    }
+
+    // var summation = function (num) {
+    //   return (num > 1) ? num + summation(num - 1) : num;
+    // }
+
+    console.log(summation(3));
+    console.clear()
+
+    // function distinct(a) {
+    //   let result = []
+    //   a.forEach(x => (result.includes(x)) ? true : result.push(x));
+    //   return result
+    // }
+
+    function distinct(a) {
+      return [...new Set(a)]
+    }
+
+    function distinct(a) {
+      return Array.from(new Set(a));
+    }
+
+    function distinct(a) {
+      return [...new Set(a)];
+    }
+
+    console.log(distinct([1, 1, 2, 3, 3]));
+
+    var mySet = new Set();
+    mySet.add(1);
+
+    let testSet = new Set([1,1,1,3]);
+    console.log(testSet);
+
+    var setObj = new Set('a','b','c')
+    var charArr = Array.from(setObj);
+    console.log(charArr[1]);
+    
+    var arr = Array.from([1,2,3],x=>x*10);
+    console.log(arr[0]);
+
+    console.log(Array.from('yaho'));
+    console.log(Array.from({length:5},(x,k)=>x));
+    console.clear();
+
+
+    let abc = document.createElement('img');
+    abc.src =('https://blog.fotolia.com/kr/files/2017/01/00_banner_pantone-coy2017-heroshot2-rgb-1024x662-1024x576.jpg');
+    abc.width=200;
+    abc.height=200;
+
+    document.body.appendChild(abc);
+
+    window.onload=function(){
+      var f1 = function(a){return a*a};
+      console.log(f1);
+
+      var f2 = add;
+      console.log(f2);
+
+      function f3(f){
+        return f();
+      }
+
+      console.log(f3(function(){return 10;}))
+
+    }
+    
+  </script>
+</body>
+
+</html>
