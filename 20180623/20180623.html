@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    // function even_or_odd(number) {
+    //   return ['Even', 'Odd'][number & 1];
+    // }
+    // const even_or_odd = (num) => ['Even', 'Odd'][num & 1];
+    // console.log(even_or_odd(2))
+    // console.log(even_or_odd(3))
+
+    // function isDivisible(n, x, y) {
+    //   return (n%x===0)?(n%y===0)?true:false:false;
+    // }
+    function isDivisible(n, x, y) {
+      return n%x===0 && n%y===0
+    //return !(n%x||n%y)
+    }
+    console.log(isDivisible(100,5,2));
+    console.log(isDivisible(100,5,3));
+
+
+    let arr =[
+      {
+        abc1:[
+        {name:'hello'},{age:50}
+      ]
+      },
+      {
+        abc2:[
+          {name:'world'},{age:100}
+        ]
+      }
+    ]
+
+    function func(n){
+      return arr[n-1]['abc'+n][n-1].name;
+    }
+    console.log(func(1));
+
+
+
+  </script>
+</body>
+
+</html>
