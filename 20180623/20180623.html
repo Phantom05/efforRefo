@@ -84,11 +84,11 @@
       // ^[-]?[\d?]+\.?[\d]+
       // /^[-]?[\d?+\.?]+/gm.test( s.trim())
 
-      s==parseFloat(s)
-      !!str.trim() && !isNaN(str);
-      return s=='-0' || ''+parseInt(s)==s || Boolean(s.match(/^[+-]*\d+\.\d+$/))
-      const isDigit = s => !!s.trim() && !isNaN(s);
-      (/^-?\d+\.?\d*$/)
+      // s==parseFloat(s)
+      // !!str.trim() && !isNaN(str);
+      // return s=='-0' || ''+parseInt(s)==s || Boolean(s.match(/^[+-]*\d+\.\d+$/))
+      // const isDigit = s => !!s.trim() && !isNaN(s);
+      // (/^-?\d+\.?\d*$/)
     console.log(isDigit('s155'));
     console.log(isDigit('155'));
     console.log(isDigit('-1.55'));
@@ -99,6 +99,11 @@
     console.log(isDigit(' 3 5 '));
     console.log(isDigit(' 35'));
     console.log(isDigit('3'));
+
+    var a = function(){
+      a:alert('a')
+    }
+    console.log(a(a))
 
 
 
