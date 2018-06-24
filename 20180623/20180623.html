@@ -23,33 +23,86 @@
     //   return (n%x===0)?(n%y===0)?true:false:false;
     // }
     function isDivisible(n, x, y) {
-      return n%x===0 && n%y===0
-    //return !(n%x||n%y)
+      return n % x === 0 && n % y === 0
+      //return !(n%x||n%y)
     }
-    console.log(isDivisible(100,5,2));
-    console.log(isDivisible(100,5,3));
+    console.log(isDivisible(100, 5, 2));
+    console.log(isDivisible(100, 5, 3));
 
 
-    let arr =[
-      {
-        abc1:[
-        {name:'hello'},{age:50}
-      ]
+    let arr = [{
+        abc1: [{
+          name: 'hello'
+        }, {
+          age: 50
+        }]
       },
       {
-        abc2:[
-          {name:'world'},{age:100}
-        ]
+        abc2: [{
+          name: 'world'
+        }, {
+          age: 100
+        }]
       }
     ]
 
-    function func(n){
-      return arr[n-1]['abc'+n][n-1].name;
+    function func(n) {
+      return arr[n - 1]['abc' + n][n - 1].name;
     }
     console.log(func(1));
 
+    // function chromosomeCheck(t) {
+    //   return (/XX/.test(t))?"Congratulations! You're going to have a daughter.":(/XY/.test(t))?"Congratulations! You're going to have a son.":false
+    // }
+
+    const chromosomeCheck = (t) => `Congratulations! You're going to have a ${t === 'XY' ? 'son' : 'daughter'}.`
+
+    console.log(chromosomeCheck('XX'))
+    console.log(chromosomeCheck('XY'))
+    console.log(chromosomeCheck('Xz'))
+    console.clear();
+
+    // function isDigit(s) {
+    //  return (!(s.trim().split('').includes(' ')))?(s.lastIndexOf('-')<=0)?s:false:false
+    // }
+
+    // function isDigit(s) {
+    //  return (s.split('').map(x=>/[0-9]/.exec(x))).join()
+    // }
+    // function isDigit(s) {
+    //  return s.trim().lastIndexOf('-')<=0&&!(s.trim().includes(' '))
+    // }
+
+      // function isDigit(s) {
+      //  return !(s.trim().split('').map(x=>(x.includes(' '))?false:(/[\d-\.]/g.test(x))?x:false).includes(false))?(s.trim().lastIndexOf('-')<=0)?true:false:false
+      // }
+      // .join('').lastIndexOf('-')<=0
+      
+      function isDigit(s) {
+       return /^[-]?[\d?]+\.?[\d]*/g.test(s.trim())
+      }
+      // ^[-]?[\d?]+\.?[\d]+
+      // /^[-]?[\d?+\.?]+/gm.test( s.trim())
+
+      s==parseFloat(s)
+      !!str.trim() && !isNaN(str);
+      return s=='-0' || ''+parseInt(s)==s || Boolean(s.match(/^[+-]*\d+\.\d+$/))
+      const isDigit = s => !!s.trim() && !isNaN(s);
+      (/^-?\d+\.?\d*$/)
+    console.log(isDigit('s155'));
+    console.log(isDigit('155'));
+    console.log(isDigit('-1.55'));
+    console.log(isDigit('-1 55'));
+    console.log(isDigit('1-55'));
+    console.log(isDigit(' 1 '));
+    console.log(isDigit(' zero '));
+    console.log(isDigit(' 3 5 '));
+    console.log(isDigit(' 35'));
+    console.log(isDigit('3'));
 
 
+
+    //띄어쓰기가 내부에 있을때 숫자 1개만 있으면 트루, 3-4이런식을오 중간에 -가있거나 띄어쓰기가 있으면 false
   </script>
 </body>
 
