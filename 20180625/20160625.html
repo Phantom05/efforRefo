@@ -117,7 +117,111 @@
   <p>
     <input type="text" id="result">
   </p>
+  <header id="header">★</header>
+
+<style>
+.abc{
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: red;
+  margin: 5px;
+}
+.abc:hover{
+  height: 10px;
+}
+.bbb{
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: red;
+  margin: 5px;
+}
+
+</style>
+
+  <div class="abc" id="aaaaa">
+
+  </div>
+  <div class="bbb" id="bbbbb">
+
+  </div>
+  <form action="" id="gelo">
+    <button type="submit">버튼</button>
+  </form>
+
+
+
+
+
+  <form action="" id="helo">
+    <input type="checkbox" id="chcheck">
+    <input type="submit" id="susu">
+  </form>
+
+<br>
+  <div id="header1">a
+    <div id="para1">b</div>
+  </div>
+
+  <div id="my-header">
+뭐요
+  </div>
+
   <script>
+    function registerEventListener(node,event,listener){
+      if(node.addEventListener){
+        node.addEventListener(event.listener,false);
+      }else if (node.attachEvent){
+
+      }
+    }
+    
+      var ㅎ1ㅎ1 = document.getElementById('my-header');
+
+      ㅎ1ㅎ1.addEventListener('click',function(){
+        ㅎ1ㅎ1.innerHTML+='+';
+      })
+    
+
+
+
+
+    const header1 =document.getElementById('header1');
+    const para1=document.getElementById('para1');
+
+    header1.addEventListener('click',function(){
+      alert('header')
+    })
+    para1.addEventListener('click',function(e){
+      e.stopPropagation()
+      alert('para1')
+    })
+
+
+
+
+    const susu=document.getElementById('susu');
+    susu.addEventListener('click',function(e){
+      e.preventDefault()
+      const chcheck=document.getElementById('chcheck');
+      console.log(chcheck.checked)
+    })
+    const gelo=document.getElementById('gelo');
+    gelo.addEventListener('onsubmit',function(){
+      return false
+    });
+
+    const aaaaa= document.getElementById('aaaaa');
+    const bbbbb=document.getElementById('bbbbb');
+
+  aaaaa.addEventListener('change',function(){
+    bbbbb.style.height = aaaaa.height;
+    console.log('he')
+  })
+
+
+
     // const findNeedle = (h) => `found the needle at position ${h.indexOf('needle')}`
 
     // var haystack_1 = ['3', '123124234', undefined, 'needle', 'world', 'hay', 2, '3', true, false];
@@ -178,7 +282,177 @@
     // console.log(fakeBin1('43634634634634643253465363463465244541215'))
 
     // console.log(fakeBin2('43634634634634643253465363463465244541215'))
+
+    const result=document.getElementById('result');
+    let tt =0;
+    result.addEventListener('keypress',function(){
+      tt++
+      console.log(`뚝햄 바보${tt}`) 
+    })
+    window.onload =function(){
+      var header = document.getElementById('header');
+
+
+      header.onclick=function(일일구){
+        this.style.color='orange';
+        this.style.background='red';
+        this.innerHTML='★★★★★';
+
+
+        let 코뽀 = 일일구||window.event;
+
+        document.body.innerHTML='';
+        for(var key in event){
+          document.body.innerHTML+='<p>'+key+': '+event[key]+'</p>'
+        }
+      }
+    }
+
   </script>
 </body>
 
+<body>
+  
+</body>
+<script>
+    function test(name){
+    var output = 'Hello '+name+'..!';
+    return function(){
+      console.log(output);
+    }
+  }
+  var test_1 = test('Web');
+  var test_2 = test('JavaScript');
+  test_1();
+  test_2();
+
+  
+  const u1 = {name:'Cynthia'};
+  const u2 = {name:'Jackson'};
+  const u3 = {name:'Olive'};
+  const u4 = {name:'James'};
+
+  const userRole = new Map();
+  userRole.set(u1,'User');
+
+ const err = new Error('invalid email');
+ function validateEmail(email){
+   if(validateEmail instanceof Error){
+     console.error(`Error: ${validateEmail.message}`);
+   }else{
+     console.log(`Valid email: ${validateEmail}`)
+   }
+ }
+ console.log(validateEmail('ee'));
+
+ function billPay(amount,payee,account){
+   if(amount>account.balance){
+     throw new Error("insufficient funds");
+     account.transfer(payee,amount);
+   }
+ }
+
+console.clear();
+
+ function a(){
+   console.log('a: calling b');
+   b();
+   console.log('a: done');
+ }
+ function b(){
+   console.log('b: calling c');
+   c();
+   console.log('b: done');
+ }
+ function c(){
+   console.log('c: throwing error');
+   throw new Error ('c error');
+   console.log('c: done');
+ }
+ function d(){
+   console.log('d: calling c');
+   c();
+   console.log('d: done');
+ }
+ try{
+   a();
+ }catch(err){
+   console.log(err.stack)
+ }
+
+ try{
+   d();
+ }catch(err){
+   console.log(err.stack)
+ }
+
+ //이터레이터, //제너레이터
+ const book = [
+   'Twinkle,twinkle,little bat!1',
+   'How I wonder what you at!',
+   'Up above the world you fly',
+   'Like a tea tray in the sky',
+   'Twinkle, twinkle, little bat!',
+   'How I wonder what you are at!',
+ ]
+  // const it =book.values(); 
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+  // console.log(it.next());
+
+//  const it = book.values();
+//  let current = it.next();
+//  while(!current.done){
+//    console.log(current.value);
+//    current = it.next();
+//  }
+ //이터레이터를 구현해봄
+ //이터레이터는 모두 독립적이라서, 새 이터레이터를 만들 때마다 처음에서 시작합니다.
+ function* foo(){}
+
+ const it1=book.values();
+ const it2=book.values();
+
+ console.log(it1.next())
+ console.log(it1.next())
+
+ console.log(it2.next())
+
+ console.log(it1.next())
+
+ const titicaca=[
+   'Hello',
+   'world',
+   'fucking',
+   'javascript',
+ ]
+ const itit = titicaca.values();
+ console.log(itit.done)
+ while(itit.done){
+   console.log(itit.next())
+ }
+
+
+ class Log{
+   constructor(){
+     this.message=[];
+   }
+   add(message){
+     this.message.push({message,timestamp:Date.now()});
+   }
+   [Symbol.iterator](){
+     return this.message.values();
+   }
+ }
+
+ 
+
+  
+</script>
 </html>
