@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #result {
+      width: 500px;
+    }
+    .hide {
+      display: none;
+    }
+    select{
+      padding: 5px;
+      font-size: 1.2rem;
+    }
+  </style>
+  <script>
+    function changeSelect(pos) {
+      const result = document.getElementById('result');
+      const face = document.getElementsByClassName('face');
+      const chest = document.getElementsByClassName('chest');
+      const Body = document.getElementsByClassName('Body');
+      let item = '';
+      const Select1 = document.getElementById("select1");
+      const Select2 = document.getElementById('select2');
+      const Select3 = document.getElementById('select3');
+
+      switch (pos) {
+        case 1:
+          let selectValue1 = Select1.value;
+          let selectDataName=Select1.options[Select1.selectedIndex].getAttribute('class');
+          console.log(selectDataName)
+          item = selectValue1;
+          if (item) {
+            Select2.selectedIndex = 1;
+            switch (item) {
+              case '얼굴':
+                for (var mnt = 0; mnt < face.length; mnt++) {
+                  chest[mnt].classList.add('hide');
+                  Body[mnt].classList.add('hide');
+                  face[mnt].classList.remove('hide')
+                }
+                break;
+              case '가슴':
+               Select2.selectedIndex = 5;
+                for (var mnt = 0; mnt < chest.length; mnt++) {
+                  face[mnt].classList.add('hide')
+                  Body[mnt].classList.add('hide');
+                  chest[mnt].classList.remove('hide')
+                }
+                break;
+              case '몸매':
+               Select2.selectedIndex = 9;
+                for (var mnt = 0; mnt < Body.length; mnt++) {
+                  face[mnt].classList.add('hide');
+                  chest[mnt].classList.add('hide');
+                  Body[mnt].classList.remove('hide');
+               }
+                break;
+            }
+          }
+          break;
+        case 2:
+          let selectValue2 = Select2.options[Select2.selectedIndex].textContent;
+          item = selectValue2;
+          if (item) Select3.selectedIndex = 1;
+          break;
+        case 3:
+          let selectValue3 = Select3.options[Select3.selectedIndex].textContent;
+          item = selectValue3;
+          break;
+      }
+      result.value += '#' + item
+    }
+
+
+  </script>
+
+</head>
+
+<body>
+
+  <select id="select1" name="lang" onchange="changeSelect(1)">
+    <option value="" selected disabled>부위를 선택</option>
+    <option value="얼굴" class="face" data-name="face">얼굴</option>
+    <option value="가슴" class="chest" data-name="chest">가슴</option>
+    <option value="몸매" class="Body" data-name="Body">몸매</option>
+  </select>
+
+  <select name="" id="select2" onchange="changeSelect(2)">
+    <option value="" selected disabled>부위를 선택</option>
+    <option class="hide face" value="얼굴">눈</option>
+    <option class="hide face" value="얼굴">코</option>
+    <option class="hide face" value="얼굴">입</option>
+    <option class="hide face" value="얼굴">턱</option>
+    <option class="hide chest" value="가슴">가슴1</option>
+    <option class="hide chest" value="가슴">가슴13</option>
+    <option class="hide chest" value="가슴">가슴14</option>
+    <option class="hide chest" value="가슴">가슴12</option>
+    <option class="hide Body" value="몸매">몸매123</option>
+    <option class="hide Body" value="몸매">몸매123</option>
+    <option class="hide Body" value="몸매">몸매123</option>
+    <option class="hide Body" value="몸매">몸매123</option>
+  </select>
+
+  <select name="" id="select3" onchange="changeSelect(3)">
+    <option value="" selected disabled>부위를 선택</option>
+    <option class="" value="절개">절개</option>
+    <option class="" value="부분절개">부분절개</option>
+    <option class="" value="묶기">묶기</option>
+  </select>
+
+  <p>
+    <input type="text" id="result">
+  </p>
+  <script>
+    // const findNeedle = (h) => `found the needle at position ${h.indexOf('needle')}`
+
+    // var haystack_1 = ['3', '123124234', undefined, 'needle', 'world', 'hay', 2, '3', true, false];
+    // var haystack_2 = ['283497238987234', 'a dog', 'a cat', 'some random junk', 'a piece of hay', 'needle',
+    //   'something somebody lost a while ago'
+    // ];
+    // var haystack_3 = [1, 2, 3, 4, 5, 6, 7, 8, 8, 7, 5, 4, 3, 4, 5, 6, 67, 5, 5, 3, 3, 4, 2, 34, 234, 23, 4, 234, 324,
+    //   324, 'needle', 1, 2, 3, 4, 5, 5, 6, 5, 4, 32, 3, 45, 54
+    // ];
+
+    // console.log(findNeedle(haystack_1));
+    // console.log(findNeedle(haystack_2));
+    // console.log(findNeedle(haystack_3));
+
+
+    // function countPositivesSumNegatives(n) { 
+    //   let arr=[];
+    //   let sum =null;
+    //   arr.push(n.filter(x=>x>0).length);
+    //   n.map(x=>(x<0)?sum+=x:false);
+    //   arr.push(sum);
+    //   return  arr
+    // }
+    // console.log(countPositivesSumNegatives([10,20,50,-1,-2,-5]))
+
+    // function countPositivesSumNegatives(n) { 
+    //   let arr=[];
+    //   arr.push(n.filter(x=>x>0).length)
+    //   arr.push(n.reduce((x,y)=>((x,y)<0) &&x+y))
+    //   return  arr
+    // }
+    // console.log(countPositivesSumNegatives([10,20,50,5,-1,-2,-5,-5,-4]))
+
+    // function countPositivesSumNegatives(n) { 
+    //   let arr =[];
+    //   let tararr=[]
+    //   let sum=0;
+    //   n.forEach(x => (x>=0)?tararr.push(x):sum+=x);
+    //   arr.push(tararr.length);
+    //   arr.push(sum);
+    //   return arr
+    // }
+    // console.log(countPositivesSumNegatives([1.25,0,0,10,20,50,-1.53,-1,-1,-1,-1]));'
+
+    // function countPositivesSumNegatives(n) { 
+    //   return input && input.length ? [input.filter(p => p > 0).length, input.filter(n => n < 0).reduce((a, b) => a + b, 0)] : [];
+    // }
+    // console.log(countPositivesSumNegatives([1.25,0,0,10,20,50,-1.53,-1,-1,-1,-1]));
+
+
+    // function fakeBin1(x) {
+    //   return x.split('').map(x => (x >= 5) ? "1" : "0").join('')
+    // }
+
+    // function fakeBin2(x) {
+    //   return x.replace(/\d/g, d => d < 5 ? 0 : 1);
+    // }
+    // console.log(fakeBin1('43634634634634643253465363463465244541215'))
+
+    // console.log(fakeBin2('43634634634634643253465363463465244541215'))
+  </script>
+</body>
+
+</html>
