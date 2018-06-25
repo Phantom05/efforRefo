@@ -100,14 +100,73 @@
     console.log(isDigit(' 35'));
     console.log(isDigit('3'));
 
-    var a = function(){
-      a:alert('a')
-    }
-    console.log(a(a))
 
 
 
     //띄어쓰기가 내부에 있을때 숫자 1개만 있으면 트루, 3-4이런식을오 중간에 -가있거나 띄어쓰기가 있으면 false
+
+    const list1 =[]
+    const list2 =[]
+    const list3=[]
+    const list4=[]
+
+    // function testcaset1(target,key1,value1,key2,value2){
+    //   let obj ={};
+    //   obj[key1]=value1;
+    //   obj[key2]=value2;
+    //   target.push(obj);
+    //   return target;
+    // }
+    // testcaset1(list1,'title','Hello','content','world')
+    // console.log('1',list1)
+
+    // function testcaset2(target,key,...b){
+    //   let obj={};
+    //   let arr =key.split(',');
+    //   obj[arr[0]]=arr[1]
+    //   target.push(obj)
+    //   return  target
+    // }
+    // testcaset2(list2,'title,아침새','content,운다')
+    // console.log('2',list2)
+
+    // function testcaset3(target,...b){
+    //   let obj={};
+    //   b.forEach(x=>{
+    //     let arr =x.split('$split$');
+    //     obj[arr[0]]=arr[1];
+    //   })
+    //   return target.push(obj);
+    // }
+    // testcaset3(list3,'title$split$hello','content,world','url,www.google.com');
+    // testcaset3(list3,'title,case1','content,case2','url,www.naver.com');
+    // testcaset3(list2,'hello,world','키키키,만들었따');
+    // console.log('2',list2)
+    // console.log('3',list3);
+
+    function testcaset4(target,...a){
+      let obj={};
+      obj.title=a[0];
+      obj.content=a[1];
+      obj.green=a[2];
+      obj.color=a[3];
+      obj.url=a[4];
+
+      for(b in obj) {
+        if(obj[b]===null){
+          delete obj[b]
+        }
+      }
+      
+      return target.push(obj)
+    }
+    //제목 컨텐츠,그린,컬러,url
+    testcaset4(list4,'제목','컨텐츠',null,null,'ww/w.google.com');
+    console.log('4',list4);
+    
+  
+
+
   </script>
 </body>
 
