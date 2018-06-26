@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function solution(s) {
+      return [...s].reverse().join('');
+    }
+    console.log(solution('world'));
+
+    function solution(str) {
+      return str.length > 0 ? solution(str.substring(1)) + str.charAt(0) : '';
+    }
+
+    function noSpace(x) {
+      return x.replace(/ /g, "")
+    }
+    console.log(noSpace('2 2 2 2 2 2 2 2 2'));
+
+    // function replace(s){
+    //   return s.replace(/[aeiouABCDE]/g,'!');
+    // }
+    // function replace(s){
+    //   let res='';
+    //   for(var i=0;i<s.length;i++){
+    //     switch(s[i]){
+    //       case 'a':res+='!';break;
+    //       case 'e':res+='!';break;
+    //       case 'i':res+='!';break;  
+    //       case 'o':res+='!';break;  
+    //       case 'u':res+='!';break;  
+    //       case 'A':res+='!';break;  
+    //       case 'E':res+='!';break;  
+    //       case 'I':res+='!';break;  
+    //       case 'O':res+='!';break;  
+    //       case 'U':res+='!';break;
+    //       default:res+=s[i]
+    //     }
+    //   }
+    //   return res
+    // }
+    // console.log(replace('aeiouABCDE'));
+
+    //  [...s].map(x=>(x===('a'||'e'||'i'||'o'||'u'||'A'||'E'||'I'||'O'||'U'))?'!':x)
+
+
+
+    // function replace(s){
+    //   let res='';
+    //   let scan='aeiouAEIOU';
+    //   for(var i=0;i<s.length;i++){
+    //     if(scan.includes(s[i])){
+    //       res+='!';
+    //     }else{
+    //       res+=s[i];
+    //     }
+    //   }
+    //   return res;
+    // }
+    // console.log(replace('aeiouABCDE'));
+
+    // function replace(s){
+    //   let str = '';
+    //   for(let i = 0; i < s.length; i++){
+    //     let up = s[i].toUpperCase();
+    //     if((up == 'A') || (up == 'E') || (up == 'I') || (up == 'O') || (up == 'U'))
+    //      str += '!';
+    //      else
+    //      str += s[i];
+    //   }
+    //   return str;
+    // }
+    function replace(s) {
+      let res = '';
+      let scan = s.toLowerCase()
+      for (var i = 0; i < s.length; i++) {
+        (scan[i] == 'a' || scan[i] == 'e' || scan[i] == 'o' || scan[i] == 'i' || scan[i] == 'u') ? res += '!': res += s[
+          i];
+      }
+      return res;
+    }
+    console.log(replace('aeiouABCDE'));
+
+    // function digitize(n) {
+    //   let res = String(n).split('').reverse()
+    //  return res.map(x=>parseFloat(x))
+    // }
+    function digitize(n) {
+      //  return (n+'').split('').map(Number).reverse()
+      return (n + '').split('').map(x => +x).reverse()
+    }
+    // return (n+'').split('').reverse().map(n => +n);
+    console.log(digitize(56455));
+
+    const book = [
+      'Hello1',
+      'Hello2',
+      'Hello3',
+      'Hello4',
+      'Hello5',
+      'Hello6',
+    ]
+    let test = book.values() // 이런식으로 values를 줌. 그럼 이터레이터를 만들 수 있음.
+    console.log(test.next());
+    console.log(test.next());
+    console.log(test.next());
+    console.log(test.next());
+    console.log(test.next());
+    console.log(test.next());
+    console.log(test.next().done);
+    //마지막 페이지를 반환했다해서 끝이아니라, 계속 나옴. 언디파인으로 done은 true로 
+    console.log(test.done);
+
+    let it = book.values();
+    let current = it.next();
+    while (!(current.done)) {
+      console.log(current.value);
+      current = it.next()
+    }
+
+    //만약 이터레이터를 2개만들면 이어지는게 아님. 1개를 만든다면 next로 이어지겠지만 2개는 각각 독립적임.
+    const it1 = book.values();
+    let it1cureent = it1.next();
+    const it2 = book.values();
+
+
+    while (!it1cureent.done) {
+      console.log('it1cureent', it1cureent.value);
+
+      it1cureent = it1.next();
+    }
+
+    console.log('it2', it2.next().done)
+
+
+    const menuList = [
+      '짜장면', '피자', '치킨', '맥주', '감자탕뚝배기'
+    ]
+
+
+    function iterKey(iter, keyNum) {
+      const tar = iter.values();
+      let res = tar.next();
+      for (var i = 0; i < keyNum - 1; i++) res = tar.next();
+      return res.value;
+    }
+
+    console.log(iterKey(menuList, 2));
+
+    class Log {
+      constructor(abc) {
+        this.message = [];
+        this.name = abc;
+      }
+      add(message) {
+          this.message.push({
+            '메세지': message,
+            timestamp: Date.now()
+          });
+        }
+        [Symbol.iterator]() {
+          return this.message.values()
+        }
+    }
+
+
+
+    class Timy extends Log {
+      constructor(abc) {
+        super();
+        this.naming = abc;
+      }
+    }
+
+    let test1 = new Log('guys');
+    console.log(test1)
+    let test2 = new Timy('guys');
+    console.log(test2)
+
+    let test3 = new Log();
+    test3.add('Hello');
+    test3.add('sppotted whale');
+    test3.add('sppotted anthor vessel');
+    
+
+
+
+
+    // let AAAB = [];
+    // function add2(message) {
+    //   return AAAB.push({message});
+    // }
+    // add2('Hello');
+    // console.log(AAAB);
+
+    // class FibonacciSequence{
+    //   [Symbol.iterator](){
+    //     let a = 0, b =1;
+    //     return{
+    //       next()
+    //     }
+    //   }
+    // }
+// 0 1 1 2 3 5 8
+    function fibosu1(){
+      let a=0, b=1,c=0;
+      let res=[]
+      for(;;){
+        res.push(b)
+        c=a+b
+        a=b;
+        b=c;
+        if(c>100) break
+      }
+      return res
+    }
+    console.log(fibosu1());
+  console.clear()
+
+
+    function fibosu2(tar){
+      const arr =[1];
+      const cur = arr.values();
+      let ta =cur.next();
+      let res=0;
+      while(true){
+        arr.push(res);
+        res+=ta.value;
+        ta = cur.next();
+        if(arr.length>=20) break;
+      }
+     return arr.slice(1)
+    }
+    console.log(fibosu2());
+
+    //제너레이터는 언제든 호출자에게 제어권을 넘길 수 있다.
+
+    //제너레이터는 function뒤에 *을 붙이는게 문법임
+    function* rainbow(){
+      yield 'red';//제너레이터는 yield라는 키워드를 사용할 수 있음.
+      yield 'orange';
+      yield 'green';
+      yield 'blue';
+      yield 'indigo';
+      yield 'violet';
+    }
+    // 제너레이터를 호출하면 이터레이터를 얻는다. values()를 안써도 next라든지 사용할 수 있다는말.
+    const itz = rainbow();
+    console.log(itz.next());
+    console.log(itz.next());
+    console.log(itz.next());
+    console.log(itz.next());
+    console.log(itz.next());
+    console.log(itz.next());
+    console.log(itz.next());
+    console.dir(rainbow)
+
+    for(let colorv of rainbow()){
+      console.log(colorv)//색갈이 모두 출력됨.
+    }
+
+    function* interrogate(){
+      const name = yield 'What is your name?';
+      const color = yield 'What is your favorite color?';
+      return `${name}'s favorite color is ${color}`
+    }
+    let tic= interrogate();
+    console.log(tic.next())//첫번쨰 구문 실행됨.
+    console.log(tic.next('뚝백'))// name에 '뚝백'이들어감,두번째 구문이 실행됨
+    console.log(tic.next('똥색!'))//두번째구문에 color에 똥색이 들어가고 세번째 구문인 return값을 뱉음
+    //제너레이터는 함수내부에서 양방향으로 함수를 제어해버릴수있는것임. 개꿀
+    //위에만 봐도 return을 안시키고 중간에 멈춰버리는...라인을 잡아버리는 으마으마한녀석
+    //근데 화살표 기법에서 사용할 수 없음.
+
+    
+
+
+  </script>
+</body>
+
+</html>
