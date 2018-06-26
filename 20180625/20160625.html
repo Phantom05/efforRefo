@@ -451,8 +451,105 @@ console.clear();
    }
  }
 
- 
+const log = new Log();
+log.add('first day at sea');
+log.add('spotted whale');
+log.add('spotted another vessel');
 
+for(let entry of log){
+  console.log(`${entry.message} @ ${entry.timestamp}`)
+}
+
+function* rainbow(){
+  yield 'red';
+  yield 'orange';
+  yield 'green';
+  yield 'blue';
+  yield 'indigo';
+  yield 'violet';
+}
+const it =rainbow();
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+console.log(it.next());
+
+for(let color of rainbow()){
+  console.log(color)
+}
+
+  function* Say(){
+    yield '안녕하세요';
+    yield '저는';
+    yield '코알라입니다';
+  }
+
+  var say = Say();
+  console.log(say.next());
+  console.log(say.next());
+  console.log(say.next());
+  console.log(say.next());
+
+  function* Realworld(){
+    let name = yield 'name?';
+    console.log('Hello',name)
+  }
+
+  var world = Realworld();
+  console.log(world.next());
+  console.log(world.next('Edward'));
+  console.log(world.next('world'))
+
+  var mySymbol1 = Symbol('mySymbol');
+  var mySymbol2 = Symbol('mySymbol');
   
+var prop2 = Symbol('prop2');
+var obj={
+  prop1:1,
+  [prop2]:2,
+};
+for(var key in obj){
+  console.log(key)
+}
+console.log(obj[prop2]);
+Symbol('some');
+
+var zeroeForeverIterator={
+
+}
+
+function opposite(number) {
+  return -number
+}
+console.log(opposite(5));
+
+function basicOp(operation, value1, value2){
+
+// var operCase = {
+//   '+':value1+value2,
+//   '-':value1-value2,
+//   '*':value1*value2,
+//   '/':value1/value2,
+// }
+
+switch(operation){
+  case '+': return value1+value2;
+  case '-': return value1-value2;
+  case '*': return value1*value2;
+  case '/': return value1/value2;
+}
+   
+}
+console.log(basicOp('*',5,5));
+
+function removeChar(str){
+return str.slice(1,-1)
+
+};
+console.log(removeChar('Hello'))
 </script>
 </html>
