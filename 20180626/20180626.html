@@ -8,6 +8,8 @@
   <title>Document</title>
   <style>
     .달력 {
+      position: relative;
+      top: 70px;
       width: 600px;
       margin: auto;
       border-top: 1px solid black;
@@ -18,7 +20,7 @@
       text-align: center;
     }
 
-    h1 {
+    .titlemonth {
       padding: 0;
       margin: 0;
       height: 70px;
@@ -93,8 +95,8 @@
       font-size: 13px;
       font-weight: 500;
       top: 42px;
-      right: 5px;
-
+      right: 65px;
+      color: gray;
     }
 
     .yearTx {
@@ -104,9 +106,35 @@
       top: 42px;
       left: 5px;
     }
+    .dayofweek{
+      position: absolute;
+      font-size: 13px;
+      font-weight: 500;
+      top: 42px;
+      right: 5px;
+      color: gray;
+    }
 
     .today {
       background: rgba(160, 230, 209, .3);
+    }
+    .copyright{
+      position: absolute;
+      width: 60px;
+      bottom: -2px;
+      right: 20px;
+      z-index: -1;
+      font-weight: bold;
+      font-size: 15px;
+      color: orange;
+      cursor: default;
+      user-select: none;
+      font-family:'Times New Roman', Times, serif;
+      transform: rotate(-3deg);
+      font-variant: small-caps
+    }
+    .copyright img{
+      width: 100%;
     }
   </style>
 </head>
@@ -114,12 +142,13 @@
 <body>
   <!-- 만년달력 -->
   <div class="달력">
-    <div class="month">
-      <h1 id="mainMonth" class=""></h1>
+    <div id="title" class="month">
+      <h1 id="titleMonth" class="titlemonth"></h1>
       <span id="prev" class="prev arrBt">＜</span>
       <span id="next" class="next arrBt">＞</span>
       <span id="monthText" class="monthTx"></span>
-      <span id="yearText" class="yearTx"></span>
+      <span id="yearsText" class="yearTx"></span>
+      <span id="dayOftheWeek" class="dayofweek"></span>
     </div>
 
     <table>
@@ -177,7 +206,17 @@
         <td class="day"></td>
         <td class="day sat"></td>
       </tr>
+      <tr id="lastTd" class="can">
+          <td class="day sun"></td>
+          <td class="day"></td>
+          <td class="day"></td>
+          <td class="day"></td>
+          <td class="day"></td>
+          <td class="day"></td>
+          <td class="day sat"></td>
+      </tr>
     </table>
+    <div class="copyright"><img src="https://i.pinimg.com/originals/02/e6/bb/02e6bbceb1637bdd8dcfeffe294a5bd0.gif" alt=""></div>
   </div>
   <script>
     function out11() {
@@ -511,68 +550,106 @@
       console.log(year);
     }
 
-
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const monthText = document.getElementById('monthText');
+    const yearsText = document.getElementById('yearsText');
+    const titleMonth = document.getElementById('titleMonth');
     const mtwhfss = document.getElementsByClassName('mtwhfss');
-    const dayOfTheWeek = ['Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur', 'Sun'];
-    //요일 함수
-    function dayOfWeek() {
-      for (var i = 0; i < mtwhfss.length; i++) {
-        mtwhfss[i].textContent = dayOfTheWeek[i] + 'day'
-      }
-    }
-    dayOfWeek()
+    const arrBt = document.getElementsByClassName('arrBt');
+    const title = document.getElementById('title');
+    const lastTd=document.getElementById('lastTd');
+    const allDay = document.getElementsByClassName('day');
+    const dayOftheWeek=document.getElementById('dayOftheWeek');
 
     let date = new Date();
     let years = date.getFullYear();
     let month = date.getMonth() + 1;
     let today = date.getDate();
     let nowMonth = date.getMonth() + 1;
-
-    const mainMonth = document.getElementById('mainMonth');
-    const engMonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-      'October', 'November', 'December'
-    ];
-    const monthText = document.getElementById('monthText');
-    const yearText = document.getElementById('yearText');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
     let cntBt = 0;
-    prev.addEventListener('click', function () {
-      (month < 2) ? (month = 12, years--) : month--;
-      calendar();
-    })
-    next.addEventListener('click', function () {
-      (month > 11) ? (month = 1, years++) : month++;
-      calendar();
-    })
     //오늘 날짜
     let todayOfNum = date.getDay() - 1;
+
+    const dayOfTheWeek = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur'];
+    const engMonthName = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December'
+      ];
+    //every month days array
+    let allMonthday = [31, yunmonth() ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+
+    //날수 함수
+
     console.log('오늘의 요일', dayOfTheWeek[todayOfNum]);
-    console.log('1일', today - today + 1);
+    console.log('function start now:', years, '-', month, '-', today);
+    console.log('오늘 날짜',today)
 
+    //날수구하기
+    let prevYears = years-1;//전년도
+    let numOfdays = (prevYears%4==0 &&prevYears%100!=0||prevYears%400==0)?prevYears*366:prevYears*365;//전년도 윤년인지확인후 *365
+    let startOfWeek=0;
+
+    //입력받은 년도의 전월까지의 날수를 기존에 계산된 날수에 추가.
+    for(var i =0;i<month-1;i++){
+      numOfdays+=allMonthday[i];
+      startOfWeek+=allMonthday[i];
+    }
+    //입력받은 일까지의 날짜수를 추가
+    numOfdays+=today;
+    
+    //날수 계산이 끝났음.7로 나눈 나머지를 계산.
+    let dayOfWeekIndex =numOfdays%7;
+    let dayOfStartWeek= (startOfWeek+1)%7;
+  
+    //나머지 값에 따라 적당한 요일을 출력
+
+    console.log('오늘의 요일',dayOfTheWeek[dayOfWeekIndex-2]);
+    dayOftheWeek.innerHTML='('+dayOfTheWeek[dayOfWeekIndex-2]+')'
+    //윤달이 있는날에는 366일 
+    console.log('이번달 시작 요일',dayOfTheWeek[dayOfStartWeek-1])
+
+
+    //요일 함수
+    function dayOfWeek() {
+      for (var i = 0; i < mtwhfss.length; i++) {
+        mtwhfss[i].textContent = dayOfTheWeek[i] + 'day'
+      } return;
+    }
+    dayOfWeek()
+
+    // button click event for prev,next
+    title.addEventListener('click', function (e) {
+      if (e.target.id === 'prev') {
+        (month < 2) ? (month = 12, years--) : month--;
+      } else if (e.target.id === 'next') {
+        (month > 11) ? (month = 1, years++) : month++;
+      }
+      calendar();
+      return;
+    })
+
+    //calendar function start
     function calendar(e) {
-      console.log('function start now:',years+'-'+month+'-'+today);
-      let allDay = document.getElementsByClassName('day');
 
-      //메인 달 //사이드 연도,달
-      mainMonth.textContent = (month < 10) ? '0' + month : month;
-      yearText.innerHTML = '-' + years + '-';
+      //title month //side years,month
+      titleMonth.textContent = (month < 10) ? '0' + month : month;
+      yearsText.innerHTML = '-' + years + '-';
       monthText.innerHTML = '(' + engMonthName[month - 1] + ')';
-
+      //reset day
       for (var i = 0; i < allDay.length; i++) {
         allDay[i].innerHTML = '';
       }
-      //매달 날짜 배열
-      let allMonthday = [31, yunmonth() ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
       for (let i = 1; i <= allMonthday[month - 1]; i++) {
-        allDay[i].innerHTML = i;
+        allDay[i+(dayOfStartWeek-1)].innerHTML = i;
       }
-      (years + '-' + month === date.getFullYear() + '-' + (date.getMonth() + 1)) ? allDay[today].classList.add('today'):
-        allDay[today].classList.remove('today');
+      (years + '-' + month === date.getFullYear() + '-' + (date.getMonth() + 1)) ?
+      allDay[today].classList.add('today'): allDay[today].classList.remove('today');
+      return;
     }
     calendar();
 
-    // 윤달 함수
+    // intercalation function
     function yunmonth() {
       const year = date.getFullYear;
       if (year % 4) return false;
@@ -580,6 +657,27 @@
       else if (year % 400) return false;
       else return true;
     }
+
+
+
+
+
+
+
+
+
+    // function prevNextBtcontrolFunc() {
+    //   prev.addEventListener('click', function () {
+    //     (month < 2) ? (month = 12, years--) : month--;
+    //     calendar();
+    //   })
+    //   next.addEventListener('click', function () {
+    //     (month > 11) ? (month = 1, years++) : month++;
+    //     calendar();
+    //   })
+    //   return;
+    // }
+    // prevNextBtcontrolFunc()
   </script>
 </body>
 
