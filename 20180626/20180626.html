@@ -95,7 +95,7 @@
       font-size: 13px;
       font-weight: 500;
       top: 42px;
-      right: 65px;
+      right: 10px;
       color: gray;
     }
 
@@ -106,19 +106,21 @@
       top: 42px;
       left: 5px;
     }
-    .dayofweek{
+
+    .dayofweek {
       position: absolute;
       font-size: 13px;
       font-weight: 500;
-      top: 42px;
-      right: 5px;
+      top: 43px;
+      left: 52px;
       color: gray;
     }
 
     .today {
       background: rgba(160, 230, 209, .3);
     }
-    .copyright{
+
+    .copyright {
       position: absolute;
       width: 60px;
       bottom: -2px;
@@ -129,11 +131,12 @@
       color: orange;
       cursor: default;
       user-select: none;
-      font-family:'Times New Roman', Times, serif;
+      font-family: 'Times New Roman', Times, serif;
       transform: rotate(-3deg);
       font-variant: small-caps
     }
-    .copyright img{
+
+    .copyright img {
       width: 100%;
     }
   </style>
@@ -207,16 +210,18 @@
         <td class="day sat"></td>
       </tr>
       <tr id="lastTd" class="can">
-          <td class="day sun"></td>
-          <td class="day"></td>
-          <td class="day"></td>
-          <td class="day"></td>
-          <td class="day"></td>
-          <td class="day"></td>
-          <td class="day sat"></td>
+        <td class="day sun"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day"></td>
+        <td class="day sat"></td>
       </tr>
     </table>
-    <div class="copyright"><img src="https://i.pinimg.com/originals/02/e6/bb/02e6bbceb1637bdd8dcfeffe294a5bd0.gif" alt=""></div>
+    <div class="copyright">
+      <img src="https://i.pinimg.com/originals/02/e6/bb/02e6bbceb1637bdd8dcfeffe294a5bd0.gif" alt="">
+    </div>
   </div>
   <script>
     function out11() {
@@ -558,9 +563,9 @@
     const mtwhfss = document.getElementsByClassName('mtwhfss');
     const arrBt = document.getElementsByClassName('arrBt');
     const title = document.getElementById('title');
-    const lastTd=document.getElementById('lastTd');
+    const lastTd = document.getElementById('lastTd');
     const allDay = document.getElementsByClassName('day');
-    const dayOftheWeek=document.getElementById('dayOftheWeek');
+    const dayOftheWeek = document.getElementById('dayOftheWeek');
 
     let date = new Date();
     let years = date.getFullYear();
@@ -569,61 +574,38 @@
     let nowMonth = date.getMonth() + 1;
     let cntBt = 0;
     //오늘 날짜
-    let todayOfNum = date.getDay() - 1;
+    let todayOfNum = date.getDay();
 
     const dayOfTheWeek = ['Sun', 'Mon', 'Tues', 'Wednes', 'Thurs', 'Fri', 'Satur'];
     const engMonthName = [
-      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December'
-      ];
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
+      'December'
+    ];
     //every month days array
     let allMonthday = [31, yunmonth() ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-
-    //날수 함수
-
-    console.log('오늘의 요일', dayOfTheWeek[todayOfNum]);
-    console.log('function start now:', years, '-', month, '-', today);
-    console.log('오늘 날짜',today)
-
-    //날수구하기
-    let prevYears = years-1;//전년도
-    let numOfdays = (prevYears%4==0 &&prevYears%100!=0||prevYears%400==0)?prevYears*366:prevYears*365;//전년도 윤년인지확인후 *365
-    let startOfWeek=0;
-
-    //입력받은 년도의 전월까지의 날수를 기존에 계산된 날수에 추가.
-    for(var i =0;i<month-1;i++){
-      numOfdays+=allMonthday[i];
-      startOfWeek+=allMonthday[i];
+    function checkYun(year) {
+      if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) return 29
+      else return 28
     }
-    //입력받은 일까지의 날짜수를 추가
-    numOfdays+=today;
-    
-    //날수 계산이 끝났음.7로 나눈 나머지를 계산.
-    let dayOfWeekIndex =numOfdays%7;
-    let dayOfStartWeek= (startOfWeek+1)%7;
-  
-    //나머지 값에 따라 적당한 요일을 출력
-
-    console.log('오늘의 요일',dayOfTheWeek[dayOfWeekIndex-2]);
-    dayOftheWeek.innerHTML='('+dayOfTheWeek[dayOfWeekIndex-2]+')'
-    //윤달이 있는날에는 366일 
-    console.log('이번달 시작 요일',dayOfTheWeek[dayOfStartWeek-1])
-
+    //금일 요일
+    dayOftheWeek.innerHTML = '(' + dayOfTheWeek[todayOfNum] + ')'
 
     //요일 함수
     function dayOfWeek() {
       for (var i = 0; i < mtwhfss.length; i++) {
         mtwhfss[i].textContent = dayOfTheWeek[i] + 'day'
-      } return;
+      }
+      return;
     }
     dayOfWeek()
 
     // button click event for prev,next
     title.addEventListener('click', function (e) {
       if (e.target.id === 'prev') {
-        (month < 2) ? (month = 12, years--) : month--;
+        (month <= 1) ? (month = 12, years--) : month--;
       } else if (e.target.id === 'next') {
-        (month > 11) ? (month = 1, years++) : month++;
+        (month >= 12) ? (month = 1, years++) : month++;
       }
       calendar();
       return;
@@ -631,6 +613,18 @@
 
     //calendar function start
     function calendar(e) {
+      //날수 함수
+      let dayofweekcheck = [31, checkYun(years - 1), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      let daymount = 0;
+      for (var i = 0; i < dayofweekcheck.length; i++) {
+        daymount += allMonthday[i];
+      }
+      for (var i = 0; i < allMonthday.length - (allMonthday.length - (month - 1)); i++) {
+        daymount += allMonthday[i];
+      }
+      //전년도 날수합 +이번년도전달 까지의 합%7 즉 이번달 첫요일
+      console.log('이번달 첫요일',dayOfTheWeek[((daymount*365))%7])
+      console.log(((daymount*365))%7)
 
       //title month //side years,month
       titleMonth.textContent = (month < 10) ? '0' + month : month;
@@ -641,7 +635,7 @@
         allDay[i].innerHTML = '';
       }
       for (let i = 1; i <= allMonthday[month - 1]; i++) {
-        allDay[i+(dayOfStartWeek-1)].innerHTML = i;
+        allDay[i-1+ ((daymount * 365)) % 7].innerHTML = i;
       }
       (years + '-' + month === date.getFullYear() + '-' + (date.getMonth() + 1)) ?
       allDay[today].classList.add('today'): allDay[today].classList.remove('today');
@@ -652,16 +646,47 @@
     // intercalation function
     function yunmonth() {
       const year = date.getFullYear;
-      if (year % 4) return false;
-      else if (year % 100) return true;
-      else if (year % 400) return false;
-      else return true;
+      if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) return true;
+      else return false;
     }
 
 
 
 
 
+
+
+
+
+
+    //날수 함수
+    // console.log('오늘의 요일', dayOfTheWeek[todayOfNum]);
+    // console.log('function start now:', years, '-', month, '-', today);
+    // console.log('오늘 날짜',today)
+
+    // //날수구하기
+    // let prevYears = years-1;//전년도
+    // let numOfdays = (prevYears%4==0 &&prevYears%100!=0||prevYears%400==0)?prevYears*366:prevYears*365;//전년도 윤년인지확인후 *365
+    // let startOfWeek=0;
+
+    // //입력받은 년도의 전월까지의 날수를 기존에 계산된 날수에 추가.
+    // for(var i =0;i<month-1;i++){
+    //   numOfdays+=allMonthday[i];
+    //   startOfWeek+=allMonthday[i];
+    // }
+    // //입력받은 일까지의 날짜수를 추가
+    // numOfdays+=today;
+
+    // //날수 계산이 끝났음.7로 나눈 나머지를 계산.
+    // let dayOfWeekIndex =numOfdays%7;
+    // let dayOfStartWeek= (startOfWeek+1)%7;
+
+    // //나머지 값에 따라 적당한 요일을 출력
+
+    // console.log('오늘의 요일',dayOfTheWeek[dayOfWeekIndex-2]);
+    // dayOftheWeek.innerHTML='('+dayOfTheWeek[2]+')'
+    // //윤달이 있는날에는 366일 
+    // console.log('이번달 시작 요일',dayOfTheWeek[dayOfStartWeek-1])
 
 
 
