@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      list-style: none;
+    }
+
+    .abc {
+      width: 80%;
+
+      overflow: hidden;
+      margin: 1000px auto;
+    }
+
+    .abc li {
+      float: left;
+      width: 200px;
+      height: 200px;
+      background: orange;
+      margin: 2px;
+    }
+
+    #target {}
+
+    .target {
+      transition: .5s;
+      opacity: 0;
+    }
+
+    .show {
+      transition: .5s;
+      opacity: 1;
+      background: black !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="aaa">ss</div>
+  <ul id="res" class="abc">
+    <li id="target" class="target">Helloworld</li>
+    <li class="target">Helloworld</li>
+    <li class="target">Helloworld</li>
+    <li class="target">Helloworld</li>
+    <li class="target">Helloworld</li>
+  </ul>
+  g
+  <script>
+    // function simpleMultiplication(num) {
+    //   // return (number%2)?number*8:number*9
+    //   return num*(num%2?9:8)
+    // }
+    // console.log(simpleMultiplication(2));
+    // console.log(simpleMultiplication(3));
+    // function GetSum(a, b) {
+    //   let res=0;
+    //   if(a>0){
+    //     for(var i =1;i<=a;i++){
+    //       if(a%i==0){
+    //         console.log('a:',i)
+    //         res+=i
+    //       }
+    //     }
+    //   }
+
+    //   if(b>0){
+    //     for(var i =1;i<=b;i++){
+    //       if(b%i==0){
+    //         console.log('b:',i)
+    //         res+=i
+    //       }
+    //     }
+    //   }
+    //   return res
+    // }
+    // console.log(GetSum(1, 2));
+
+    // function GetSum(a, b) {
+    //   var res = 0;
+    //   if(a==b){return a}
+      
+    //   if (a > 0) {
+    //     for (var i = 1; i <= a; i++) {
+    //       if (a % i == 0) {
+    //         console.log('a: ', i);
+    //         res += i;
+    //       }
+    //     }
+    //   } else if (a < 0) {
+    //     console.log('hh')
+    //     let n1 = Math.abs(a)
+    //     for (var i = 1; i <= n1; i++) {
+    //       if (a % i == 0) {
+    //         console.log('a: ', -i);
+    //         res -= i;
+    //       }
+    //     }
+    //   }
+
+    //   if (b > 0) {
+    //     for (var i = 1; i <= b; i++) {
+    //       if (b % i == 0) {
+    //         console.log('b: ', i);
+    //         res += i;
+    //       }
+    //     }
+    //   } else if (b < 0) {
+    //     let n1 = Math.abs(b)
+    //     for (var i = 1; i <= n1; i++) {
+    //       if (b % i == 0) {
+    //         console.log('b: ', -i);
+    //         res -= i;
+    //       }
+    //     }
+    //   }
+    //   return res;
+    // }
+    // console.log(GetSum(1, 2));
+     function GetSum(a, b) {
+      var res = 0;
+      if(a==b){return a}
+      if (a > 0 && b > 0) {
+        if (a > b) {
+          for (var i = 1; i <= a; i++) {
+            if (a % i == 0) {
+              console.log('a: ', -i)
+              res += i;
+            }
+          }
+        } else {
+          for (var i = 1; i <= b; i++) {
+            if (b % i == 0) {
+              console.log('b: ', i)
+              res += i;
+            }
+          }
+        }
+        return res;
+      } else if (a < 0 && b < 0) {
+        if (a < b) {
+          let n1 = Math.abs(a)
+          for (var i = 1; i <= n1; i++) {
+            if (a % i == 0) {
+              console.log('a: ', -i)
+              res -= i;
+            }
+          }
+        } else res -= nega(b)
+        return res;
+      }
+      
+       if (a > 0) res += posi(a)
+        else if (a < 0) res += nega(a)
+       if (b > 0) res += posi(b)
+        else if (b < 0) res -= nega(b)
+      return res;
+    }
+    function posi(num){
+      let resIn=0;
+      for (var i = 1; i <= num; i++) {
+          if (num % i == 0) {
+            console.log('a: ', i);
+             resIn += i;
+           }
+         }
+         return resIn;
+    }
+    function nega(num){
+      let n1 = Math.abs(num);
+      let resIn = 0;
+         for (var i = 1; i <= n1; i++) {
+           if (num % i == 0) {
+             resIn -= i;
+           }
+         }
+         return resIn
+    }
+    console.log(GetSum(0, 1));
+
+    //스크롤
+    document.getElementsByClassName
+    const res = document.getElementById('res')
+    const target = document.getElementById('target');
+    let targetSize = 0;
+    // console.log(target.clientHeight)
+    const lilist = document.getElementsByTagName('li');
+    window.addEventListener('scroll', function () {
+      targetSize = target.offsetTop;
+      windowScroll = document.documentElement.scrollTop
+      if (windowScroll > targetSize - 350) {
+        for (var i = 0; i < lilist.length; i++) {
+          lilist[i].classList.add('show')
+        }
+      } else if (windowScroll < targetSize) {
+        for (var i = 0; i < lilist.length; i++) {
+          lilist[i].classList.remove('show')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
