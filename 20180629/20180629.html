@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    const zeroFuel = (distanceToPump, mpg, fuelLeft) => {
+      return (distanceToPump / mpg <= fuelLeft) ? true : false;
+    };
+    console.log(zeroFuel(50, 25, 2));
+
+    console.clear();
+
+    function mergeArrays(arr1, arr2) {
+      if(arr1.length==0||arr2.length==0) return [];
+      const it = arr2.values();
+      let current = it.next();
+      while (!current.done) {
+        if(!arr1.includes(current.value)) arr1.push(current.value);
+        current = it.next();
+      }
+      return arr1.sort((x,y)=>x-y);
+    }
+    console.log(mergeArrays([1,3,5,7,9,11,12], [1,2,3,4,5,10,12]));
+    // [1, 2, 3, 4, 5, 7, 9, 10, 11, 12]
+
+    console.clear();
+    function mergeArrays1(arr1, arr2) {
+      const res = arr1;
+      // (!(arr1+arr2))?[]:arr2.forEach(x=>(!(res.includes(x)))?res.push(x):false);
+      (!(arr1+arr2))?[]:res.forEach(x=>(!arr2.includes(x))?res.push(x):true)
+      return res
+    }
+    console.log(mergeArrays1([1,3,5,7,9,11,12], [1,2,3,4,5,10,12]));
+    console.log(mergeArrays1([], []));
+    // [1, 2, 3, 4, 5, 7, 9, 10, 11, 12]
+
+    function mergeArrays2(arr1, arr2) {
+      if(!(arr1+arr2)) return []
+      const res = arr1;
+      const arr = [];
+      arr2.forEach(x=>{(!(res.includes(x)))? arr.push(x):true});
+      return res.concat(arr).sort((x,y)=>x-y);
+    }
+    console.log(mergeArrays2([1,3,5,7,9,11,12], [1,2,3,4,5,10,12]));
+    console.log(mergeArrays2([], []));
+    // [1, 2, 3, 4, 5, 7, 9, 10, 11, 12]
+
+
+    // return Array.from(new Set(arr1.concat(arr2).sort((a,b) => (a-b))));
+    // return [...new Set(a.concat(b))].sort((a,b)=>a-b)
+    // const mergeArrays = (a1, a2) => [...a1, ...a2].filter((v, i, a) => a.indexOf(v) === i).sort((a, b) => a - b);
+    // 
+    // const _ = require('lodash');
+    // function mergeArrays(arr1, arr2) {
+      // return _.sortBy(_.union(arr1, arr2));
+    // }
+
+    
+  </script>
+</body>
+
+</html>
