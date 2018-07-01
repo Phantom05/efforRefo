@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // Sum of Multiples
+
+    // function sumMul(n, m) {
+    //   let num = n;
+    //   let res = 0;
+    //   if (m <= n) return 'INVALID'
+    //   for (; num <= m; num += n) {
+    //     res += num;
+    //     // console.log(num)
+    //     console.log(res)
+    //   }
+    //   return res
+    // }
+    // console.log(sumMul(2, 9));
+
+    // const sumMul = (n, m) => ~~(m / n) * (m + n - m % n) / 2 || 'INVALID';
+
+    // function sumMul(n, m) {
+    //   return m <= n ? "INVALID" : Math.floor(m / n) * (Math.floor(m / n) + 1) * (n / 2);
+    // }
+
+    // function sumMul(n, m) {
+    //   if (n <= 0 || m <= 0) return "INVALID";
+    //   const last = Math.ceil(m / n) * n - n;
+    //   return (last + n) * (last / n) / 2;
+    // }
+
+    // const sumMul = (n, m) => m <= n ? 'INVALID' : Array.from({
+    //     length: m - n
+    //   }, (x, i) => i + n)
+    //   .reduce((acc, x) => acc + (x % n === 0 ? x : 0), 0)
+
+    // const sumMul = (n, m) => n >= m ? 'INVALID' : Array(Math.floor(m / n)).fill(0).reduce((s, e, i) => s + n + n * i, 0);
+    
+
+    //첫번쨰는 대문자, 
+    function accum(s) {
+      let res = '';
+      for(var i =0; i<s.length;i++){
+        res+=s.charAt(i).toUpperCase()+s.charAt(i).toLowerCase().repeat(i)+'-'
+      }
+      return res.slice(0,-1)
+    }
+    console.log(accum('Hello'));
+
+    function accum1(s) {
+      return [...s].map((x,y)=>x.toUpperCase()+x.toLowerCase().repeat(y)).join('-')
+
+    }
+    console.log(accum1('Helloworld'));
+  </script>
+</body>
+
+</html>
