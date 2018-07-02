@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-decoration: none
+    }
+
+    .testMenu {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 500;
+      background: white;
+    }
+
+    a {
+      color: black;
+    }
+
+    ul {
+      overflow: hidden;
+      width: 100%;
+      /* border: 1px solid blue; */
+      margin: auto;
+    }
+
+    li {
+      float: left;
+      border: 1px solid black;
+      margin: 10px;
+    }
+
+    li>a {
+      display: block;
+      padding: 10px;
+
+    }
+
+    li>a:hover {
+      background: orange;
+      color: white;
+      /* font-weight: bold; */
+      transition: .3s;
+    }
+
+    .targetBox {
+      width: 100%;
+      height: 300px;
+      border: 1px solid red;
+      margin: 10px 0;
+      text-align: center;
+      line-height: 300px
+    }
+
+    .v1 {
+      margin: 200px 0;
+    }
+
+    .v2 {
+      margin: 200px 0;
+    }
+
+    .v3 {
+      margin: 200px 0;
+    }
+
+    .v4 {
+      margin: 200px 0;
+    }
+
+    .v5 {
+      margin: 200px 0;
+    }
+
+    .upbt {
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      right: 20px;
+      bottom: 20px;
+      border-radius: 100%;
+      text-align: center;
+      line-height: 50px;
+      font-weight: bold;
+      font-size: 13px;
+      color: brown;
+      background: orange;
+      cursor: pointer;
+    }
+
+    footer {
+      height: 400px;
+      line-height: 400px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ul id="testUl" class="testMenu">
+    <li>
+      <a href="" data-name="target1">TARGET1</a>
+    </li>
+    <li>
+      <a href="" data-name="target2">TARGET2</a>
+    </li>
+    <li>
+      <a href="" data-name="target3">TARGET3</a>
+    </li>
+    <li>
+      <a href="" data-name="target4">TARGET4</a>
+    </li>
+    <li>
+      <a href="" data-name="target5">TARGET5</a>
+    </li>
+  </ul>
+
+  <div id="target1" class="targetBox v1">
+    target1
+  </div>
+  <div id="target2" class="targetBox v2">
+    target2
+  </div>
+  <div id="target3" class="targetBox v3">
+    target3
+  </div>
+  <div id="target4" class="targetBox v4">
+    target4
+  </div>
+  <div id="target5" class="targetBox v5">
+    target5
+  </div>
+  <footer>
+    Hello
+  </footer>
+
+  <div id="upbt" class="upbt">UP</div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const testUl = document.getElementById('testUl');
+      const target1 = document.getElementById('target1');
+      const target2 = document.getElementById('target2');
+      const target3 = document.getElementById('target3');
+      const target4 = document.getElementById('target4');
+      const target5 = document.getElementById('target5');
+      const upbt = document.getElementById('upbt');
+      //document.documentElement.scrollTop
+      testUl.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.target.tagName === 'A') {
+          let dataName = e.target.getAttribute('data-name')
+          let i =0;
+          switch (dataName) {
+            case 'target1':
+              // document.documentElement.scrollTop = target1.offsetTop - 70;
+              let line1 =target1.offsetTop - 70
+              let testing1 = setInterval(function(){
+                i++;
+                document.documentElement.scrollTop=i;
+                if(i >line1)clearInterval(testing1)
+              },5)
+              break;
+            case 'target2':
+              // document.documentElement.scrollTop = target2.offsetTop - 70;
+              let line2 =target2.offsetTop - 70
+              let testing2 = setInterval(function(){
+                i++;
+                document.documentElement.scrollTop=i;
+                if(i >line2)clearInterval(testing2)
+              },1)
+              break;
+            case 'target3':
+              // document.documentElement.scrollTop = target3.offsetTop - 70;
+              let line3 =target2.offsetTop - 70
+              let testing3 = setInterval(function(){
+                i++;
+                document.documentElement.scrollTop=i;
+                if(i >line3)clearInterval(testing3)
+              },1)
+              break;
+            case 'target4':
+              document.documentElement.scrollTop = target4.offsetTop - 70;
+              break;
+            case 'target5':
+              document.documentElement.scrollTop = target5.offsetTop - 70;
+              break;
+          }
+        }
+
+        function scrollMoveFunc(){
+
+        }
+
+      })
+
+      upbt.addEventListener('click', function () {
+        document.documentElement.scrollTop = 0
+      })
+    })
+  </script>
+</body>
+
+</html>

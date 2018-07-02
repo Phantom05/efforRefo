@@ -191,8 +191,8 @@
     // console.log(target.clientHeight)
     const lilist = document.getElementsByTagName('li');
     window.addEventListener('scroll', function () {
-      targetSize = target.offsetTop;
-      windowScroll = document.documentElement.scrollTop
+      targetSize = target.offsetTop;  // target의 위치
+      windowScroll = document.documentElement.scrollTop // 현재 윈도우 스크롤의 위치.
       if (windowScroll > targetSize - 350) {
         for (var i = 0; i < lilist.length; i++) {
           lilist[i].classList.add('show')
