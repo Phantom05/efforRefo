@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>20180704</title>
+</head>
+
+<body>
+  <script>
+    function find_average(arr) {
+      return arr.reduce((x, y) => x + y) / arr.length;
+    }
+    console.log(find_average([1, 2, 3]));
+
+    function hexToDec(hexString) {
+      return parseInt(hexString, 16)
+    }
+    console.log(hexToDec('FF'));
+
+    // function maps(x) {
+    //   return x.map(x*2)
+    // }
+    function maps(x) {
+      let sum = [];
+      for (let i = 0; i < x.length; i++) {
+        sum.push(x[i] * 2)
+      }
+      return sum
+    }
+    console.log(maps([2, 4, 8]));
+
+    // function getCount(str) {
+    //   var vowelsCount = 0;
+    //   for (a of str) {
+    //     if ('aeiou'.indexOf(a) > -1) vowelsCount++
+    //   }
+    //   return vowelsCount;
+    // }
+
+    // function getCount(str) {
+    //   return str.split('').filter(x=>(['a','e','i','o','u'].includes(x))).length
+    // }
+    // const getCount=(s)=>s.split('').filter(x=>(['a','e','i','o','u'].includes(x))).length;
+    function getCount(str) {
+      return str.match(/[aeiou]/ig).length;
+    }
+    // const getCount = s => (s.match(/[aeiou]/ig)||[]).length
+    console.log(getCount('helloabracadabra'));
+
+    function highAndLow(numbers) {
+      // numbers.split(' ').sort((x,y)=>x-y).splice(-1,0)
+      let res = numbers.split(' ').map(x => +x).sort((x, y) => x - y)
+      return res[0] + ' ' + res[res.length - 1]
+    }
+    // case1
+    // function highAndLow(numbers) {
+    //   numbers = numbers.split(' ').map(Number);
+    //   return Math.max.apply(0, numbers) + ' ' + Math.min.apply(0, numbers);
+    // }
+
+    // case2
+    // function highAndLow(numbers) {
+    //   numbers = numbers.split(' ');
+    //   return `${Math.max(...numbers)} ${Math.min(...numbers)}`;
+    // }
+    console.log(highAndLow('1 2 3 4 5 -5 10'))
+    // let bt = document.getElementById('bt');
+    // let clickIndex = -1
+
+    // function clickFun() {
+    //   clickIndex++;
+    //   if (clickIndex > 2) clickIndex = 0
+    //   else if (clickIndex < 0) clickIndex = 2;
+
+
+    //   return (function () {
+    //     for (var i = 0; i < 3; i++) {
+    //       console.log('result: ', i + 3 + (clickIndex * 3))
+    //     }
+    //     return;
+    //   })()
+    // }
+
+    // function findDifference(a, b) {
+    //   let A = a.reduce((x, y) => x * y);
+    //   let B = b.reduce((x, y) => x * y);
+    //   return A - B
+    // }
+    // console.log(findDifference([3, 2, 5], [1, 4, 4]))
+
+    // function descendingOrder(n) {
+    //   return +(('' + n).split('').sort((x, y) => y - x).join(''))
+    // }
+    // console.log(descendingOrder(984445))
+    // console.log(descendingOrder(0))
+
+
+
+    // function descendingOrder(n) {
+    //   return n.digits().sort().reverse().undigits();
+    // }
+    const descendingOrder=()=>n.digits().sort().reverse().undigits();
+
+    Number.prototype.digits = function () {
+      const result = [];
+      let n = this;
+      do {
+        result.unshift(n % 10);
+        n = Math.floor(n / 10);
+      } while (n);
+      return result;
+    };
+
+    Array.prototype.undigits = function () {
+      return this.reduce((n, d) => n * 10 + d, 0);
+    };
+
+  </script>
+</body>
+
+</html>
