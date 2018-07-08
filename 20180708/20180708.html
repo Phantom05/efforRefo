@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    // let str = "ya ho ain't Hello!";
+    // String.prototype.toJadenCase = function () {
+    //   return this.split(' ').map(x=>x.replace(x[0],x[0].toUpperCase())).join(' ')
+    // };
+    // let str = "ya ho ain't Hello!";
+    // String.prototype.toJadenCase = function () {
+    //   return this.split(' ').map(x=>x.charAt(0).toUpperCase()+x.slice(1)).join(' ')
+    // };
+    let str = "ya ho ain't Hello!";
+    String.prototype.toJadenCase = function () {
+      return this.replace(/(^|\s)[a-z]/g,function(s){return s.toUpperCase()})
+    };
+    console.log(str.toJadenCase());
+
+    
+  </script>
+</body>
+
+</html>
