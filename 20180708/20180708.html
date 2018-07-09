@@ -6,12 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+  .server{
+    border: 1px solid red;
+  }
+  .submutDisplayNone{
+    display: none;
+  }
+  </style>
 </head>
 
 <body>
 
+  <!-- <form action="" onsubmit="" id="testForm"> -->
+    <div>
+        <input type="text" name="a" class="input">
+    </div>
+    <div>
+        <input type="text" name="b" class="input">
+    </div>
+    <input type="submit" class="submutDisplayNone">
+  <!-- </form> -->
+
+  <div id="server" class="server">
+ff
+  </div>
 
   <script>
+    //
+    // const testForm =document.getElementById('testForm');
+    // testForm.addEventListener('sumbit',function(e){
+    //   e.preventDefault()
+      
+    // })
+    let input =document.getElementsByClassName('input');
+    for(let i=0;i<input.length;i++){
+      input[i].addEventListener('keydown',function(e){
+        if(e.keyCode===13){
+          alert(e.target.value)
+          e.target.value='';
+        }
+      })
+    }
+
+
     // let str = "ya ho ain't Hello!";
     // String.prototype.toJadenCase = function () {
     //   return this.split(' ').map(x=>x.replace(x[0],x[0].toUpperCase())).join(' ')
@@ -26,7 +64,7 @@
     };
     console.log(str.toJadenCase());
 
-    
+
   </script>
 </body>
 
