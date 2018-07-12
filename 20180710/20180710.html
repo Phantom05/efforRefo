@@ -1,130 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
   <script>
-    		// let hello = []
-		// const value1 = document.getElementById('value1');
-		// const button = document.getElementById('button');
-		// let datanum = 0;
-		// button.addEventListener('click', function () {
-		// 	hello[datanum] = value1.value;
-		// 	datanum++
-		// 	console.log(hello);
-		// 	value1.value = '';
+    // let hello = []
+    // const value1 = document.getElementById('value1');
+    // const button = document.getElementById('button');
+    // let datanum = 0;
+    // button.addEventListener('click', function () {
+    // 	hello[datanum] = value1.value;
+    // 	datanum++
+    // 	console.log(hello);
+    // 	value1.value = '';
 
-		// });
+    // });
 
-		// function sumTwoSmallestNumbers(n) {
-		// 	return Math.min(...n) + n.sort((x, y) => x - y)[1]
-		// };
-		// console.log(sumTwoSmallestNumbers([19, 5, 42, 2, 77]));
+    // function sumTwoSmallestNumbers(n) {
+    // 	return Math.min(...n) + n.sort((x, y) => x - y)[1]
+    // };
+    // console.log(sumTwoSmallestNumbers([19, 5, 42, 2, 77]));
 
-		// return masked string
-		// function maskify(cc) {
-		// 	const lit = cc+'';
-		// 	const contNum = lit.length-1;
-		// 	let res = '';
-		// 	for(let i =0;i<lit.length-4;i++){res+='#';}
-		// 	return res+lit.charAt(contNum-3)+lit.charAt(contNum-2)+lit.charAt(contNum-1)+lit.charAt(contNum)
-		// };
+    // return masked string
+    // function maskify(cc) {
+    // 	const lit = cc+'';
+    // 	const contNum = lit.length-1;
+    // 	let res = '';
+    // 	for(let i =0;i<lit.length-4;i++){res+='#';}
+    // 	return res+lit.charAt(contNum-3)+lit.charAt(contNum-2)+lit.charAt(contNum-1)+lit.charAt(contNum)
+    // };
 
-		// function maskify(cc) {
-		// 	const lit = String(cc)
-		// 	return lit.slice(0,lit.length-4).replace(/\d/g,'#')+lit.substring(lit.length-4,lit.length);
-		// };
+    // function maskify(cc) {
+    // 	const lit = String(cc)
+    // 	return lit.slice(0,lit.length-4).replace(/\d/g,'#')+lit.substring(lit.length-4,lit.length);
+    // };
 
-		// function maskify(cc) {
-		// 	// return cc.slice(0, -4).replace(/./g, '#') + cc.slice(-4);
-		// 	return cc.replace(/.(?=.{4})/g, "#");
-		// };
+    // function maskify(cc) {
+    // 	// return cc.slice(0, -4).replace(/./g, '#') + cc.slice(-4);
+    // 	return cc.replace(/.(?=.{4})/g, "#");
+    // };
 
-		// console.log(maskify('1655424124151552346'));
+    // console.log(maskify('1655424124151552346'));
 
-		// function solution(n) {
-		// 	let res = 0;
-		// 	let arr = []
-		// 	for(let i =0;i<n;i++){
-		// 		if(i%3==0){
-		// 			res+=i;
-		// 			arr.push(i)
-		// 		}
-		// 	}
-		// 	for(let i=0;i<n;i++){
-		// 		if(i%5==0){
-		// 			if(!(arr.includes(i)))res+=i
-		// 		}
-		// 	}
+    // function solution(n) {
+    // 	let res = 0;
+    // 	let arr = []
+    // 	for(let i =0;i<n;i++){
+    // 		if(i%3==0){
+    // 			res+=i;
+    // 			arr.push(i)
+    // 		}
+    // 	}
+    // 	for(let i=0;i<n;i++){
+    // 		if(i%5==0){
+    // 			if(!(arr.includes(i)))res+=i
+    // 		}
+    // 	}
 
-		// 	return res;
-		// }
+    // 	return res;
+    // }
 
-		// function solution(n) {
-		// 	let res = 0;
-		// 	const arr = []
-		// 	for(let i =0;i<n;i++){
-		// 		if(i%3==0){
-		// 			res+=i;
-		// 			arr.push(i)
-		// 		}
-		// 	}
-		// 	for(let i=0;i<n;i++){
-		// 		if(i%5==0 && !(arr.includes(i)))res+=i
-		// 	}
-		// 	return res
-		// }
-		// function solution(n) {
-		// 	let i=0;
-		// 	let res=0;
-		// 	while(i<n){
-		// 		if(i%3==0){
-		// 			res+=i;
-		// 			if(i%5==0 &&!i%3==0)res+=i;
-		// 		}
-		// 		i++;
-		// 	}
-		// 	return res
-		// }
+    // function solution(n) {
+    // 	let res = 0;
+    // 	const arr = []
+    // 	for(let i =0;i<n;i++){
+    // 		if(i%3==0){
+    // 			res+=i;
+    // 			arr.push(i)
+    // 		}
+    // 	}
+    // 	for(let i=0;i<n;i++){
+    // 		if(i%5==0 && !(arr.includes(i)))res+=i
+    // 	}
+    // 	return res
+    // }
+    // function solution(n) {
+    // 	let i=0;
+    // 	let res=0;
+    // 	while(i<n){
+    // 		if(i%3==0){
+    // 			res+=i;
+    // 			if(i%5==0 &&!i%3==0)res+=i;
+    // 		}
+    // 		i++;
+    // 	}
+    // 	return res
+    // }
 
-		// function solution(n) {
-		// 	let res = 0;
-		// 	for (let i = 0; i < n; i++) {
-		// 		if (i % 3 == 0) res += i;
-		// 		if (i % 5 == 0 && !(i % 3 == 0)) res += i;
-		// 	}
-		// 	return res;
-		// }
+    // function solution(n) {
+    // 	let res = 0;
+    // 	for (let i = 0; i < n; i++) {
+    // 		if (i % 3 == 0) res += i;
+    // 		if (i % 5 == 0 && !(i % 3 == 0)) res += i;
+    // 	}
+    // 	return res;
+    // }
 
-		function solution(number) {
-			let sum = 0;
-			for (var i = 1; i < number; i++) {
-				if (i % 3 == 0 || i % 5 == 0) sum += i
-			}
-			return sum;
-		}
-		// let s = 0;
-		// for (let i = 0; i < n; i++) s += i % 3 ? i % 5 ? 0 : i : i;
-		// return s;
+    // function solution(number) {
+    //   let sum = 0;
+    //   for (var i = 1; i < number; i++) {
+    //     if (i % 3 == 0 || i % 5 == 0) sum += i
+    //   }
+    //   return sum;
+    // }
+    // // let s = 0;
+    // // for (let i = 0; i < n; i++) s += i % 3 ? i % 5 ? 0 : i : i;
+    // // return s;
 
-		function solution(number) {
-			for (acc = 0; --number > 2;) {
-				acc = !(number % 3) || !(number % 5) ? acc + number : acc;
-			}
-			return acc;
-		}
+    // function solution(number) {
+    //   for (acc = 0; --number > 2;) {
+    //     acc = !(number % 3) || !(number % 5) ? acc + number : acc;
+    //   }
+    //   return acc;
+    // }
 
-		function solution(number){
-  return number < 1 ? 0 : [...new Array(number).keys()].filter(n => n % 3 == 0 || n % 5 == 0).reduce((a, b) => a + b);
-}
+    // function solution(number) {
+    //   return number < 1 ? 0 : [...new Array(number).keys()].filter(n => n % 3 == 0 || n % 5 == 0).reduce((a, b) => a +
+    //     b);
+    // }
 
 
-		console.log(solution(10))
-		// 3 6 9 5
-    </script>
+    // console.log(solution(10));
+
+    function helloSoulution(number){
+      for(acc =0;--number>2;){
+        acc=!(number%3)||!(number%5)?acc+number:acc;
+      }
+      return acc;
+    }
+    console.log(helloSoulution(10))
+    // 3 6 9 5
+  </script>
 </body>
+
 </html>
