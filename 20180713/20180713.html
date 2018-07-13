@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //  return str.split(' ').map( w => w.length<5 ? w : w.split('').reverse().join('') ).join(' ');
+
+    // function spinWords(words) {
+    //   return words.split(' ').map(function (word) {
+    //     return (word.length > 4) ? word.split('').reverse().join('') : word;
+    //   }).join(' ');
+    // }
+
+    // function spinWords(w) {
+    //   return  w.split(' ').map(x=>{
+    //     return let res='';
+    //     if(x.length>=5){
+    //       for(let i=x.length;i>-1;i--){
+    //         res+=x[i];
+    //       }
+    //     }else{
+    //       x
+    //     }     
+    //      })
+    // }
+
+    // String.prototype.strReverse = function(){
+    //   return this.match(/./g).reverse().join('')
+    // }
+    String.prototype.strReverse = function () {
+      return this.match(/./g).reverse().join('')
+    };
+
+    function spinWords(w) {
+      return w.split(' ').map(x => (x.length > 5) ? x.strReverse() : x).join(' ')
+    };
+
+    console.log(spinWords('This is another test'));
+
+    console.clear();
+
+    // function order(w) {
+    //   order['strObj']=w.split(' ').map(x=>x);
+    //   order['sortNum']=w.split(' ').map(x=>x.replace(/[a-zA-Z]/g,'')).map(Number)
+    //   // order.sortNum.map((x,y)=>String(x).replace(String(x),order.strObj[y])).sort((x,y)=>x-y)
+
+    //   let arr=['0'+order.sortNum[0],'1'+order.sortNum[1],'2'+order.sortNum[2],'3'+order.sortNum[3]]
+
+    //   // order.sortNum.sort((x,y)=>x-y);
+    //   order.sortNum.map((x,y)=>String(x).replace(String(x),order.strObj[y]));
+    //   return arr
+    // }
+    // console.log(order('is2 Thi1s T4est 3a'));
+    // console.dir(order);
+    // case1
+    function order(words) {
+      return words.split(' ').sort(function (a, b) {
+        return a.match(/\d/) - b.match(/\d/);
+      }).join(' ');
+    }
+    console.log(order('is2 Thi1s T4est 3a'));
+    // // case2
+    // var reg = /\d/;
+
+    // function order(words){
+    //   return words.split(' ').sort(comparator).join(' ');
+    // }
+
+    // function comparator(word, nextWord) {
+    //   return +word.match(reg) - +nextWord.match(reg)
+    // }
+    // // case3
+    // function order(words){
+    //   // ...
+    //   return words && words.split(' ')
+    //     .map(word => word.match(/\d/) + word)
+    //     .sort()
+    //     .map(word => word.slice(1))
+    //     .join(' ');
+    // }
+    // // case4
+    // function order(words) {
+    //   words = words.split(' ');
+    //   var num = '123456789'.split('');
+    //   var output = [];
+    //   for (var i = 0; i < words.length; i++) {
+    //     for (var j = 0; j < words[i].length; j++) {
+    //       if (num.indexOf(words[i][j]) > -1) {
+    //         output[num.indexOf(words[i][j])] = words[i];
+    //       }
+    //     }
+    //   }
+    //   return output.join(' ');
+    // }
+  </script>
+</body>
+
+</html>
