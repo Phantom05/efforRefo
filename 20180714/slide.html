@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <style>
+    .slideTle {
+      position: relative;
+      top: 100px;
+      width: 300px;
+      height: 300px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .slideCont {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1800px;
+      height: 100%;
+      ;
+    }
+
+    .page {
+      float: left;
+      width: 300px;
+      height: 300px;
+    }
+
+    .slideBt {
+      position: absolute;
+      top: 40%;
+      background: rgba(0, 0, 0, .5);
+      color: white;
+      text-decoration: none;
+      font-size: 50px;
+      height: 80px;
+      border-radius: 5px;
+    }
+
+    .slideBt:hover {
+      transition: .3s;
+      background: rgba(0, 0, 0, .8)
+    }
+
+    .prevBt {
+      left: 10px;
+    }
+
+    .nextBt {
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slideTle">
+    <div class="slideCont">
+      <img src="http://pds27.egloos.com/pds/201710/16/40/c0030640_59e3edad0325c.jpg" class="page" />
+      <img src="https://i1.daumcdn.net/thumb/C720x360/?fname=http://t1.daumcdn.net/brunch/service/user/mbh/image/BKSX47BN8AwI35FyGJKjM_eugYo"
+        class="page" />
+      <img src="http://img.snacker.hankyung.com/hk-content/2018/06/candles-2899921_1920-400x250.jpg" class="page" />
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-BfMPaA0m1Wy0bvDjo3gLMNpiMxtSG5kOPcG30YnNQe7gK83y" class="page"
+      />
+      <img src="http://ph.dailysecu.com/news/photo/201804/33140_25715_1757.jpg" class="page" />
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMShfTCch4JKF6Tj3itKhQSOaJgAomxa7McRB1uNfxKuQUgAta" class="page"
+      />
+    </div>
+
+    <a href="javascrip:false" class="slideBt prevBt">＜</a>
+    <a href="javascrip:false" class="slideBt nextBt">＞</a>
+  </div>
+  <script>
+    let SLIDE_CONT_INDEX = 0;
+    let DEFAULT_INDEX_LEN = 0;
+    let BANNER_WIDTH = 300;
+    let SLIDE_DURATION = 500;
+
+    defaultFunc();
+
+    console.log('DEFAULT_INDEX_LEN', DEFAULT_INDEX_LEN)
+    
+    $('.slideBt').on('click', function () {
+      
+      if ($(this).hasClass('prevBt')) {
+        SLIDE_CONT_INDEX--;
+        if(SLIDE_CONT_INDEX<0){
+          SLIDE_CONT_INDEX=DEFAULT_INDEX_LEN-1;
+        }
+        console.log('nIndex prev',SLIDE_CONT_INDEX)
+        slideFunc(SLIDE_CONT_INDEX);
+
+      } else if ($(this).hasClass('nextBt')) {
+        SLIDE_CONT_INDEX++;
+        if(SLIDE_CONT_INDEX>DEFAULT_INDEX_LEN-1){
+          SLIDE_CONT_INDEX=0;
+        }
+        console.log('nIndex next',SLIDE_CONT_INDEX)
+        slideFunc(SLIDE_CONT_INDEX);
+      }
+    })
+
+    function slideFunc(nIndex) {
+      var nPosition = -BANNER_WIDTH * nIndex;
+
+      $('.slideCont').stop();
+      $('.slideCont').animate({
+        'left': nPosition
+      }, SLIDE_DURATION, function () {
+        nPosition=BANNER_WIDTH * nIndex;
+        if (nIndex < 1) {
+          
+        console.log('마지막으로')
+          
+        }
+
+        if (nIndex > DEFAULT_INDEX_LEN-1) {
+         console.log('처음으로')
+       
+
+        }
+      })
+
+
+
+
+    }
+
+    function defaultFunc() {
+      DEFAULT_INDEX_LEN = $('.slideCont .page').length;
+      $('.slideCont').css({
+        'left': BANNER_WIDTH-BANNER_WIDTH
+      })
+    }
+
+
+    //////
+
+    
+  </script>
+</body>
+
+</html>

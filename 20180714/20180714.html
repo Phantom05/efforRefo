@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <style>
+      #banner_container {
+        width: 1002px;
+        height: 100px;
+        overflow: hidden;
+        position: relative;
+    }
+    #banner_wrapper {
+        width: 600px;
+        position: absolute;
+    }
+    img {
+        width: 100%;
+        float: left;
+        border: 1px solid red;
+    }
+    #banner_navi span {
+        border: 1px solid red;
+        padding: 2px;
+    }
+  </style>
+</head>
+
+<body>
+    <div id="banner_container" style="width:102px;height:58px;overflow:hidden;position:relative;">
+        <div id="banner_wrapper" style="width:612px;position:absolute;">
+            <img src="http://pds27.egloos.com/pds/201710/16/40/c0030640_59e3edad0325c.jpg" style="width:100px;border:solid 1px;float:left;"/>
+            <img src="https://i1.daumcdn.net/thumb/C720x360/?fname=http://t1.daumcdn.net/brunch/service/user/mbh/image/BKSX47BN8AwI35FyGJKjM_eugYo" class="page" style="width:100px;border:solid 1px;float:left;"/>
+            <img src="http://img.snacker.hankyung.com/hk-content/2018/06/candles-2899921_1920-400x250.jpg" class="page" style="width:100px;border:solid 1px;float:left;"/>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-BfMPaA0m1Wy0bvDjo3gLMNpiMxtSG5kOPcG30YnNQe7gK83y" class="page" style="width:100px;border:solid 1px;float:left;"/>
+            <img src="http://ph.dailysecu.com/news/photo/201804/33140_25715_1757.jpg" class="page" style="width:100px;border:solid 1px;float:left;"/>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMShfTCch4JKF6Tj3itKhQSOaJgAomxa7McRB1uNfxKuQUgAta" style="width:100px;border:solid 1px;float:left;"/>
+        </div>
+    </div>
+
+    <div id="banner_navi">
+        <button id="btn_left">left</button>
+        <button id="btn_right">right</button>
+    </div>
+
+  <script>
+    //인덱스는 1부터 
+    // function iqTest(n) {
+    //   const arr = n.split(' ').map(Number)
+    //   const odd =[];
+    //   const even=[];
+    //   arr.map(x=>(x%2==0)?even.push(x):odd.push(x))
+    //   return (odd.length >even.length)?arr.indexOf(even[0])+1:arr.indexOf(odd[0])+1
+    // }
+
+    // function iqTest(n) {
+    //   return n.split(' ').map(Number).map(x=>(x%2==1)?n.split(' ').indexOf(x):x);
+    // }
+
+    function iqTest(numbers) {
+      var nums = numbers.split(" ").map(x => x % 2);
+      var sum = nums.reduce((a, b) => a + b);
+      var target = sum > 1 ? 0 : 1;
+      return nums.indexOf(target) + 1;
+    }
+
+    let testArr = new Array();
+    // testArr.prototype.abc = function () {
+    //   return this
+    // }
+    console.dir(Array)
+
+    let TestingArr = function(){
+      return;
+    }
+    
+    let testSonArr = new TestingArr();
+
+    TestingArr.prototype.game =function(){
+      return this
+    }
+    
+    console.log(testSonArr.game())
+    console.log(iqTest('2 4 6 8 9 10'))
+    console.clear()
+  </script>
+  <script>
+    //베너의 위치를 조절하기위해 인덱스를 조절,
+    var BANNER_INDEX = 1;
+    // 배너의 위치 : 배너가 움직이려면 LEFT값을 변경해야 하는데 LEFT 값을 계산하려면 배너의 위치가 필요하다.
+    var BANNER_LEN = 0;
+    //배너의 넓이 : 배너의 넓이는 언제든지 변할 수 있으니 배너의 넓이를 정의하는 변수를 정의한다.
+    var BANNER_WIDTH = 102;
+    //배너의 개수 : 사용자의 요청에 따라 배너의 개수가 변할 수 있으니 배너의 개수를 정의하는 변수가 필요하다.
+    var SHOW_DURATION = 500;
+    //슬라이드 속도를 조절할수있다. 200/1000초로 기본 셋을 설정한다.
+  $(document).ready(function() {
+
+        bannerInit();
+
+        $("#btn_left").unbind();
+        $("#btn_left").bind("click", function() {
+            var nIndex = BANNER_INDEX - 1;
+            //0의 기점으로 기준점을 맞춰둔다. 
+            //nIndex는 기준점이 된다.
+            showBannerAt(nIndex);
+            //$("#banner_wrapper").stop().animate({left:-103}, 1000);
+        });
+        $("#btn_right").unbind();
+        $("#btn_right").bind("click", function() {
+            // 이동할 이전 배너 인덱스 값 구하기.
+            var nIndex = BANNER_INDEX + 1;
+            // n번째 배너 보이기.
+            showBannerAt(nIndex);
+            //$("#banner_wrapper").stop().animate({left:103}, 1000);
+        });
+    });
+    // nIndex에 해당하는 배너 보이기.
+    function showBannerAt(nIndex) {
+        //if(nIndex != BANNER_INDEX){ 
+        //배너의 위치가 기준점과 같지 않을 경우, 같을수가 없는 상황인데, 이는 버그를 최소화 하기 위하여 줄인다.
+
+        var nPosition = -BANNER_WIDTH * nIndex;
+        //슬라이드 시작
+        $("#banner_wrapper").stop();
+        $("#banner_wrapper").animate({
+            left: nPosition
+        }, SHOW_DURATION, function() {
+            
+            //****************************************여기부터
+            // 이전 내용이 없는 경우 마지막 배너 인덱스 값으로 설정하기.
+            if (nIndex < 1) {
+                nIndex = BANNER_LEN;
+                nPosition = -BANNER_WIDTH * nIndex;
+                $("#banner_wrapper").css({
+                    "left": nPosition + "px"
+                });
+            }
+
+            // 다음 내용이 없는 경우, 첫 번째 배너 인덱스 값으로 설정하기.
+            if (nIndex > BANNER_LEN) {
+                nIndex = 1;
+                nPosition = -BANNER_WIDTH * nIndex;
+                $("#banner_wrapper").css({
+                    "left": nPosition + "px"
+                });
+            }
+             // ****************************************요기 사이 가장 했갈리는 부분
+
+            //현재 배너 인덱스 업데이트 시키기.
+            BANNER_INDEX = nIndex;
+        });
+        //}
+    }
+
+    function bannerInit() { //초기 setting
+        BANNER_LEN = $("#banner_wrapper .page").length;
+        $("#banner_wrapper").css({
+            "left": -BANNER_WIDTH
+        });
+    }
+
+  </script>
+</body>
+
+</html>
