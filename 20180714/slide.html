@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -142,6 +142,334 @@
     //////
 
     
+  </script>
+</body>
+
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="./slide.css">
+
+</head>
+<body>
+  <div class="slide">
+    <ul class="slideUl">
+      <li class="slideList"></li>
+
+      <li class="slideList"></li>
+      <li class="slideList"></li>
+      <li class="slideList"></li>
+      <li class="slideList"></li>
+      <li class="slideList"></li>
+
+      <li class="slideList"></li>
+
+    </ul>
+    <a href="javascript:false" class="slideBt prevBt">＜</a>
+    <a href="javascript:false" class="slideBt nextBt">＞</a>
+
+    <ul class="pading">
+      <li class="pagingDot pagingActive"></li>
+      <li class="pagingDot"></li>
+      <li class="pagingDot"></li>
+      <li class="pagingDot"></li>
+      <li class="pagingDot"></li>
+      <li class="pagingDot"></li>
+      <li class="pagingDot"></li>
+    </ul>
+  </div>
+  <script>
+    let CONTROL_INDEX=0;
+    let DEFAULT_LEN=0;
+    let DURATION=500;
+    let LIST_WIDTH=500;
+    defaultLen()
+    $('.slideBt').on('click',function(){
+      if($(this).hasClass('prevBt')){
+        CONTROL_INDEX--;
+        pagingFunc(CONTROL_INDEX)
+        slideFunc(CONTROL_INDEX);
+
+      }else if($(this).hasClass('nextBt')){
+        CONTROL_INDEX++;
+        pagingFunc(CONTROL_INDEX)
+        slideFunc(CONTROL_INDEX);
+
+      }
+    });
+
+    function slideFunc(nIndex){
+        nPosition = -LIST_WIDTH*nIndex;
+
+        $('.slideUl').stop()
+
+        $('.slideUl').animate({
+          left:nPosition
+        },DURATION,function(){
+          console.log(nIndex)
+          console.log(DEFAULT_LEN)
+
+          if(nIndex>DEFAULT_LEN){
+            CONTROL_INDEX=0;
+            nPosition = -LIST_WIDTH*nIndex;
+            $('.slideUl').css({display:'none'})
+            $('.slideUl').css({
+               left:0
+             })
+             $('.slideUl').css({display:'block'})
+          }
+
+          if(nIndex<0){
+            CONTROL_INDEX=DEFAULT_LEN
+            $('.slideUl').css({
+              left:-LIST_WIDTH*DEFAULT_LEN
+            })
+          }
+        })
+       
+    }
+
+    function defaultLen(){
+      DEFAULT_LEN =$('.slideUl .slideList').length-1;
+      $('.slideUl').css({
+        left:0
+      })
+    }
+
+    function pagingFunc(nIndex){
+      $('.pagingDot').eq(nIndex).addClass('pagingActive');
+      $(`.pagingDot:not(:eq(${nIndex}))`).removeClass('pagingActive');
+      if(nIndex>DEFAULT_LEN){
+        $('.pagingDot').eq(0).addClass('pagingActive');
+      }
+    }
+
+
+    
+  </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="./slide.css">
+</head>
+
+<body>
+  <div class="product_con">
+    <ul class="product_list">
+      <li><a href="#none">1</a></li>
+      <li><a href="#none">2</a></li>
+      <li><a href="#none">3</a></li>
+      <li><a href="#none">4</a></li>
+      <li><a href="#none">5</a></li>
+    </ul>
+    <a class="btn_prev" href="#none">◀prev</a>
+    <a class="btn_next" href="#none">next▶</a>
+
+    <div class="numlist">
+      <a href="#none">●</a>
+      <a href="#none">●</a>
+      <a href="#none">●</a>
+      <a href="#none">●</a>
+      <a href="#none">●</a>
+    </div>
+  </div>
+  <script>
+    $(function () {
+      var selNum = 0; //초기값
+      var $proList = $(".product_lis, li");
+      var totalNum = $proList.length; //리스트 렝스 
+      var $btnprev = $(".product_con .btn_prev"); //뒤로 버튼
+      var $btnnext = $(".product_con .btn_next"); //앞으로 버튼
+      var oldNum;
+
+      $proList.css({
+        display: "none"
+      });
+      //리스트들을 모두 디스플레이 논하고
+      $proList.eq(selNum).fadeIn(1500);
+      //0번째있는놈만 페이드인 해서 시작
+
+      function prevItem() {
+        oldNum = selNum;
+        selNum = selNum - 1;
+        if (selNum < 0) {
+          selNum = totalNum - 1;
+          //렝스-1 끝에있는 리스트 넘버가 들어감.
+        }
+
+        setting('-1');
+        //뒤로가기 누를때마다 셋팅에 -1을 넣어줌.
+      }
+
+      function nextItem() {
+        oldNum = selNum;
+        selNum = selNum + 1;
+        if (selNum >= totalNum) {
+          selNum = 0;
+        }
+
+        setting('1');
+        //앞으로 갈때는 1을 넣어줌
+      }
+
+      $btnprev.on('click', prevItem);
+      $btnnext.on('click', nextItem);
+
+      function setting(adjust) {
+        //뒤로 가기눌렀을때 -1이 들어감.
+        var adjust1 = adjust * 1,
+          adjust2 = adjust * -1;
+        if (setting.caller == indicate) {
+          if (selNum < oldNum) {
+            adjust1 = adjust * -1,
+              adjust2 = adjust;
+          }
+        }
+        $proList.eq(selNum).css({
+          left: adjust1 * 200 + 'px',
+          display: 'block',
+          opacity: 0
+        })
+        $proList.eq(oldNum).stop().animate({
+          left: adjust2 * 200 + 'px',
+          opacity: 0
+        });
+        $proList.eq(selNum).stop().animate({
+          left: 0,
+          opacity: 1
+        }, 500, function () {});
+
+      }
+
+      function indicate() {
+        oldNum = selNum;
+        selNum = $(this).index();
+        if (selNum == oldNum) return;
+        setting('1')
+      }
+
+      $('.numlist a').on('click', indicate)
+
+    });
+  </script>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="./slide.css">
+</head>
+
+<body>
+  <div class="wrap">
+
+  <div class="thumbnail">
+    <ul class="clear">
+      <li><a href="#none"><img class="slideImg" src="./1.jpg" alt="title"></a></li>
+      <li><a href="#none"><img class="slideImg" src="./2.jpg" alt="title"></a></li>
+    </ul>
+  </div>
+  <div class="lib_bg">
+    <div class="lib">
+      <ul class="clear">
+        <li><img src="./1.jpg" alt=""></li>
+        <li><img src="./2.jpg" alt=""></li>
+      </ul>
+      <div class="dir">
+        <a href="#none" class="arrwbt lfbt">＜</a>
+        <a href="#none" class="arrwbt rtbt">＞</a>
+        <a href="#none" class="close">x</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    $(function () { //모든 문서가 준비되면 실행이 이렇게 실행함. 제이쿼리에서
+        //인덱스를 통일해줬음
+      $('.thumbnail ul li a').each(function(index){
+        $(this).attr('data-index',index)
+      })
+
+      $('.lib_bg ul li').each(function(index){
+        $(this).addClass('lib_img'+index)
+      })
+        //인덱스를 통일해줬음
+
+        $('.rtbt').on('click',function(){
+          $('.lib ul').stop()
+          $('.lib ul').animate({left:-$('.lib ul li').width()},function(){
+              $(this).css({left:0})
+              $(this).find('li:first').insertAfter($(this).find('li:last'))
+          })
+        })
+
+        $('.lfbt').on('click',function(){
+          $('.lib ul').stop()
+          $('.lib ul').css({left:-($('.lib ul li').width())});
+          $('.lib ul').find('li:last').insertBefore( $('.lib ul').find('li:first'));
+          $('.lib ul').animate({left:0})
+        })
+
+        $('.lib_bg').on('click',function(e){
+          if(e.target.className=='lib_bg'){
+            $('.lib_bg').fadeOut(300)
+          }else if (e.target.className=='close'){
+            $('.lib_bg').fadeOut(300)
+          }
+        })
+
+      $('.thumbnail ul li a').on('click',function(){
+        var thumbI= $(this).attr('data-index');
+        
+        $('.lib_img'+thumbI).insertBefore($('.lib ul li:first'))
+        $('.lib_bg').fadeIn(function(){
+          lightOpen()
+        })
+        
+      })
+      function lightOpen() {
+        var libW = $('.lib').width();
+        $('.lib ul li').width(libW);
+        $('.lib ul').width($('.lib ul li').length * libW).height();
+        var libH = $('.lib ul li').height();
+        $('.lib').css({
+          "height": libH,
+          "margin-top": -(libH / 2),
+          "margin-left": -(libW / 2),
+        })
+      }
+      lightOpen()
+      $(window).resize(function () {
+        lightOpen()
+      })
+
+
+    }) //
   </script>
 </body>
 
