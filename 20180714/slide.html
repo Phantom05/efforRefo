@@ -392,6 +392,7 @@
     <ul class="clear">
       <li><a href="#none"><img class="slideImg" src="./1.jpg" alt="title"></a></li>
       <li><a href="#none"><img class="slideImg" src="./2.jpg" alt="title"></a></li>
+
     </ul>
   </div>
   <div class="lib_bg">
@@ -423,8 +424,10 @@
         $('.rtbt').on('click',function(){
           $('.lib ul').stop()
           $('.lib ul').animate({left:-$('.lib ul li').width()},function(){
+            //left -로 끌어주고 끌린놈을 다시 맨 뒤로 붙임.
               $(this).css({left:0})
               $(this).find('li:first').insertAfter($(this).find('li:last'))
+              
           })
         })
 
@@ -432,6 +435,7 @@
           $('.lib ul').stop()
           $('.lib ul').css({left:-($('.lib ul li').width())});
           $('.lib ul').find('li:last').insertBefore( $('.lib ul').find('li:first'));
+          //li가 앞쪽으로 가면 left가 -가 되니까 다시 0으로 끌어주는거임
           $('.lib ul').animate({left:0})
         })
 
@@ -447,9 +451,7 @@
         var thumbI= $(this).attr('data-index');
         
         $('.lib_img'+thumbI).insertBefore($('.lib ul li:first'))
-        $('.lib_bg').fadeIn(function(){
-          lightOpen()
-        })
+        $('.lib_bg').fadeIn(lightOpen)
         
       })
       function lightOpen() {
