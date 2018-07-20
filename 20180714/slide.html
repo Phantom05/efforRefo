@@ -386,6 +386,10 @@
 </head>
 
 <body>
+
+  <div class="fucker">
+    ㅡㅡ
+  </div>
   <div class="wrap">
 
   <div class="thumbnail">
@@ -410,6 +414,9 @@
   </div>
 </div>
   <script>
+    $('.fucker').on('click',function(){
+      $(this).fadeOut(1000)
+    })
     $(function () { //모든 문서가 준비되면 실행이 이렇게 실행함. 제이쿼리에서
         //인덱스를 통일해줬음
       $('.thumbnail ul li a').each(function(index){
