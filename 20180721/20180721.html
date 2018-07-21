@@ -372,6 +372,172 @@ body {
 <body>
 
 <script>
+  var users = [
+    {id:1,name:'ID',age:36},
+    {id:2,name:'BJ',age:32},
+    {id:3,name:'JM',age:32},
+    {id:4,name:'PJ',age:27},
+    {id:5,name:'HA',age:25},
+    {id:6,name:'JE',age:26},
+    {id:7,name:'JI',age:31},
+    {id:8,name:'MP',age:23},
+  ]
+
+  var temp_users = [];
+  for(var i =0;i<users.length;i++){
+    if(users[i].age>=30){
+      temp_users.push(users[i]);
+    }
+  }
+  var names=[];
+  for(var i =0;i<temp_users.length;i++){
+    names.push(temp_users[i].name)
+  }
+  console.log(temp_users);
+  console.log(names);
+
+  var temp_users = [];
+  for(var i =0;i<users.length;i++){
+    if(users[i].age<30){
+      temp_users.push(users[i])
+    }
+  }
+  console.log(temp_users);
+  var ages=[];
+  for(var i =0;i<temp_users.length;i++){
+    ages.push(temp_users[i].age);
+  }
+  console.log(ages);
+
+  //filter 응용형함수- 함수를 인자로 받음. 그리고 그인자를 조건으로 사용함.
+function _filter(list,predi){//함수가 인자로 받고 필터함수안에서 인자함수를 시행시킴
+  var new_list = [];
+ _each(list,function(val){
+  if(predi(val)) new_list.push(val);
+ })
+  return new_list;
+}
+
+function _map(list,mapper){
+  let new_list=[];
+  _each(list,function(val){
+    new_list.push(mapper(val));
+  })
+  return new_list;
+}
+
+function _each(list,iter){//iter로 함수가 들어올건대  list의 랭스만큼 반복해서 함수가 실행되고 그 값이 들어갈거임.
+  for(var i =0;i<list.length;i++){
+    iter(list[i])
+  }
+  return list
+}
+
+console.log(
+  'iter',
+  _each([1,2,3,4],function(val){return })
+)
+
+
+var over_30 = _filter(users,function(user){return user.age>30})
+console.log('over',over_30);
+var under_30= _filter(users,function(user){return user.age<30})
+
+var names1 = _map(over_30,function(user){return user.name})
+console.log(names1);
+var age1 = _map(under_30,function(user){return user.age})
+console.log(age1)
+
+console.log(
+  _filter(users,function(user){return user.age>=30})
+)
+console.log(
+  _filter(users,function(user){return user.age<30})
+)
+//한번에 쓰려면 함수를 둘다 인자로 넣어주면 됨.
+console.log(
+  _map(
+    _filter(users,function(user){return user.age>=30}),
+    function(user){return user.name}
+  )
+)
+
+
+//필터, map정도는 필수로 복습하기. 
+//아... 이렇게 반복되는 부분이 많기때문에 js 메서드들이 나온거임...대박..난 계속 포문을 썼는데
+//알고보니 메서드를 사용하면 훨신 간결한것들이었음..
+
+//이렇게하면 보다 안정성 높고 수정도 용이한 코드를 사용할 수 있음.
+
+
+// console.log(
+//   _filter([1,2,3,4],function(num){return (num%2)})
+// )
+// console.log(
+//   _filter([1,2,3,4],function(num){return !(num%2)})
+// )
+
+
+
+
+
+
+
+
+
+
+
+// function test(arr,fun){
+//   let parentArr= [];
+//     for(let i=0;i<arr.length;i++){
+//       parentArr.push(fun(arr[i]))
+//     }
+//   return parentArr;
+// }
+
+// console.log(
+//   test([5,6,7,8],function(num){return num+7})
+// )
+
+// function filter_list(l,a) {
+//  let arr =[];
+//  for(let i =0;i<l.length;i++){
+//    if(a(l[i])){
+//      arr.push(a(l[i]))
+//    }
+//  }
+//  return arr
+// }
+// function intFunc(arr){
+//   return (typeof arr =='number')?arr:'';
+// }
+// console.log('filter')
+// console.log(filter_list([1,2,'a','b',5,'123'],intFunc))
+
+// console.clear();
+
+// function filter_list(l) {
+//   return l.filter(x=>(typeof x=='number')?x:"")
+// }
+// const filter_list= (l)=> l.filter(x=>{
+//   if(typeof x==='number'){
+//     return x
+//   }
+// })
+
+// function filter_list(l) {
+//  return l.filter(v => typeof v == "number")
+// }
+// function filter_list(l) {
+//   return l.filter(Number.isInteger);
+// }
+// const filter_list = l => l.filter(c => typeof c === 'number');
+// console.log(filter_list([1,2,'aasf','1','123',5,0]))
+// console.log(typeof 0)
+
+
+
+
 
 </script>
 </body>
