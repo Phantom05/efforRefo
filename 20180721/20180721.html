@@ -1,0 +1,378 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <style>
+    *{list-style: none;padding: 0;margin: 0;box-sizing: border-box;}
+    .b1{
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTonn1gIGhxhfk0BmYAW-qVelRvjji2tskwS3lpTXFGOyba2omm');
+      background-size: cover;
+    }
+    .b2{
+      background: url('https://cdn.pixabay.com/photo/2018/07/12/02/32/basil-3532424__340.jpg');
+      background-size: cover;
+    }
+    .b3{
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTonn1gIGhxhfk0BmYAW-qVelRvjji2tskwS3lpTXFGOyba2omm');
+      background-size: cover;
+    }
+    .b4{
+      background: url('http://www.aitimes.kr/news/photo/201804/11622_11412_1831.jpg');
+      background-size: cover;
+    }
+    .b5{
+      background: url('https://t1.daumcdn.net/cfile/tistory/2114AA4B52AEC8D539');
+      background-size: cover;
+    }
+    .slide{
+      position: absolute;
+      overflow: hidden;
+      width: 500%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    .slideList{
+      width: 20%;
+      height: 100%;
+      float: left;
+    }
+    .slideTle{
+      position: relative;
+      width: 500px;
+      height: 400px;
+      transition: .5s;
+      margin: auto;
+      overflow: hidden;
+    }
+    .btc{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slideTle">
+  <ul class="slide" data-count="0">
+    <li class="slideList b1"></li>
+    <li class="slideList b2"></li>
+    <li class="slideList b3"></li>
+    <li class="slideList b4"></li>
+    <li class="slideList b5"></li>
+  </ul>
+</div>
+
+<div class="btc">
+    <button id="prev" class="slideBt">prev</button>
+    <button id="next" class="slideBt">next</button>
+    <button id="pause" class="slidePause">pause</button>
+</div>
+  <script>
+    $('.slideBt').on('click',function(){
+      slideFunc($(this).attr('id'))
+    })
+    
+    let pause=0;
+    $('.slidePause').on('click',function(){
+      if(pause==0){
+        $('.slidePause').text('auto');
+        pause++
+      }else if(pause==1){
+        $('.slidePause').text('pause');
+        AutoSlideFunc();
+        pause--;
+      }
+    })
+
+    function AutoSlideFunc(){
+      let AutoSlide = setInterval(function(){
+      $('.slide').stop();
+      $('.slide').animate({'left':'-=100%'},function(){
+      $('.slide').css({'left':'0'})
+      $('.slide').find(':first').insertAfter($('.slide').find(':last'));
+      })
+      if(pause==1){
+        clearInterval(AutoSlide)
+      }
+      },2000)
+    }
+    AutoSlideFunc()
+
+    function slideFunc(t){
+     if(t=='next'){
+      $('.slide').stop();
+       $('.slide').animate({'left':'-=100%'},function(){
+        $('.slide').css({'left':'0'})
+        $('.slide').find(':first').insertAfter($('.slide').find(':last'));
+       })
+     }else if(t=='prev'){
+      $('.slide').stop();
+      $('.slide').find(':last').insertBefore($('.slide').find(':first'));
+      $('.slide').css({'left':'-100%'});
+       $('.slide').animate({'left':'+=100%'})
+     }
+     return;
+    }
+
+
+
+    
+  </script>
+</body>
+</html>  -->
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(
+         function() {
+            var list = $(".coList");
+
+            var margin = 0;
+            var selector = 0;
+            $('#coList li:eq(' + selector + ')').addClass('selectItem');
+
+            function gotoNext(flag) {
+               switch (flag) {
+               case "prev":
+                  margin = margin + 80;
+
+                  $('#coList').stop().animate({
+                     marginLeft : margin
+                  }, 200, function() {
+                  });
+
+                  break;
+               case "next":
+                  margin = margin - 80;
+                  $('#coList').stop().animate({
+                     marginLeft : margin
+                  }, 200, function() {
+                  });
+
+                  break;
+               }
+            }
+
+            $(".prev").click(
+                  function() {
+                     $('#coList li:eq(' + selector + ')').removeClass(
+                           'selectItem');
+                     if (selector == 0) {
+                        selector = 20;
+                        $('#coList li:eq(' + selector + ')').addClass(
+                              'selectItem');
+                        margin = -1120;
+                        $('#coList').stop().animate({
+                           marginLeft : margin
+                        }, 200, function() {
+                        });
+                     } else {
+                        if (selector > 2 && selector < 17) {
+                           $('#coList li:eq(' + selector + ')')
+                                 .removeClass('selectItem');
+                           selector = selector - 1;
+                           $('#coList li:eq(' + selector + ')')
+                                 .addClass('selectItem');
+                           gotoNext("prev");
+                        } else {
+                           $('#coList li:eq(' + selector + ')')
+                                 .removeClass('selectItem');
+                           selector = selector - 1;
+                           $('#coList li:eq(' + selector + ')')
+                                 .addClass('selectItem');
+                        }
+
+                     }
+
+                  });
+
+            $(".next").click(
+                  function() {
+                     $('#coList li:eq(' + selector + ')').removeClass(
+                           'selectItem');
+                     selector = selector + 1;
+                     if (selector == 21) {
+                        selector = 0;
+                        $('#coList li:eq(' + selector + ')').addClass(
+                              'selectItem');
+                        margin = 0;
+                        $('#coList').stop().animate({
+                           marginLeft : margin
+                        }, 200, function() {
+                        });
+
+                     } else {
+                        $('#coList li:eq(' + selector + ')').addClass(
+                              'selectItem');
+                     }
+                     if (selector > 2 && selector < 17) {
+                        gotoNext("next");
+                     }
+
+                  })
+
+            
+            var move = 0;
+       var bannerBox = $('#bannerBox');
+            $('#banner6').remove();
+            
+            setInterval(function() {
+               move = move + 1
+               if(move%200 == 0){
+               bannerBox.insertAfter($('#banner6'));
+                  console.log('point');
+               }
+               $('#bannerMain #bannerBox').animate({
+                  marginLeft : move
+               }, 10, function() {
+               });
+
+            }, 0);
+
+
+         });
+</script>
+<style type="text/css">
+body {
+   margin-top: 100px;
+}
+
+.selectItem {
+   color: white;
+}
+
+.coList:after {
+   list-style-type: none;
+}
+
+.coList:after {
+   content: '';
+   display: block;
+   clear: both;
+}
+
+.coList {
+   margin: 0;
+   padding: 0;
+}
+
+.coList li {
+   width: 80px;
+   float: left;
+   padding: 0;
+   margin: 0;
+   list-style: none;
+   float: left;
+   background: red;
+   list-style: none;
+}
+
+.lidiv {
+   overflow: hidden;
+   width: 560px;
+   border: solid 1px red;
+}
+
+.bannerMain {
+   width: 1000px;
+   height: 100px;
+   border: solid 1px black;
+   padding: 5px;
+   margin-top: 50px;
+   margin-left: 100px;
+   overflow : hidden;
+}
+
+.bannerBox {
+   width: 1200px;
+   height: 100px;
+   padding : 0;
+   position: relative;
+   
+   
+}
+
+.banner {
+   width: 200px;
+   height: 100px;
+   float: left;
+   padding : 0;
+   margin : 0;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+   <center>
+
+
+      <div class="lidiv">
+         <ul class="coList" id="coList" style="width: 2300px;">
+            <li class="first" id="firstLi">0번 내용</li>
+            <li>1번 내용</li>
+            <li>2번 내용</li>
+            <li>3번 내용</li>
+            <li>4번 내용</li>
+            <li>5번 내용</li>
+            <li>6번 내용</li>
+            <li>7번 내용</li>
+            <li>8번 내용</li>
+            <li>9번 내용</li>
+            <li>10번 내용</li>
+            <li>11번 내용</li>
+            <li>12번 내용</li>
+            <li>13번 내용</li>
+            <li>14번 내용</li>
+            <li>15번 내용</li>
+            <li>16번 내용</li>
+            <li>17번 내용</li>
+            <li>18번 내용</li>
+            <li>19번 내용</li>
+            <li>20번 내용</li>
+         </ul>
+      </div>
+
+      <a href="#" class="prev">이전</a> <a href="#" class="next">다음</a>
+
+   </center>
+
+   <div id="bannerMain" class="bannerMain">
+         <div id="bannerBox" class="bannerBox">
+            <div id="banner1" class="banner" style="background: red;"></div>
+            <div id="banner2" class="banner" style="background: orange;"></div>
+            <div id="banner3" class="banner" style="background: yellow;"></div>
+            <div id="banner4" class="banner" style="background: green;"></div>
+            <div id="banner5" class="banner" style="background: blue;"></div>
+            <div id="banner6" class="banner" style="background: black;"></div>
+         </div>
+      </div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <title>Document</title>
+
+</head>
+<body>
+
+<script>
+
+</script>
+</body>
+</html>
