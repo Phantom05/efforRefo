@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
+</head>
+
+<body>
+  <div class="m">HELLO M</div>
+  <div class="pc">HELLO PC</div>
+
+    <ul class="menuBox">
+      <li class="menuList">Menu</li>
+      <li class="menuList abc">Menu</li>
+      <li class="menuList">Menu</li>
+      <li class="menuList">Menu</li>
+      <li class="menuList">Menu</li>
+    </ul>
+  <script>
+
+    //적응형 
+    {
+    function Detect_Mobile() {
+      return navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(
+          /iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent
+        .match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i) ? true : false;
+    }
+    console.log(Detect_Mobile())
+
+    if (Detect_Mobile()) {
+      $('.m').show();
+      $('.pc').hide();
+      // console.log('t');
+    } else {
+      $('.m').hide();
+      $('.pc').show();
+      // console.log('f');
+    }
+    Detect_Mobile();
+  }
+
+    let user=[
+      {ID:1,NAME:'JUN',AGE:27},
+      {ID:2,NAME:'SUN',AGE:31},
+      {ID:3,NAME:'SEU',AGE:20},
+      {ID:4,NAME:'YEJ',AGE:25},
+      {ID:5,NAME:'NDA',AGE:30},
+    ];
+    function _filter(list,filter){
+      let new_list=[];
+      _each(list,function(val){
+        if(filter(val)) new_list.push(filter(val));
+      })
+      return new_list;
+    };
+
+    function _each(list,iter){
+      for(let i=0;i<list.length;i++){
+        iter(list[i])
+      }
+      return list;
+    };
+
+    function _map(list,mapper){
+      let new_list=[];
+      _each(list,function(val){
+        new_list.push(mapper(val))
+      })
+      return new_list;
+    };
+    let menuBox=document.getElementsByClassName('menuBox')[0];
+    let menuList =document.getElementsByClassName('menuList');
+    console.log(
+      _each(menuList,function(n){
+        n.classList.add('Hello');
+      })
+    );
+    console.log(
+      _filter(menuList,function(e){
+        return (e.classList.contains('abc'))?e.classList.add('success'):'';
+      })
+    );
+    
+    console.log(
+      _filter(user,function(n){return (n.AGE>30)?n:''}),
+      _map(user,function(u){return u.NAME}),
+    );
+
+      function _curry(fn){ //인자로 본체함수를 받고.
+        return function(a,b){ //처음실행됨 . 
+          return (arguments.length==2)? fn(a,b):function(b){ return fn(a,b);};
+        }
+      };
+
+      var add =_curry(function(a,b){
+        return a+b
+      });//안에 함수가 fn으로 들어가서 안쪽 returnfn 으로 들어가게됨. a+b로
+
+      var add10 = add(10);
+      var add5=add(5);
+      console.log(add10(5));
+      console.log(add5(3));
+      console.log(add(10)(10));
+      console.log(add(10,5));//add 안에 함수본체를 넣어봤기때문에 실행하면 function(a,b)함수가 리턴되는데 그 리턴시 인자를 확인해서 바로 또 함수를 실행시켜버림 fn 본체를
+
+      var sub = _curryr(function(a,b){
+        return a-b;
+      })//정의할떄 첫번쨰리턴이 되어있는상태임.
+      console.log(sub);
+      console.log(sub(10,5));
+  
+      var sub10 = sub(10);
+      console.log(sub10(5));
+
+      function _curryr(fn){
+        return function(a,b){
+          return (arguments.length==2)? fn(a,b):function(b){ return fn(b,a);};
+        }
+      }
+      function _get(obj,key){
+        return obj==null?undefined:obj[key];
+      };
+
+      var user1 = user[0];
+      var user2 = user[1];
+      console.log(user1);//이렇게 하면 배열안에 있는걸 갖고오는 기본저긴것.
+      console.log(user1.NAME)
+
+      console.log(_get(user2,'NAME'));//이렇게해도 나옴
+      //만약 user에 없는놈을 그냥 가져오려면?
+      // console.log(user[10].NAME)//에러가 나서 프로그램이 죽어버림.
+      //하지만 _get함수안에 넣으면 프로그램이 죽지않고 언디파인이 나옴
+      console.log(_get(user[10],'NAME'));
+      //이렇게 하게되면 프로그램이 죽지않고 언디파인을 내줌. 안정성 증대.
+
+
+  </script>
+</body>
+
+</html>
