@@ -367,11 +367,117 @@ body {
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <title>Document</title>
-
+  <style>
+    *{padding: 0;list-style: none;margin: 0;box-sizing: border-box;}
+    body{
+      background: rgb(27, 34, 56);
+    }
+    .ham{
+      display: inline-block;
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      cursor: pointer;
+    }
+    .bar{
+      display: inline-block;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background: white;
+      left: 0;
+      transition: .5s;
+    }
+    .peti1{
+      top: 0;
+    }
+    .peti2{
+      top: 10px;
+    }
+    .peti3{
+      top: 20px;
+    }
+    .bar1{
+      transform: rotateZ(50deg);
+      top: 10px;
+    }
+    .bar2{
+      opacity: 0;
+    }
+    .bar3{
+      transform: rotateZ(-50deg);
+      top: 10px;
+    }
+    .menu{
+      position: fixed;
+      width: 200px;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      background:white;
+      transition: 1s;
+      opacity: 0;
+    }
+    .menuActive{
+      left: 0;
+      transition: 1s;
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
+  <div class="ham">
+    <span class="peti1 bar"></span>
+    <span class="peti2 bar"></span>
+    <span class="peti3 bar"></span>
+  </div>
+  <div class="menu">
+    <ul class="menuList">
+      <li><a href="#none">MENU1</a></li>
+      <li><a href="#none">MENU2</a></li>
+      <li><a href="#none">MENU3</a></li>
+      <li><a href="#none">MENU4</a></li>
+      <li><a href="#none">MENU5</a></li>
+    </ul>
+  </div>
+  <script>
+    function hamburger(){
+      let ham = document.getElementsByClassName('ham')[0];
+      let bar=document.getElementsByClassName('bar');
+      let menu=document.getElementsByClassName('menu')[0]
+      let menuList=document.getElementsByClassName('menuList')[0]
+      ham.addEventListener('click',function(){
+        menuFunc()
+      })
+      menuList.addEventListener('click',function(e){
+      if(e.target.className='a'){
+        menuFunc()
+      }
+    })
 
-<script>
+    function menuFunc(){
+      for(let i =0;i<bar.length;i++){
+        bar[i].classList.toggle('bar'+(i+1))
+      }
+      menu.classList.toggle('menuActive')
+    }
+    }
+
+
+    hamburger()
+
+    // function _each(list,iter){
+    //   for(let i=0;i<list.length;i++){
+    //     iter(list[i])
+    //   }
+    //   return list;
+    // }
+    
+  </script>
+<!-- <script>
   var users = [
     {id:1,name:'ID',age:36},
     {id:2,name:'BJ',age:32},
@@ -393,8 +499,8 @@ body {
   for(var i =0;i<temp_users.length;i++){
     names.push(temp_users[i].name)
   }
-  console.log(temp_users);
-  console.log(names);
+  // console.log(temp_users);
+  // console.log(names);
 
   var temp_users = [];
   for(var i =0;i<users.length;i++){
@@ -402,13 +508,23 @@ body {
       temp_users.push(users[i])
     }
   }
-  console.log(temp_users);
+  // console.log(temp_users);
   var ages=[];
   for(var i =0;i<temp_users.length;i++){
     ages.push(temp_users[i].age);
   }
-  console.log(ages);
+  // console.log(ages);
 
+  var users = [
+    {id:1,name:'ID',age:36},
+    {id:2,name:'BJ',age:32},
+    {id:3,name:'JM',age:32},
+    {id:4,name:'PJ',age:27},
+    {id:5,name:'HA',age:25},
+    {id:6,name:'JE',age:26},
+    {id:7,name:'JI',age:31},
+    {id:8,name:'MP',age:23},
+  ]
   //filter 응용형함수- 함수를 인자로 받음. 그리고 그인자를 조건으로 사용함.
 function _filter(list,predi){//함수가 인자로 받고 필터함수안에서 인자함수를 시행시킴
   var new_list = [];
@@ -426,41 +542,68 @@ function _map(list,mapper){
   return new_list;
 }
 
-function _each(list,iter){//iter로 함수가 들어올건대  list의 랭스만큼 반복해서 함수가 실행되고 그 값이 들어갈거임.
+//iter로 함수가 들어올건대  list의 랭스만큼 반복해서 함수가 실행되고 그 값이 들어갈거임.
+function _each(list,iter){
   for(var i =0;i<list.length;i++){
     iter(list[i])
   }
-  return list
+  console.log('list',list)
+  return list;
 }
-
+//이렇게 사용하면 좋은게 뒤에 콜백함수라고 불리는 위치의 함수에서 개발자가 스스로 조건을 골라줄수 있기 때문에, 다형성이 좋음, node를 인자로 받으면 node.nodeName과 같이 스스로 개발자가 선택할수가 있음. 
+console.log(_map([1,2,3,4],function(val){
+  return val
+}));
 console.log(
-  'iter',
-  _each([1,2,3,4],function(val){return })
+  _filter([1,2,3,4],function(val){
+    return val>2
+  })
 )
 
-
-var over_30 = _filter(users,function(user){return user.age>30})
-console.log('over',over_30);
-var under_30= _filter(users,function(user){return user.age<30})
-
-var names1 = _map(over_30,function(user){return user.name})
-console.log(names1);
-var age1 = _map(under_30,function(user){return user.age})
-console.log(age1)
-
+function _curry(fn){
+  return function(a){
+    return function(b){
+      return fn(a,b);
+    }
+  }
+}
+var add=_curry(function(a,b){
+  return a+b;
+})
 console.log(
-  _filter(users,function(user){return user.age>=30})
+  add(5)(3)
 )
-console.log(
-  _filter(users,function(user){return user.age<30})
-)
-//한번에 쓰려면 함수를 둘다 인자로 넣어주면 됨.
-console.log(
-  _map(
-    _filter(users,function(user){return user.age>=30}),
-    function(user){return user.name}
-  )
-)
+
+////////////////////////////
+// console.log(
+//   'iter',
+//   _each([1,2,3,4],function(val){return })
+// )
+
+
+
+// var over_30 = _filter(users,function(user){return user.age>30})
+// console.log('over',over_30);
+// var under_30= _filter(users,function(user){return user.age<30})
+
+// var names1 = _map(over_30,function(user){return user.name})
+// console.log(names1);
+// var age1 = _map(under_30,function(user){return user.age})
+// console.log(age1)
+
+// console.log(
+//   _filter(users,function(user){return user.age>=30})
+// )
+// console.log(
+//   _filter(users,function(user){return user.age<30})
+// )
+// //한번에 쓰려면 함수를 둘다 인자로 넣어주면 됨.
+// console.log(
+//   _map(
+//     _filter(users,function(user){return user.age>=30}),
+//     function(user){return user.name}
+//   )
+// )
 
 
 //필터, map정도는 필수로 복습하기. 
@@ -539,6 +682,6 @@ console.log(
 
 
 
-</script>
+</script> -->
 </body>
 </html>
