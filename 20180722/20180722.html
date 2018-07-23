@@ -121,6 +121,7 @@
           return (arguments.length==2)? fn(a,b):function(b){ return fn(b,a);};
         }
       }
+
       function _get(obj,key){
         return obj==null?undefined:obj[key];
       };
@@ -136,6 +137,26 @@
       //하지만 _get함수안에 넣으면 프로그램이 죽지않고 언디파인이 나옴
       console.log(_get(user[10],'NAME'));
       //이렇게 하게되면 프로그램이 죽지않고 언디파인을 내줌. 안정성 증대.
+
+      //근데 여기서 더 쩌는것은... curry를 이용하여 
+      var _get = _curryr(function(obj,key){
+        return obj==null?undefined:obj[key]
+      })
+
+      function _reduce(list,iter,memo){
+
+      }
+      _reduce([1,2,3],function(){
+        return a+b;
+      },0);
+      //6
+
+      console.log(
+        _reduce([1,2,3],add,0);
+      )
+      memo=add(0,1)
+      memo
+
 
 
   </script>
