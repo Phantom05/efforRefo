@@ -137,7 +137,92 @@ console.log(
 //10이 처음들어감.
 console.log(
   _reduce([1,2,3],add,0)
-)
+);
+
+console.clear()
+
+
+function calculate(a,b,c){
+  return a*b+c;
+}
+
+function curryFun(func){
+  var args = Array.prototype.slice.call(arguments,1);//아규먼트 인덱스1부터 다 
+  console.log(func) // calculate함수
+  return function(){
+    return func.apply(null,args.concat(Array.prototype.slice.call(arguments)));
+  }
+}
+function curryFun2(func){
+  var args = Array.prototype.slice.call(arguments,1);
+  return function(){
+    var arg_idx = 0;
+    for(var i =0;i<args.length && arg_idx<arguments.length;i++){
+      if(args[i] === undefined){
+        args[i]= arguments[arg_idx++];
+        return func.apply(null,args);
+      }
+    }
+  }
+}
+
+var new_fun = curryFun2(calculate,1,undefined,4);
+console.log(new_fun(3))//7
+
+var new_fun1 = curryFun(calculate,1);
+console.log(new_fun1(2,3));
+var new_fun2 = curryFun(calculate,1,3);
+// console.log(new_fun2(3));
+//커링이란 특정 함수에서 정의된 인자의 일부를 넣어 고정시키고, 나머지 인자로 받는 새로운 함수를 만드는 것을 의미한다. 
+/*
+Currying은 여러개의 인자를 가진 함수를 호출 할 경우, 파라미터의 수보다 적은 수의 파라미터를 인자로 받으면 누락된 파라미터를 인자로 받는 기법을 말합니다.
+*/
+
+function volum(l,w,h){
+  return l*w*h;
+}
+
+function curring(fn){
+  var arity = fn.length;
+  return (function resolver(){
+    var memory= Array.prototype.slice.call(arguments);
+    return function(){
+      var local = memory.slice();
+    };
+  }());
+}
+
+var curried = curring(volum);
+
+var sum = function(a,b){
+  return a+b;
+}
+
+Function.prototype.curry = function(){
+  var slice = Array.prototype.slice;
+  var args = slice.apply(arguments);
+  var that = this;
+  return function(){
+    return that.apply(null,args.concat(slice.apply(arguments)));
+  }
+}
+
+var Person ={
+  name:'Person',
+  yell:function(){
+    console.log(this.name)
+  }
+}
+var Product = {
+  name:'Product',
+}
+Person.yell.call(Product);
+
+const addy =(a,b)=>a+b;
+const suby = (a,b)=>a-b;
+console.log(addy(10,10));
+var addy10 = addy(10);
+console.log
 
   </script>
 </body>
