@@ -1,4 +1,7 @@
 
+#selectBox{
+  display: inline-block;
+}
 .select-one{
   display: none;
 }
@@ -9,10 +12,15 @@
   font-size: 16px;
   padding: 5px;
   border-bottom: 1px solid rgb(226, 225, 225);
+  -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
   cursor: pointer;
 }
 .select__twoBox:hover{
+  background: rgb(41, 117, 129);
+}
+.select__curView{
   background: rgb(13, 153, 172);
 }
 .select__view{
@@ -22,6 +30,8 @@
   font-size: 16px;
   padding: 5px;
   border-bottom: 1px solid rgb(226, 225, 225);
+  -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
   cursor: pointer;
 }
@@ -29,6 +39,8 @@
   max-height: 0;
   line-height: 0;
   opacity: 0;
+  -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
 }
 .select__two-Cont{

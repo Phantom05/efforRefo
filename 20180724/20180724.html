@@ -83,7 +83,7 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>f</title>
+<title>te</title>
 <style>
 /*the container must be positioned relative:*/
 .custom-select {
@@ -143,7 +143,7 @@
 
 <body>
 
-<h2>Custom Select</h2>
+<!-- <h2>Custom Select</h2>
 <div class="custom-select" style="width:200px;">
   <select>
     <option value="0">Select car:</option>
@@ -160,7 +160,7 @@
     <option value="11">Toyota</option>
     <option value="12">Volvo</option>
   </select>
-</div>
+</div> -->
 
 <h2>My Select</h2>
 <div id="selectBox">
@@ -179,6 +179,56 @@
 </div>
 
 <script>
+  var selectBox=document.getElementById('selectBox');
+  var selectView = document.createElement('div');
+  var selectValTag=document.getElementsByClassName('selectValTag');
+  var selectTwo = document.createElement('div');
+  var selectTwoOpt=document.getElementsByClassName('select__twoBox');
+  var selectBox=document.getElementById('selectBox');
+
+  _each(selectValTag,function(val){
+    var selectTwoOpt = document.createElement('div');
+    selectTwoOpt.classList.add('select__twoBox');
+    selectTwoOpt.innerHTML=val.textContent;
+    selectTwo.appendChild(selectTwoOpt);
+  })
+    selectView.innerHTML='Select Travel';
+    selectView.classList.add('select__view')
+    selectTwo.classList.add('select__two-Cont');
+    selectBox.appendChild(selectView);
+    selectBox.appendChild(selectTwo);
+
+    selectBox.addEventListener('click',function(e){
+    var tar = e.target;
+
+    if(tar.classList.contains('select__view')){
+      selectTwo.classList.toggle('select__twoCont-Act');
+    }
+
+    else if(tar.classList.contains('select__twoBox')){
+      _each(selectTwoOpt,function(val){val.classList.remove('select__curView')})
+      tar.classList.add('select__curView');
+      selectView.innerHTML=tar.textContent;
+      selectTwo.classList.toggle('select__twoCont-Act');
+    }
+  })
+
+  function _each(list,iter){
+    for(var i= 0;i<list.length;i++){iter(list[i])};
+  }
+
+  function closeTwoSelect(e){
+    var tar = e.target;
+    if((selectTwo.classList.contains('select__twoCont-Act'))){
+     if(!(tar.classList.contains('select__view')|| tar.classList.contains('select__twoBox'))){
+      selectTwo.classList.toggle('select__twoCont-Act');
+    }
+  }
+  }
+  document.addEventListener("click", closeTwoSelect);
+</script>
+
+<!-- <script>
 var x, i, j, selElmnt, a, b, c;
 x = document.getElementsByClassName("custom-select");
 for (i = 0; i < x.length; i++) {
@@ -210,7 +260,7 @@ for (i = 0; i < x.length; i++) {
           }
         }
         
-        h.click();
+        // h.click();
         // console.log(h.value)
     });
     b.appendChild(c);
@@ -223,9 +273,7 @@ for (i = 0; i < x.length; i++) {
       this.classList.toggle("select-arrow-active");
     });
 }
-function _filter(list,predi){
 
-}
 
 function closeAllSelect(elmnt) {
   var x, y, i, arrNo = [];
@@ -246,45 +294,222 @@ function closeAllSelect(elmnt) {
 }
 document.addEventListener("click", closeAllSelect);
 
-</script>
+</script> -->
+
 <script>
 
-  var selectBox=document.getElementById('selectBox');
-  var selectView = document.createElement('div');
-  var selectValTag=document.getElementsByClassName('selectValTag');
-  var selectTwo = document.createElement('div');
-  var selectTwoOpt=document.getElementsByClassName('select__twoBox');
+  var plus= function(a,b,c){
+    return a+b+c;
+  }
+  // Function.prototype.partial = function(){
+  //   var args = [].slice.apply(arguments);
+  //   var self = this;
+  //   return function(){
+  //     return self.apply(null,args.concat([].slice.apply(arguments)))
+  //   };
+  // };
 
-  _each(selectValTag,function(val){
-    var selectTwoOpt = document.createElement('div');
-    selectTwoOpt.classList.add('select__twoBox');
-    selectTwoOpt.innerHTML=val.textContent;
-    selectTwo.appendChild(selectTwoOpt)
-  })
-    selectTwo.classList.add('select__two-Cont');
-    selectView.classList.add('select__view')
-    selectView.innerHTML='Select Travel';
-    selectBox.appendChild(selectView);
-    selectBox.appendChild(selectTwo);
-    selectBox.addEventListener('click',function(e){
-    var tar = e.target;
-    if(tar.classList.contains('select__view')){
-      selectTwo.classList.toggle('select__twoCont-Act')
-    }
+  // console.log([3].concat(5))
 
-    if(tar.classList.contains('select__twoBox')){
-      selectView.innerHTML=tar.textContent;
-      selectTwo.classList.toggle('select__twoCont-Act')
-    }
-  })
-
-  function _each(list,iter){
-    for(var i= 0;i<list.length;i++){iter(list[i])}
+  function curring(num){
+    return function(add){
+      return num+add;
+    };
   }
 
-  document.addEventListener("click", closeAllSelect);
+  // var add= curring(5)
+  // var result = add(5)
+  // console.log(result)
+
+  // function add(x,y){
+  //   var old_x =x,old_y =y;
+  //   if(typeof old_y ==='undefined'){
+  //     return function (new_y){
+  //       return old_x +new_y;
+  //     }
+  //   }
+  //   return x+y
+  // }
+  // console.log(add(3,5))
+
+
+
+  // function add(x,y){
+  //   if(typeof y ==='undefined'){
+  //     return function (y){
+  //       return x+y
+  //     }
+  //   }
+  //   return x+y
+  // }
+  //커링 == 인자가 1개일때는 함수를 리턴해서 ()()로 쓸수있게하고 인자가 2개이면정상적으로 동작함. ()1개만 넣을때는 함수만 리턴한 상태임. 
+  // console.log('y undefined',add(10)(5))
+  // var add10 = add(10);
+  // console.log(add10(10))
+
+  function _curry(fn){
+    return function(a,b){
+      return (arguments.length==2)?fn(a,b) : function(b){return fn(a,b);};
+    }
+  }
+  function _curryr(fn){
+    return function(a,b){
+      return (arguments.length==2)?fn(a,b) : function(b){return fn(b,a);};
+    }
+  }
+  var add =_curry(function(a,b){
+    return a+b
+  })
+  var sub = _curryr(function(a,b){
+    return a-b;
+  })
+  var add10 = add(10);
+  //인자를 하나만 전달하면 함수를 리턴함.
+  //위의코드는 add(1,2)이런식으로 직접 넘길수가 없음.
+  var add5=add(5);
+  console.log(add10(5));
+  console.log(add(5)(2));
+  console.log(add5(20));
+  console.log(add(5,5))
+  //arguments를 조절해서 인자가 2개일경우 본체를 즉시 리턴하게 해버리면 인자 2개를 넣어도 잘돌아감 
+
+  console.log(sub(50,5));
+  var sub50 = sub(50);
+  console.log(sub50(7));
+  var user=[
+    {id:1,name:'jax',age:29},
+    {id:2,name:'afx',age:30},
+    {id:3,name:'sdg',age:21},
+    {id:4,name:'wwe',age:32},
+    {id:5,name:'bfd',age:37},
+  ]
+  function _each(list,iter){
+    for(let i=0;i<list.length;i++){
+      iter(list[i])
+    }
+  }
+
+  function _filter(list,predi){
+    let new_list=[];
+    _each(list,function(val){
+      if(predi(val)) new_list.push(val)
+    })
+    return new_list;
+  }
+
+  function _map(list,mapper){
+    let new_list=[];
+      _each(list,function(val){
+        new_list.push(mapper(val))
+      })
+    return new_list;
+  }
+
+  var _get= _curryr(function(obj,key){
+    return obj==null?undefined:obj[key];
+  })//error가나서 프로그램이 죽는부분을 막아줌.
+  console.log( _get(user[10],'name'));
+  // console.log( user[10].name )
+  console.log(
+    'filter',_filter(user,function(val){
+      return val.age>30
+    })
+  );
+  console.log('map',
+    _map(_filter(user,function(val){ return val.age>30}),
+    _get('name')
+      )
+    );
+
+  try{
+    console.log(user[10].name);
+  }catch(error){
+    console.log(error);
+  }
+
+  console.log('hi');
+
+  var myFunc = function(param){
+    if(!myFunc.cache[param]){
+      var result={};
+
+      myFunc.cache[param] = result;
+    }
+    return myFunc.cache[param];
+  }
+  myFunc.cache = {};
+
+  var slice = Array.prototype.slice;
+  function _rest(list,num){
+    return slice.call(list,num||1);//원하는 번호만큼 잘라주거나, 없으면 1로 자름.
+  }//array like를 array로 만들기 위해 rest라는 함수를 만듬.
+
+  function _reduce(list,iter,memo){
+    if(arguments.length ==2){
+      memo = list[0];
+      list = _rest(list)
+    }
+    _each(list,function(val){
+      memo = iter(memo,val)
+    })
+   return memo;
+  }
+  //이건 마지막 값이 들어갔을때 돌아가겠지만 마지막 값을 넣지 않으면 동작하지 않음.
+  console.log(
+    _reduce([1,2,3],function(a,b){
+      return a+b;
+    },0)
+  )
+  console.log(
+    _reduce([1,2,3],function(a,b){
+      return a+b;
+    })
+  )
+  //6
+
+//파이프
+//들어온 값을 연속 실행하기위한 함수
+
+function _pipe(){
+  var fns = arguments;
+  return function(arg){
+    return _reduce(fns,function(arg,fn){
+      return fn(arg)
+    },arg);
+  }
+}
+function _go(arg){
+  var fns = arguments;
+  return _pipe.apply(null,fns)(arg);
+}
+
+var f1 = _pipe(
+  function(a){return a+1;},//1+1
+  function(a){return a*2},//2*2
+  function(a){return a*a}
+);
+
+console.log(f1(1))
+
+// 고 go
+
+// _go(1,
+//   function(a){return a+1;},//1+1
+//   function(a){return a*2},//2*2
+//   function(a){return a*a},
+//   console.log
+// );
+
+
+
+
+
+
+
+
+
+
+  
 </script>
-
-
 </body>
 </html>
