@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <ul>
+    <li>Menu</li>
+    <li class="target">Menu</li>
+    <li>Menu</li>
+    <li>Menu</li>
+    <li>Menu</li>
+  </ul>
+
+  <style>
+    .aaaa{
+      border: 1px solid blue;
+    }
+    .ttt{
+      border: 1px solid red;
+    }
+  </style>
+  <div class="aaaa">
+
+  </div>
+<div class="ttt">
+
+</div>
+  <script>
+
+    let target =document.getElementsByClassName('target')[0];
+    let docu= document;
+    docu.write('Hello')
+    
+  Element.prototype.phprev=function(){
+    return this.previousElementSibling;
+  }
+  target.phprev().style.background ='black'
+
+  Element.prototype.val = function (Param) {
+    if (this.nodeName === "INPUT") {
+        if (Param === '' || typeof(Param) === "undefined" || typeof(Param) === 'null') {
+            if(this.value.match(/[^0-9]/)) {
+                return this.value;
+            } else {
+                return this.value * 1;
+            }
+        } else {
+            this.value = Param;
+        }
+    }
+};
+//===로
+
+  let ttt =docu.getElementsByClassName('ttt')[0];
+  let aaaa =docu.getElementsByClassName('aaaa')[0];
+  let didi = docu.createElement('div');
+  didi.innerText='야야';
+  didi.classList.add('hello');
+
+  let aabab = docu.createElement('div');
+  aabab.innerHTML='hello'
+  
+    // Element.prototype.phAppendChild=function(c){
+
+    //     for(var i =0;i<child.length;i++){
+    //       this.appendChild(c);
+    //     }
+    //     return (function(){
+
+    //     })()
+    //   }
+
+      function phAppendChild(){
+        let c = Array.prototype.slice.call(arguments)
+          for(var i =1;i<c.length;i++){
+            c[0].appendChild(c[i])
+          }
+        return 
+      }
+      aaaa,phAppendChild(ttt,didi,aabab)
+
+      function createEl(el,content){
+        return docu.createElement(el)
+      }
+
+      // ttt.phAppendChild(didi)
+
+
+
+
+ 
+  </script>
+</body>
+</html>
