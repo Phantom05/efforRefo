@@ -717,9 +717,54 @@
         console.log(b.link)
       })
 
-    });
+      var object = {name:'윤인성'};
 
-    
+      $.extend(object,{
+        region:'강서구',
+        part:'세컨드 기타'
+      });
+
+      var output ='';
+      $.each(object,function(key,item){
+        output += key+': '+item+'\n';
+      });
+      // alert(output)
+    });
+    // $.noConflict();
+
+    jQuery(document).ready(function(){
+      
+    })
+
+    function test(options){
+      options.valueA = options.valueA ||10;
+      options.valueB = options.valueA ||20;
+      options.valueC = options.valueA ||30;
+
+      // alert(options.valueA+':'+options.valueB+':'+options.valueC )
+    }
+    test({
+      valueA:52,
+      valueC:272
+    })
+
+var arr1 = [[2, 1], [4, 3]];
+var arr2 = [[3, 2, 1], [5, 4], [6]];
+var arr3 = [[3], [4, 5], [6], [7], [8, 9, 10]];
+
+function restoreArray(arr) {
+    return arr.join(',').split(',').map(Number).sort((x,y)=>x-y)
+}
+
+console.log(restoreArray(arr1));
+console.log(restoreArray(arr2));
+console.log(restoreArray(arr3));
+
+Element.prototype.prev=function(){
+  return this.previousElementSibling;
+}
+
+
   </script>
 </body>
 
