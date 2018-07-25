@@ -1,42 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
   <style>
-    .rainbow{
+    * {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .rainbow {
       width: 100px;
       height: 100px;
     }
+
+    .menuCont {
+      /* position: relative; */
+      display: inline-block;
+      width: 500px;
+      /* height: 30px;; */
+      border: 1px solid red;
+      overflow: hidden;
+    }
+
+    .menuUl {
+      position: relative;
+      top: 0;
+      left: 0;
+      ;
+      width: 2000px;
+      /* border: 1px solid blue; */
+      /* overflow: hidden; */
+    }
+
+    .menuList {
+      float: left;
+    }
+
+    .menuAn {
+      display: block;
+      padding: 5px;
+      border: 1px solid yellow;
+      font-weight: bold;
+      text-decoration: none;
+      color: rgb(214, 214, 214);
+    }
+
+    .buttonBox {
+      text-align: center;
+    }
+
+    .ButtonActive {
+      background: black;
+      color: red;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    .scene {
+      border: 1px solid #CCC;
+      margin: 40px 0;
+      position: relative;
+      width: 210px;
+      height: 140px;
+      margin: 80px auto;
+      perspective: 1000px;
+    }
+
+    .carousel {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform: translateZ(-288px);
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+
+    .carousel__cell {
+      position: absolute;
+      width: 190px;
+      height: 120px;
+      left: 10px;
+      top: 10px;
+      border: 2px solid black;
+      line-height: 116px;
+      font-size: 80px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      transition: transform 1s, opacity 1s;
+    }
+
+    .carousel__cell:nth-child(9n+1) {
+      background: hsla( 0, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+2) {
+      background: hsla( 40, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+3) {
+      background: hsla( 80, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+4) {
+      background: hsla(120, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+5) {
+      background: hsla(160, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+6) {
+      background: hsla(200, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+7) {
+      background: hsla(240, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+8) {
+      background: hsla(280, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(9n+0) {
+      background: hsla(320, 100%, 50%, 0.8);
+    }
+
+    .carousel__cell:nth-child(1) {
+      transform: rotateY( 0deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(2) {
+      transform: rotateY( 40deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(3) {
+      transform: rotateY( 80deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(4) {
+      transform: rotateY(120deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(5) {
+      transform: rotateY(160deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(6) {
+      transform: rotateY(200deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(7) {
+      transform: rotateY(240deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(8) {
+      transform: rotateY(280deg) translateZ(288px);
+    }
+
+    .carousel__cell:nth-child(9) {
+      transform: rotateY(320deg) translateZ(288px);
+    }
+
+
+
+    .carousel-options {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      background: hsla(0, 0%, 100%, 0.8);
+    }
   </style>
 </head>
-<body>
 
+<body>
+  <input type="text">
+  <input type="radio">
+
+  <ul>
+    <li class="aaa">hello</li>
+    <li class="aaa">hello</li>
+    <li class="aaa">hello</li>
+    <li class="aaa">hello</li>
+    <li class="aaa">hello</li>
+  </ul>
+  <div class="">
+
+  </div>
+  <div class="menuCont">
+    <ul class="menuUl">
+      <li class="menuList">
+        <a href="" class="menuAn ButtonActive">menu1</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu2</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu3</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu4</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu5</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu6</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu7</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu8</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu9</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu10</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu11</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu12</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu13</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu14</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu15</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu16</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu17</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu18</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu19</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu20</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu21</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu22</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu23</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu24</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu25</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu26</a>
+      </li>
+      <li class="menuList">
+        <a href="" class="menuAn">menu27</a>
+      </li>
+    </ul>
+  </div>
+  <div class="buttonBox">
+    <button class="prevBt themeButton">prev</button>
+    <button class="nextBt themeButton">next</button>
+  </div>
   <div class="rainbow"></div>
+  <div class="scene">
+    <div class="carousel">
+      <div class="carousel__cell">1</div>
+      <div class="carousel__cell">2</div>
+      <div class="carousel__cell">3</div>
+      <div class="carousel__cell">4</div>
+      <div class="carousel__cell">5</div>
+      <div class="carousel__cell">6</div>
+      <div class="carousel__cell">7</div>
+      <div class="carousel__cell">8</div>
+      <div class="carousel__cell">9</div>
+      <div class="carousel__cell">10</div>
+      <div class="carousel__cell">11</div>
+      <div class="carousel__cell">12</div>
+      <div class="carousel__cell">13</div>
+      <div class="carousel__cell">14</div>
+      <div class="carousel__cell">15</div>
+    </div>
+  </div>
+
+  <div class="carousel-options">
+    <p>
+      <label>
+        Cells
+        <input class="cells-range" type="range" min="3" max="15" value="9" />
+      </label>
+    </p>
+    <p>
+      <button class="previous-button">Previous</button>
+      <button class="next-button">Next</button>
+    </p>
+    <p>
+      Orientation:
+      <label>
+        <input type="radio" name="orientation" value="horizontal" checked /> horizontal
+      </label>
+      <label>
+        <input type="radio" name="orientation" value="vertical" /> vertical
+      </label>
+    </p>
+  </div>
+  <style>
+    .마퀴 {
+      position: relative;
+      width: 200px;
+      height: 30px;
+      overflow: hidden;
+      border: 1px solid red;
+      cursor: pointer;
+      transition: 5s;
+    }
+
+    .content {
+      position: absolute;
+      white-space: nowrap;
+      word-wrap: break-word;
+      top: 0;
+      left: 0;
+      transition: 5s;
+    }
+
+    .마퀴:hover .content {
+      left: -100%;
+      animation: 마퀴애니 5s forwards;
+    }
+
+    @keyframes 마퀴애니 {
+      0% {
+        color: black;
+      }
+      100% {
+        color: red
+      }
+    }
+  </style>
+  <div class="마퀴">
+    <div class="content">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis quo similique quidem ipsa ullam. Omnis non maxime explicabo!
+      Cumque iusto esse deserunt omnis iste quis, saepe quia corrupti inventore rerum.
+    </div>
+  </div>
+
   <script>
+    var carousel = document.querySelector('.carousel');
+    var cells = carousel.querySelectorAll('.carousel__cell');
+    var cellCount; // cellCount set from cells-range input value
+    var selectedIndex = 0;
+    var cellWidth = carousel.offsetWidth;
+    var cellHeight = carousel.offsetHeight;
+    var isHorizontal = true;
+    var rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
+    var radius, theta;
+    // console.log( cellWidth, cellHeight );
+
+    function rotateCarousel() {
+      var angle = theta * selectedIndex * -1;
+      carousel.style.transform = 'translateZ(' + -radius + 'px) ' +
+        rotateFn + '(' + angle + 'deg)';
+    }
+
+    var prevButton = document.querySelector('.previous-button');
+    prevButton.addEventListener('click', function () {
+      selectedIndex--;
+      rotateCarousel();
+    });
+
+    var nextButton = document.querySelector('.next-button');
+    nextButton.addEventListener('click', function () {
+      selectedIndex++;
+      rotateCarousel();
+    });
+
+    var cellsRange = document.querySelector('.cells-range');
+    cellsRange.addEventListener('change', changeCarousel);
+    cellsRange.addEventListener('input', changeCarousel);
+
+
+
+    function changeCarousel() {
+      cellCount = cellsRange.value;
+      theta = 360 / cellCount;
+      var cellSize = isHorizontal ? cellWidth : cellHeight;
+      radius = Math.round((cellSize / 2) / Math.tan(Math.PI / cellCount));
+      for (var i = 0; i < cells.length; i++) {
+        var cell = cells[i];
+        if (i < cellCount) {
+          // visible cell
+          cell.style.opacity = 1;
+          var cellAngle = theta * i;
+          cell.style.transform = rotateFn + '(' + cellAngle + 'deg) translateZ(' + radius + 'px)';
+        } else {
+          // hidden cell
+          cell.style.opacity = 0;
+          cell.style.transform = 'none';
+        }
+      }
+
+      rotateCarousel();
+    }
+
+    var orientationRadios = document.querySelectorAll('input[name="orientation"]');
+    (function () {
+      for (var i = 0; i < orientationRadios.length; i++) {
+        var radio = orientationRadios[i];
+        radio.addEventListener('change', onOrientationChange);
+      }
+    })();
+
+    function onOrientationChange() {
+      var checkedRadio = document.querySelector('input[name="orientation"]:checked');
+      isHorizontal = checkedRadio.value == 'horizontal';
+      rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
+      changeCarousel();
+    }
+
+    // set initials
+    onOrientationChange();
+
+
+    var listWd = 0;
+    $('.themeButton').on('click', function (e) {
+      themelistFunc(e.target);
+    })
+
+    function themelistFunc(e) {
+
+      if (e.classList.contains('prevBt')) {
+
+      } else if (e.classList.contains('nextBt')) {
+
+        listWd = listWd + $('.menuUl li:first').width();
+        $('.menuUl').stop()
+        $('.menuUl').animate({
+          'margin-left': -listWd
+        }, 200)
+      }
+    }
+
+    function _each(list, iter) {
+      for (var i = 0; i < list.length; i++) {
+        iter(list[i])
+      }
+      return list;
+    }
+
+
     //순수한 함수는 부수효과가 있으면 안됨. 부수효과란 함수가 실행될때마다 변환되는 값임. 실행될때마다 변환되면 안되고 들어온 인자로 인해 변환되어야 하고 본체는 그대로여야 함.
-    const color = ['red','orange','yellow','green','blue','indigo','violet']   ;
+    const color = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
     let colorIndex = -1;
     // function getNextRainbowColor(){
     //   if(++colorIndex >= colors.length) colorIndex = 0;
     //   return colors[colorIndex];
     // } 
 
-    function isLeapYear(year){
-      if(year%4 !==0) return false;
-      else if (year%100!=0) return true;
-      else if (year%400 !=0) return false;
+    function isLeapYear(year) {
+      if (year % 4 !== 0) return false;
+      else if (year % 100 != 0) return true;
+      else if (year % 400 != 0) return false;
       else return true;
     }
 
-    const getNextRainbowColor= (function(){
-      const colors = ['red','orange','yellow','green','blue','indigo','violet'];
+    const getNextRainbowColor = (function () {
+      const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
       let colorIndex = -1;
       console.log(colorIndex)
-      return function(){
-        if(++colorIndex >= colors.length) colorIndex=0;
+      return function () {
+        if (++colorIndex >= colors.length) colorIndex = 0;
         return colors[colorIndex]
       }
     })()
@@ -51,21 +512,24 @@
     //   .style['background-color'] = getNextRainbowColor();
     // },500);
 
-    function getRainbowIterator(){
-      const colors = ['red','orange','yello','green','blue','indigo','violet'];
+    function getRainbowIterator() {
+      const colors = ['red', 'orange', 'yello', 'green', 'blue', 'indigo', 'violet'];
       let colorIndex = -1;
       return {
-        next(){
-          if(++colorIndex>=colors.length) colorIndex=0;
-          return { value:colors[colorIndex], done:false}
+        next() {
+          if (++colorIndex >= colors.length) colorIndex = 0;
+          return {
+            value: colors[colorIndex],
+            done: false
+          }
         }
       }
     };
 
     const rainbowIterator = getRainbowIterator();
-    setInterval(function(){
+    setInterval(function () {
       document.querySelector('.rainbow')
-      .style['background-color']= rainbowIterator.next().value
+        .style['background-color'] = rainbowIterator.next().value
     });
 
     // setTimeout(() => {
@@ -88,41 +552,49 @@
     //   })(i)
     // }
 
-    function addThreeSquareAddFiveTakeSquearRoot(x){
-      return Math.sqrt(Math.pow(x+3,2)+5);
+    function addThreeSquareAddFiveTakeSquearRoot(x) {
+      return Math.sqrt(Math.pow(x + 3, 2) + 5);
     }
     // const answer = (addThreeSquareAddFiveTakeSquearRoot(5)+addThreeSquareAddFiveTakeSquearRoot(2)+addThreeSquareAddFiveTakeSquearRoot(7))
     // console.log(answer)
 
     const f = addThreeSquareAddFiveTakeSquearRoot;
-    const answer = (f(5)+f(7)+f(2))
+    const answer = (f(5) + f(7) + f(2))
     console.log(answer);
 
     const sin = Math.sin;
     const cos = Math.cos;
-    const theta = Math.PI/4;
+    // const theta = Math.PI/4;
     const zoom = 2;
-    const offset = [1,-3];
+    const offset = [1, -3];
 
-    const pipeline=[
-      function rotate(p){
+    const pipeline = [
+      function rotate(p) {
         return {
-          x:p.x*cos(theta) - p.y *sin(theta),
-          y:p.x*sin(theta)+ p.y*cos(theta),
+          // x:p.x*cos(theta) - p.y *sin(theta),
+          // y:p.x*sin(theta)+ p.y*cos(theta),
         };
       },
-      function scale(p){
-        return {x:p.x*zoom};
+      function scale(p) {
+        return {
+          x: p.x * zoom
+        };
       },
-      function traslate(p){
-        return {x:p.x+offset[0], y:p.y+offset[1]};
+      function traslate(p) {
+        return {
+          x: p.x + offset[0],
+          y: p.y + offset[1]
+        };
       },
     ];
 
-    const p={x:1,y:1};
-    let p2 = p;    
-    for(let i =0;i<pipeline.length;i++){
-      p2=pipeline[i](p2);
+    const p = {
+      x: 1,
+      y: 1
+    };
+    let p2 = p;
+    for (let i = 0; i < pipeline.length; i++) {
+      p2 = pipeline[i](p2);
     }
 
     // p2는 이제 p1을 좌표 원점 기준으로 45도 회전하고,
@@ -130,85 +602,125 @@
     // 1단위 오른쪽, 3단위 아래쪽으로 움직인 점입니다.
 
     console.clear()
-    function bracket(str){
-      let arr=[];
-      for(stn of str){
-        if(bracket.inc[stn]){
+
+    function bracket(str) {
+      let arr = [];
+      for (stn of str) {
+        if (bracket.inc[stn]) {
           arr.push(stn);
         }
       }
-      console.log('arr',arr)
+      console.log('arr', arr)
       return str
     }
-   
-    bracket.inc={'(':true,'[':true,'{':true,')':true,']':true,'}':true,}
+
+    bracket.inc = {
+      '(': true,
+      '[': true,
+      '{': true,
+      ')': true,
+      ']': true,
+      '}': true,
+    }
     console.log(bracket('(sdgk)[)sg'));
 
-    function calculate(a,b,c){
-      return a*b+c;
+    function calculate(a, b, c) {
+      return a * b + c;
     }
-    function curry(func){
-      var args = Array.prototype.slice.call(arguments,1);
+
+    function curry(func) {
+      var args = Array.prototype.slice.call(arguments, 1);
       console.log(args)
 
-      return function(){
-        return func.apply(null),args.concat(Array.prototype.slice.call(arguments))
+      return function () {
+        return func.apply(null), args.concat(Array.prototype.slice.call(arguments))
       }
     }
-    var new_func1 = curry(calculate,1);
-    console.log(new_func1(2,3));//5
-    var new_func2 = curry(calculate,1,3);
+    var new_func1 = curry(calculate, 1);
+    console.log(new_func1(2, 3)); //5
+    var new_func2 = curry(calculate, 1, 3);
     console.log(new_func2(3));
 
-    Function.prototype.curry = function(){
-      var fn = this, args = Array.prototype.slice.call(arguments);
-      return function(){
+    Function.prototype.curry = function () {
+      var fn = this,
+        args = Array.prototype.slice.call(arguments);
+      return function () {
         return fn.apply(this, args.concat(Array.prototype.slice.call(arguments)))
       }
     }
 
-    function Shape(){
-      this.x=0;
-      this.y=0;
+    function Shape() {
+      this.x = 0;
+      this.y = 0;
     }
 
-    Shape.prototype ={
-      move:function(x,y){
+    Shape.prototype = {
+      move: function (x, y) {
         // var self = this;
         this.x += x;
         this.y += y;
 
-        function checkBounds(min,max){
+        function checkBounds(min, max) {
           // console.log(this)
-          if(this.x <min || this.y >max){
-            console.log('checkbounds',this.x)
+          if (this.x < min || this.y > max) {
+            console.log('checkbounds', this.x)
             console.error('Warring: Shape out of bounds');
           }
         }
         // checkBounds.call(this);//이렇게 함수자체를 붙혀서 호출해주거나.
-        checkBounds.call(this,0,101);
-        checkBounds.call(this,[0,101])
+        checkBounds.call(this, 0, 101);
+        checkBounds.call(this, [0, 101])
       }
     }
 
     var shape = new Shape();
-    shape.move(101,1);
+    shape.move(101, 1);
 
     this.x = 9;
     var module = {
-      x:81,
-      getX:function(){return this.x}
+      x: 81,
+      getX: function () {
+        return this.x
+      }
     };
     console.log(
       module.getX()
     )
-    var getX = module.getX;//함수를 그냥 getX로 넣어버리는것.
+    var getX = module.getX; //함수를 그냥 getX로 넣어버리는것.
     console.log(
       getX()
     )
+
+
+    $(function () {
+      $('body').css({
+        'background': 'orange'
+      });
+      $('input[type="text"]').val('Hello')
+      $('ul li:first').css({
+        'background': 'white'
+      });
+      var array = [{
+          name: 'Hanbit',
+          link: 'http://www.google.com1'
+        },
+        {
+          name: 'naver',
+          link: 'http://www.google.com2'
+        },
+        {
+          name: 'daum',
+          link: 'http://www.google.com3'
+        },
+      ]
+      $.each(array, function (a, b) {
+        console.log(b.link)
+      })
+
+    });
+
     
-
-
   </script>
 </body>
+
 </html>
