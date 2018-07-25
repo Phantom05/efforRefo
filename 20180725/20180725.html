@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .rainbow{
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rainbow"></div>
+  <script>
+    //순수한 함수는 부수효과가 있으면 안됨. 부수효과란 함수가 실행될때마다 변환되는 값임. 실행될때마다 변환되면 안되고 들어온 인자로 인해 변환되어야 하고 본체는 그대로여야 함.
+    const color = ['red','orange','yellow','green','blue','indigo','violet']   ;
+    let colorIndex = -1;
+    // function getNextRainbowColor(){
+    //   if(++colorIndex >= colors.length) colorIndex = 0;
+    //   return colors[colorIndex];
+    // } 
+
+    function isLeapYear(year){
+      if(year%4 !==0) return false;
+      else if (year%100!=0) return true;
+      else if (year%400 !=0) return false;
+      else return true;
+    }
+
+    const getNextRainbowColor= (function(){
+      const colors = ['red','orange','yellow','green','blue','indigo','violet'];
+      let colorIndex = -1;
+      console.log(colorIndex)
+      return function(){
+        if(++colorIndex >= colors.length) colorIndex=0;
+        return colors[colorIndex]
+      }
+    })()
+    //클로저로 안쪽 함수에서 계속 변환이 되는거임.
+    console.log(getNextRainbowColor())
+    console.log(getNextRainbowColor())
+    console.log(getNextRainbowColor())
+    console.log(getNextRainbowColor)
+
+    // setInterval (function(){
+    //   document.querySelector('.rainbow')
+    //   .style['background-color'] = getNextRainbowColor();
+    // },500);
+
+    function getRainbowIterator(){
+      const colors = ['red','orange','yello','green','blue','indigo','violet'];
+      let colorIndex = -1;
+      return {
+        next(){
+          if(++colorIndex>=colors.length) colorIndex=0;
+          return { value:colors[colorIndex], done:false}
+        }
+      }
+    };
+
+    const rainbowIterator = getRainbowIterator();
+    setInterval(function(){
+      document.querySelector('.rainbow')
+      .style['background-color']= rainbowIterator.next().value
+    });
+
+    // setTimeout(() => {
+    //     (function(){console.log('Hello')})()
+    // }, 1500);
+
+    // function loopBody(i){
+    //   setTimeout(() => {
+    //     console.log(i===0?'go!':i)
+    //   }, (5-i)*1000);
+    // }
+
+    // var i ;
+    // for(i=5;i>=0;i--){
+    //   // loopBody(i)
+    //   (function(x){
+    //     setTimeout(() => {
+    //       console.log(x===0?'go':x)
+    //     }, (5-x)*1000);
+    //   })(i)
+    // }
+
+    function addThreeSquareAddFiveTakeSquearRoot(x){
+      return Math.sqrt(Math.pow(x+3,2)+5);
+    }
+    // const answer = (addThreeSquareAddFiveTakeSquearRoot(5)+addThreeSquareAddFiveTakeSquearRoot(2)+addThreeSquareAddFiveTakeSquearRoot(7))
+    // console.log(answer)
+
+    const f = addThreeSquareAddFiveTakeSquearRoot;
+    const answer = (f(5)+f(7)+f(2))
+    console.log(answer);
+
+    const sin = Math.sin;
+    const cos = Math.cos;
+    const theta = Math.PI/4;
+    const zoom = 2;
+    const offset = [1,-3];
+
+    const pipeline=[
+      function rotate(p){
+        return {
+          x:p.x*cos(theta) - p.y *sin(theta),
+          y:p.x*sin(theta)+ p.y*cos(theta),
+        };
+      },
+      function scale(p){
+        return {x:p.x*zoom};
+      },
+      function traslate(p){
+        return {x:p.x+offset[0], y:p.y+offset[1]};
+      },
+    ];
+
+    const p={x:1,y:1};
+    let p2 = p;    
+    for(let i =0;i<pipeline.length;i++){
+      p2=pipeline[i](p2);
+    }
+
+    // p2는 이제 p1을 좌표 원점 기준으로 45도 회전하고,
+    // 원점엣 2 단위만큼 떨어뜨린 후,
+    // 1단위 오른쪽, 3단위 아래쪽으로 움직인 점입니다.
+
+    console.clear()
+    function bracket(str){
+      let arr=[];
+      for(stn of str){
+        if(bracket.inc[stn]){
+          arr.push(stn);
+        }
+      }
+      console.log('arr',arr)
+      return str
+    }
+   
+    bracket.inc={'(':true,'[':true,'{':true,')':true,']':true,'}':true,}
+    console.log(bracket('(sdgk)[)sg'));
+
+    function calculate(a,b,c){
+      return a*b+c;
+    }
+    function curry(func){
+      var args = Array.prototype.slice.call(arguments,1);
+      console.log(args)
+
+      return function(){
+        return func.apply(null),args.concat(Array.prototype.slice.call(arguments))
+      }
+    }
+    var new_func1 = curry(calculate,1);
+    console.log(new_func1(2,3));//5
+    var new_func2 = curry(calculate,1,3);
+    console.log(new_func2(3));
+
+    Function.prototype.curry = function(){
+      var fn = this, args = Array.prototype.slice.call(arguments);
+      return function(){
+        return fn.apply(this, args.concat(Array.prototype.slice.call(arguments)))
+      }
+    }
+
+    function Shape(){
+      this.x=0;
+      this.y=0;
+    }
+
+    Shape.prototype ={
+      move:function(x,y){
+        // var self = this;
+        this.x += x;
+        this.y += y;
+
+        function checkBounds(min,max){
+          // console.log(this)
+          if(this.x <min || this.y >max){
+            console.log('checkbounds',this.x)
+            console.error('Warring: Shape out of bounds');
+          }
+        }
+        // checkBounds.call(this);//이렇게 함수자체를 붙혀서 호출해주거나.
+        checkBounds.call(this,0,101);
+        checkBounds.call(this,[0,101])
+      }
+    }
+
+    var shape = new Shape();
+    shape.move(101,1);
+
+    this.x = 9;
+    var module = {
+      x:81,
+      getX:function(){return this.x}
+    };
+    console.log(
+      module.getX()
+    )
+    var getX = module.getX;//함수를 그냥 getX로 넣어버리는것.
+    console.log(
+      getX()
+    )
+    
+
+
+  </script>
+</body>
+</html>
