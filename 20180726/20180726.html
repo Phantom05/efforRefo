@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-  
+
   <ul>
     <li>Menu</li>
     <li class="target">Menu</li>
@@ -17,54 +19,146 @@
   </ul>
 
   <style>
-    .aaaa{
+    .aaaa {
       border: 1px solid blue;
     }
-    .ttt{
+
+    .ttt {
       border: 1px solid red;
     }
   </style>
   <div class="aaaa">
 
   </div>
-<div class="ttt">
+  <div class="ttt">
 
-</div>
+  </div>
+
+  <a href="https://www.google.com" target="_blank">
+    <button type="button" class="slide_button">자세히</button>
+  </a>
+
+  <a href="http://www.edaily.co.kr/news/news_detail.asp?newsId=01551446619245656" target="_blank" class="item_link"> 자세히</a>
+
+  <a href="javascript:;">ggg</a>
+
+
+  <div id="test">
+    <ul>
+      <li>hello</li>
+      <li>bye</li>
+    </ul>
+    <div class="abc">Heleo</div>
+    <img src="" alt="" id="tx_entry_20040_">
+    <img src="" alt="" id="tx_entry_20045_">
+    <p>Hello</p>
+  </div>
   <script>
-
-    let target =document.getElementsByClassName('target')[0];
-    let docu= document;
-    docu.write('Hello')
-    
-  Element.prototype.phprev=function(){
-    return this.previousElementSibling;
-  }
-  target.phprev().style.background ='black'
-
-  Element.prototype.val = function (Param) {
-    if (this.nodeName === "INPUT") {
-        if (Param === '' || typeof(Param) === "undefined" || typeof(Param) === 'null') {
-            if(this.value.match(/[^0-9]/)) {
-                return this.value;
-            } else {
-                return this.value * 1;
-            }
-        } else {
-            this.value = Param;
-        }
+    Document.prototype.phGetId = function (idName) {
+      return this.getElementById(idName);
     }
-};
-//===로
 
-  let ttt =docu.getElementsByClassName('ttt')[0];
-  let aaaa =docu.getElementsByClassName('aaaa')[0];
-  let didi = docu.createElement('div');
-  didi.innerText='야야';
-  didi.classList.add('hello');
+    ;
 
-  let aabab = docu.createElement('div');
-  aabab.innerHTML='hello'
-  
+    function _each(list, iter) {
+      for (var i = 0; i < list.length; i++) {
+        iter(list[i]);
+      }
+      return list;
+    }
+
+    ;
+
+    function _filter(list, predi) {
+      var new_list = [];
+      _each(list, function (val) {
+        try {
+          if (predi(val)) new_list.push(val);
+        } catch (error) {
+          console.log(error);
+        }
+
+      })
+      return new_list;
+    }
+
+    const docu = document;
+    const test = docu.phGetId('test');
+
+    //case1
+    _each(test.children, function (val) {
+      try {
+        if (val.tagName === 'IMG') console.log(val.id);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    //case2
+    console.log(
+      _filter(test.children, function (val) {
+        return (val.tagName === 'IMG') ? val.id : '';
+      })
+    )
+
+
+    let num = 0;
+    let bCont = 0;
+
+    function a() {
+      var interval = setInterval(function () {
+        console.log('Hello')
+        num++;
+        if (bCont == 0) if (num == 5) clearInterval(interval);
+      }, 1000);
+    }
+    a();
+
+    function b() {
+      setTimeout(() => {
+        bCont++;
+        a();
+      }, 7000);
+    }
+    b();
+
+
+    let target = document.getElementsByClassName('target')[0];
+
+    docu.write('Hello')
+
+    Element.prototype.phprev = function () {
+      return this.previousElementSibling;
+    }
+    target.phprev().style.background = 'black'
+
+    Element.prototype.val = function (Param) {
+      if (this.nodeName === "INPUT") {
+        if (Param === '' || typeof (Param) === "undefined" || typeof (Param) === 'null') {
+          if (this.value.match(/[^0-9]/)) {
+            return this.value;
+          } else {
+            return this.value * 1;
+          }
+        } else {
+          this.value = Param;
+        }
+      }
+    };
+    //===로
+
+    let ttt = docu.getElementsByClassName('ttt')[0];
+    let aaaa = docu.getElementsByClassName('aaaa')[0];
+    let didi = docu.createElement('div');
+    ttt.children[0]
+    ttt.firstElementChild
+    didi.innerText = '야야';
+    didi.classList.add('hello');
+    ttt.childNodes
+
+    let aabab = docu.createElement('div');
+    aabab.innerHTML = 'hello'
+
     // Element.prototype.phAppendChild=function(c){
 
     //     for(var i =0;i<child.length;i++){
@@ -75,25 +169,23 @@
     //     })()
     //   }
 
-      function phAppendChild(){
-        let c = Array.prototype.slice.call(arguments)
-          for(var i =1;i<c.length;i++){
-            c[0].appendChild(c[i])
-          }
-        return 
+    function phAppendChild() {
+      let c = Array.prototype.slice.call(arguments)
+      for (var i = 1; i < c.length; i++) {
+        c[0].appendChild(c[i])
       }
-      aaaa,phAppendChild(ttt,didi,aabab)
+      return
+    }
+    aaaa, phAppendChild(ttt, didi, aabab)
 
-      function createEl(el,content){
-        return docu.createElement(el)
-      }
+    function createEl(el, content) {
+      return docu.createElement(el)
+    }
 
-      // ttt.phAppendChild(didi)
+    
 
-
-
-
- 
+    // ttt.phAppendChild(didi)
   </script>
 </body>
+
 </html>
