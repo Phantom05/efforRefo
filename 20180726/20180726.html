@@ -182,9 +182,134 @@
       return docu.createElement(el)
     }
 
-    
+    function _reduce(list,iter,memo){
+      _each(list,function(val){
+          memo = iter(memo,val)
+        })
+      return memo;
+    }
 
+    function _pipe(){
+      var fns = arguments;
+      return function(arg){
+        return _reduce(fns,function(arg,fn){
+          return fn(arg);
+        },arg)
+      }
+    }
+
+    // var f1 = _pipe(
+    //   function(a){ return a+1}, // 1+1
+    //   function(a){ return a*2},  // 2*2;
+    //   function(a){ return a*a} //4*4
+    //   )
+    // console.log(
+    //   f1(1)
+    // )
+    
     // ttt.phAppendChild(didi)
+    // var rara = docu.location.split('?')
+    // console.log(rara);
+
+    function duplicate(arr){
+      return arr.concat(arr)
+    }
+    console.log(duplicate([1,2,3,4,5]));
+    Array.prototype.duplicate= function(){
+      var $this = this;
+      return this.concat($this)
+    }
+    console.log(
+      [1,2,3,4,5].duplicate()
+    )
+
+    function sum(arr,f){
+      
+      if(typeof f !='function'){// 없을떄 선언함. 그럼 있을떈? 선언하지 않음...
+        f=x=>{
+          console.log(x)
+          return x;
+        };
+      }
+      //function f(x){return x}
+      //arr == [1,2,3]
+      return arr.reduce((a,x)=>{
+        return a+=f(x)//바로 인자로 들어온놈이 실행되는것임. 함수에서 함수인자실행
+      },0);
+    }
+    console.log(
+      sum([1,2,3])
+    );
+
+    // console.log(
+    //   sum([1,2,3],x=>x*x)
+    // );
+
+    // function sumOfSquares(arr){
+    //   return sum(arr, x=>x*x);
+    // }
+    function newSummer(f){ // 커링기법, 받는 변수 하나로 안에 인자들을 컨트롤 할 수 있음.
+      return function(arr){
+        return sum(arr,f);
+      }
+    }
+    const sumOfSquares = newSummer(x=>x*x);
+    const sumOfCubes = newSummer(x=>Math.pow(x,3));
+
+    console.log(
+      sumOfSquares([1,2,3])
+    )
+    console.log(
+      sumOfCubes([1,2,3])
+    )
+    console.log(sumOfCubes);
+
+
+    function findNeedle(haystack){
+      // console.log('실행')
+      if(haystack.length==0) return 'no haystack here!';
+      if(haystack.shift()==='needle'){
+        // console.log('found it!')
+        return 'found it!'
+      }  
+      return findNeedle(haystack);//건초더미에 들어있는 건초가 하나 줄었습니다.
+    }
+    findNeedle(['hay','hay','hay','needle','hay','hay','hay','hay'])
+    console.log(
+      findNeedle(['hay','hay','hay','needle','hay','hay','hay','hay'])
+    )
+
+
+function fact(n){
+  if(n===1) return 1;
+  return n*fact(n-1)
+}
+console.log(
+  fact(4)
+)
+
+console.clear()
+for(var i=10; i>1 && i%2==0 ;i--){
+    console.log(i)
+}    
+
+function t(n){
+  if(n%2==0){
+    console.log(n)
+  }else if(n<2) return;
+  return t(n-=1)
+}
+t(10)
+
+Number.prototype.twoZ=function(){
+  var new_list= [];
+  for(var i=this;i>1;i-=2){
+    new_list.push(i) 
+  }
+  return new_list
+}
+console.log((10).twoZ())
+
   </script>
 </body>
 
