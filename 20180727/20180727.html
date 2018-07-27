@@ -261,6 +261,41 @@
     console.log( Object.defineProperty(obj,'foo',{writable:false}));
     obj.foo = 3;
 
+    Function.prototype.curry = function(){
+      var fn = this, args = Array.prototype.slice.call(arguments);
+      return function(){
+        return fn.apply(this, args.concat(Array.prototype.slice.call(arguments)))
+      }
+    }
+    
+    function calculate(a,b,c){
+      return a*b+c;
+    }
+
+    function curry2(fun){//안이나 밖이나 args는 잘들어가있음.
+      var args = Array.prototype.slice.call(arguments,1);
+      return function(){
+        console.log(arguments)
+        var arg_idx =0;
+        for(var i =0;i<args.length && arg_idx<arguments.length;i++){
+          console.log('i',i)
+          if(args[i] === undefined){
+            console.log(args[i]);
+            console.log('in',i);
+            args[i] = arguments[arg_idx++];
+          } 
+          console.log(args[i]);
+          console.log('and',i);
+          return fun.apply(null,args);
+        }
+      }
+    }
+
+    var new_func = curry2(calculate,1,undefined,4);
+    console.log(new_func(3));
+
+    
+
 
 
   </script>
