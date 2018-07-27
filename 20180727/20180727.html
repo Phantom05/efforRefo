@@ -178,8 +178,42 @@
     console.log(true && 2 ); // 2 츌력
     console.log(true && "Hello"); // "Hello" 츌력
 
-    
+    const highlightActions = document.querySelectorAll('[data-action="highlight"]');
+    console.log(
+      highlightActions[0].dataset
+    )
 
+    for(let a of highlightActions){
+      a.addEventListener('click',evt=>{
+        evt.preventDefault();
+        highlightParas(a.dataset.containing)
+      })
+    }
+
+    const removeHighlightAction = document.querySelectorAll('[data-action="removeHighlights"')
+
+
+
+    function logEvent(handlerName,type,cancel,stop,stopImmediate){
+      //실제 이벤트 핸들러입니다.
+      return function(evt){
+        if(cancel) evt.preventDefault();
+        if(stop) evt.stopPropagation();
+        if(stopImmediate) evt.stopImmediatePropagation();
+        console.log(`${type}: ${handlerName}` + (evt.defaultPrevented? '(cancled) ': ''));
+      }
+    }
+    // 이벤트 핸들러를 요소에 추가합니다.
+    function addEventLogger(elt,type,action){
+      const capture = type === 'capture';
+      elt.addEventListener('click',logEvent(elt.tagName,type,action ==='cancle',action === 'stop',action ==='stop!'),capture)
+    }
+    const body = document.querySelector('body');
+    const div = document.querySelector('div');
+    const button = document.querySelector('button');
+    
+    addEventLogger(body,'capture')
+    addEventLogger(body,'bubble')
   </script>
 </body>
 
