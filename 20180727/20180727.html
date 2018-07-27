@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    .highlight {
+      background: black;
+      color: red;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/af.js"></script>
 </head>
+
 <body>
 
+  <p>Hello5</p>
+  <p>Hello5</p>
+  <p class="unique">Hello5</p>
+  <p>Hello5</p>
+  <p>Hello5</p>
+
+
+<button data-action="highlight" data-containing="unique">Hightlight paragraphs containing "unique"</button>
+<button data-action="removeHighlights">
+  Remove highlights
+</button>
+
   <script>
-    
+
     // for(var i =10;i%2==0,i>1;i--){
     //   console.log(i)
     // }
@@ -22,7 +43,7 @@
     // }, 2*1000);
     // console.log('I happen after setTimeout!');
     // console.log('Me too!')
-    
+
     // const start = new Date();
     // let i =0;
     // const intervalId = setInterval(function(){
@@ -36,7 +57,7 @@
     // function countdown(){
     //   console.log('Countdown:');
     //   for(var i=5;i>=0;i--){
-        
+
     //     (function(x){
     //     setTimeout(() => {
     //       console.log(x===0?'Go': x);
@@ -53,46 +74,113 @@
     //   console.log(`${fname} contents: ${data}`)
     // })
 
-      // function countdown(seconds){
-      //   return new Promise(function(resolve,reject){
-      //     for(let i=seconds;i>=0;i--){
-      //       setTimeout(() => {
-      //         if(i===13) return reject(new Error('Oh my god'))
-      //         if(i<0) console.log(i+'...');
-      //         else resolve(console.log('Go'))
-      //       }, (seconds-i)*500);
-      //     }
-      //   })
-      // }
-      // const p = countdown(14); 
-      // p.then(
-      //   function(){
-      //     console.log('countdown completed successfully');
-      //   },
-      //   function(err){
-      //     console.log('countdown experienced an error: '+err.message)
-      //   }
-      // );
-      // p.catch(function(err){
-      //   console.log('countdown experienced an error: '+err.message)
-      // })
+    // function countdown(seconds){
+    //   return new Promise(function(resolve,reject){
+    //     for(let i=seconds;i>=0;i--){
+    //       setTimeout(() => {
+    //         if(i===13) return reject(new Error('Oh my god'))
+    //         if(i<0) console.log(i+'...');
+    //         else resolve(console.log('Go'))
+    //       }, (seconds-i)*500);
+    //     }
+    //   })
+    // }
+    // const p = countdown(14); 
+    // p.then(
+    //   function(){
+    //     console.log('countdown completed successfully');
+    //   },
+    //   function(err){
+    //     console.log('countdown experienced an error: '+err.message)
+    //   }
+    // );
+    // p.catch(function(err){
+    //   console.log('countdown experienced an error: '+err.message)
+    // })
 
-      // // const EventEmitter = require('events').EventEmitter;
-      
+    // // const EventEmitter = require('events').EventEmitter;
 
-      // function launch(){
-      //   return new Promise(function(resolve,reject){
-      //     console.log('Lift off!');
-      //     setTimeout(function(){
-      //       resolve('In orbit!');
-      //     },2*1000)// 2초만에 궤도에 도달하다니 
-      //   })
-      // }
-      
-      const d = new Date();
-      console.log(d);
 
-      
+    // function launch(){
+    //   return new Promise(function(resolve,reject){
+    //     console.log('Lift off!');
+    //     setTimeout(function(){
+    //       resolve('In orbit!');
+    //     },2*1000)// 2초만에 궤도에 도달하다니 
+    //   })
+    // }
+
+    const d = new Date();
+    console.log(d);
+
+    new Date(); // 현재 날짜
+    console.log(new Date(2015, 0))
+    console.log(new Date(2015, 1))
+    console.log(new Date(2015, 0))
+    console.log(new Date(2015, 1, 14))
+    console.log(new Date(2015, 1, 14, 13, 30))
+    console.log(new Date(2015, 1, 14, 13, 30, 5))
+    console.log('201811' < '20187')
+
+    const x = 19.51;
+    console.log(
+      x.toFixed(3)
+    )
+
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    console.log(numberWithCommas(5022222))
+
+    var money = 2321600021;
+    console.log(money.toLocaleString())
+
+    const input = 'As I was going so Saint lves';
+    const output = input.replace('going', 'walking');
+
+    console.log(
+      input.startsWith('As')
+    )
+    const re1 = /going/;
+    const re2 = new RegExp("going");
+    const re = /\w{3,}/ig;
+
+    console.log(
+      input.match(re)
+    )
+    console.log(input.search(re))
+    console.log(re.exec(input))
+    console.log(re.exec(input))// exec는 마지막위치를 기억함. 
+    console.log(re.test(input))// true false
+
+    const html = 'HTML with <a href="/one">one link </a>, and some JavaScript.' + '<script src="stugg.jg>"';
+
+    function highlightParas(containing) {
+      if (typeof containing === 'string') {
+        containing = new RegExp(`\\b${containing}\\b`, 'i');
+      }
+      const paras = document.getElementsByTagName('p');
+      console.log(paras);
+      for (let p of paras) {
+        if (!containing.test(p.textContent)) continue;
+        p.classList.add('highlight')
+      }
+    }
+    highlightParas('unique');
+
+    let a = 0;
+    let b = 1;
+    if(b==9999 , a==0){
+      console.log('a')
+    }
+
+    if (99<8<77) console.log('me') //77
+    console.log(true && 2 ); // 2 츌력
+    console.log(true && "Hello"); // "Hello" 츌력
+
+    
+
   </script>
 </body>
+
 </html>
