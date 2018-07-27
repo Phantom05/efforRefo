@@ -212,8 +212,57 @@
     const div = document.querySelector('div');
     const button = document.querySelector('button');
     
-    addEventLogger(body,'capture')
-    addEventLogger(body,'bubble')
+    addEventLogger(body,'capture');
+    addEventLogger(body,'bubble');
+
+    console.clear()
+    const USER_EMAIL = Symbol();
+    // class User{
+    //   setEmail(value){
+    //     if(!/@/.test(value)) throw new Error(`invalud email: ${value}`);
+    //     this[USER_EMAIL] = value;
+    //   }
+    //   getEmail(){
+    //     return this[USER_EMAIL]
+    //   }
+    // }
+
+    class Rectangle{
+      constructor(width,height){
+        this.width = width;
+        this.height = height;
+      }
+      get perimeter(){
+        return this[USER_EMAIL];
+      }
+    }
+    console.dir(Rectangle)
+    let r = new Rectangle(200,200);
+    console.log(r.perimeter);
+    
+    // const u =new User();
+    // u.setEmail('john@doe.com');
+    // console.log(`User email: ${u.getEmail()}`);
+
+    class Test{
+      constructor() {
+    }
+    static test(){
+        console.log(this,'hjh')
+      }
+    }
+
+    Test.test();
+    // const t = new Test();
+    // console.log(t);
+    // console.log(t.test());
+
+    const obj = {foo:"bar"};
+    console.log( Object.defineProperty(obj,'foo',{writable:false}));
+    obj.foo = 3;
+
+
+
   </script>
 </body>
 
