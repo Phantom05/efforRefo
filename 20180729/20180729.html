@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+
+
+  <div id="attribute-to-change">
+  </div>
+  <div id="hello"></div>
+  <div id="test-change">
+  </div>
+</div>
+
+
+  <script>
+    //practice
+    {
+      var ImpleFunc = (function () {
+        var test1 = 'Hello world!!';
+
+        function testFunc() {
+          var hello = document.getElementById('hello');
+          hello.innerHTML = 'Hello world!!';
+        }
+        return {
+          testFuncParent: function () {
+            console.log(test1);
+            testFunc();
+          }
+        }
+
+      })()
+      console.log(ImpleFunc)
+      console.log(ImpleFunc.testFuncParent())
+      console.log(ImpleFunc.test1);
+
+      function pracTest1() {
+        return (function () {
+          console.log('hello')
+        })()
+      }
+      console.log(pracTest1)
+      console.clear()
+    }
+
+    // Module 패턴
+    //특정부분의 전역 스코프로 부터 보호하는 것이 가능하다.
+    //이런 특성의 결과로 우리는 동일 페이지 내에서도 함수이름이나 변수가 출동하는 것을 예방할수있다.
+    ;
+    (function () {
+      //private 변수들과 함수들을 선언
+
+      return {
+        //public 변수들과 함수들을 선언
+      }
+    })();
+    //이럴시 클로저 외부에 있는 코드는 동일한 범위에 있지않음으로 private에접근할 수가 없다. 바로 return 되어 버리니까.
+
+    var HTMLChanger = (function () {
+      var contents = 'contents'
+
+      var changeHTML = function () {
+        var element = document.getElementById('attribute-to-change');
+        element.innerHTML = contents;
+      }
+
+      return { //객체.
+        callChangeHTML: function () {
+          changeHTML();
+          console.log(contents)
+        }
+      }
+    })();
+
+    HTMLChanger.callChangeHTML(); //이게 public임. 함수가 바로리턴되어 있어서 해당 함수를 바로시키면 숨겨진놈을 찾을 수 있음. 이런패턴.
+    console.log(HTMLChanger.contents); //이게 private임. 안에 있어도 찾을 수 없지만 위 public처럼 호출하며 찾을 수 있음.
+    //callChangeHTML은 반환된 객체에 바인딩되며 HTMLChanger 네임스페이스 내부를 참조할 수 있다. 그러나 모듈 외부에서는 contents를 참조할 수 없다.
+
+    //일반 객체를 이용한 카운터
+    var counter = {
+      _count: 0,
+      count: function () {
+        return this._count += 1;
+      }
+    }
+    console.log(counter.count());
+    console.log(counter.count());
+
+    function Counter() {
+      this._count = 0;
+    }
+    Counter.prototype.count = function () {
+      return this._count += 1;
+    }
+    var counter = new Counter();
+    var counter2 = new Counter();
+    console.log(counter.count());
+    console.log(counter.count());
+    console.log(counter)
+    console.log(counter2.count());
+    console.log(counter2)
+    //this를 이용해 컨텍스트에 접근하는 일반적인 객체의 모습이다. 여기서 중요한 것은 _count라는 변수를 사용했다는 점이고 그 변수의 값을 증가시키는 행위를 하는 함수가 존재 한다는 점이다.
+    //숫자를 저장할 _count라는 멤버 변수
+    //값을 증가시키는 행위를 하는 멤버 함수 count()
+
+    //클로저를 이용한 카운터
+    var counter = (function () {
+      var _count = 0;
+      return function () {
+        return _count += 1;
+      }
+    })()
+    console.log(counter())
+
+    function counterFactory() {
+      var _count = 0;
+
+      return function () {
+        _count += 1;
+
+        return _count;
+      }
+    }
+
+    var counter = counterFactory();
+    var counter2 = counterFactory();
+
+    console.log(counter());
+    console.log(counter());
+    console.log(counter2());
+
+    var counter = counterFactory();
+
+    var app = {
+      counter: counter
+    }
+    var app2 = {
+      counter: counter
+    }
+    console.log('app', app.counter())
+    console.log('app', app.counter())
+    console.log('app2', app2.counter())
+    /*
+    물론 여기서 생성되는 함수의 개수로 인한 성능에 대해 의문을 품을 수 있겠지만, 여기서는 성능보다는 구현 내용에 집중하고자 한다. 그때그때 상황에 맞게 활용할 수 있다는 것이 더 중요한 점이다. 긴 함수들은 나누고 위치를 옮겨 중복을 제거하는 방법도 있다
+
+    이렇게 클로저를 이용해 구현하게 되면 컨텍스트에 접근할 때 스코프를 이용해 접근하기 때문에 this라는 키워드를 쓸 필요도 없다. 이렇게 만들어진 카운터는 어느 객체에 붙여서 사용해도 동일한 컨텍스트의 결과를 내주고 이벤트 리스너로 사용해도 동일한 컨텍스트를 유지한 상태로 사용할 수 있다.
+
+    은닉화의 측면에서 본다면 오히려 객체보다는 클로저의 활용에서 더 극대화된다. _count라는 변수는 외부에서 접근할 방법이 전혀 없기 때문이다. 자바스크립트의 모든 객체는 프로퍼티들의 외부 접근이 모두 허용된다. 클로저 외에는 차단할 방법이 전혀 없다.
+    */
+
+    function counterFactoryMaker(incValue) {
+      return function factory(initValue) {
+        var _count = initValue;
+
+        return function counter() {
+          return _count += incValue;
+        };
+      };
+    }
+
+    var counterFactory = counterFactoryMaker();
+    var counter = counterFactory(0);
+    var counter2 = counterFactory(1);
+
+    console.log(counter())
+    console.log(counter())
+
+    console.log(counter2())
+    console.log(counter2())
+
+
+    //객체와 클로저를 혼용한 카운터
+    function counterFactory2() {
+      var _count = 0;
+
+      function count(value) {
+        _count = value || _count;
+        return _count
+      }
+
+      return {
+        count: count,
+        inc: function () {
+          return count(count() + 1);
+        },
+        dec: function () {
+          return count(count() - 1);
+        }
+      };
+    }
+
+
+    var counter = counterFactory2();
+
+    console.log(counter.inc())
+    console.log(counter.inc())
+    console.log(counter.dec())
+
+    function counterFactory2Ext() {
+      var counter = counterFactory2();
+      var count = counter.count;
+
+      counter.inc = function () {
+        return count(count() + 2);
+      };
+
+      return counter;
+    }
+
+    var counterExt = counterFactory2Ext();
+
+    console.log(counterExt.inc())
+    console.log(counterExt.inc())
+    console.log(counterExt.inc())
+    console.log(counterExt.dec())
+
+
+
+    //캡슐화 연습 모듈패턴
+
+    let themeFunc = (function () {
+      //private
+      let count = 0;
+      var helloworldText = 'Hello world Hello daddy!'
+
+      function getTestChange(){
+        let test = document.getElementById('test-change');
+        test.innerHTML = helloworldText;
+        console.log('count',count)
+      }
+
+      function up(){
+        return count+=1;
+      }
+
+      return {
+        //public
+        testmaking:function(){
+          return getTestChange()
+        },
+        upmaking:function(){
+          up()
+        }
+      }
+    })()
+
+    themeFunc.testmaking()
+    console.log(themeFunc.count)
+    themeFunc.upmaking()
+
+    //Revealing Module Pattern
+    //변형 모듈 패턴
+    //훨씬 깨끗해 보이지만 private 메서드를 참조할 수 없다는 명백한 단점을 가지고 있습니다. 이는 단위 테스트 문제를 야기할 수 있고, 비슷한 문제로 모듈 외부에서 반환된 메서드들을 오버라이드를 할 수 없게 됩니다.
+
+    var Exposer = (function(){
+      var privateVariable = 10;
+
+      var privateMethod = function(){
+        console.log('Inside a private method!');
+        privateVariable++;
+      }
+
+      var methodToExpose = function(){
+        console.log('This is a method I want to expose!')
+      }
+
+      var otherMethodIWantToExpose = function(){
+        privateMethod();
+      }
+
+      return {
+        first:methodToExpose,
+        second:otherMethodIWantToExpose,
+      }
+    })();
+
+    Exposer.first(); 
+    Exposer.second();
+    console.log('d', Exposer.methodToExpose)
+
+    // Prototype pattern
+    var TeslaModelS =function(){
+      this.numWhells = 4;
+      this.manufacturer = 'Tesla';
+      this.make = 'Model S';
+    }
+    TeslaModelS.prototype={
+      go:function(){
+        //Rotate Wheels
+        return this.numWhells++
+      },
+      stop:function(){
+        //Apply brake pads
+      }
+    }
+    let ttt = new TeslaModelS()
+    ttt.go()
+    console.log(ttt)
+
+    //Revealing Prototype pattern
+    //변형 프로토타입 패턴
+    console.clear()
+    var TeslaModelA = function(){
+      this.numWheels = 4;
+      this.manufacturer = 'Tesla';
+      this.make = 'Model A';
+    }
+    TeslaModelA.prototype= (function(){
+      var go = function(){
+        console.log('go!')
+        this.numWheels +=4;
+      }
+
+      var stop = function(){
+        this.numWheels -=10;
+      }
+      return {
+        pressBrakePedal:stop,
+        pressGasPedal:go,
+      }
+    })()
+
+    let aaa = new TeslaModelA()
+    console.log(aaa.pressGasPedal())
+    console.log(aaa)
+    
+    // var Subject =function(){
+    //   this.observers = [];
+
+    //   return {
+    //     subscribeObserver: function(observer){
+    //       this.observers.push(observer);
+    //     },
+    //     unsubscribeObserver:function(observer){
+    //       var index = this.observers.indexOf(observer);
+    //       if(index > -1){
+    //         this.observers.splice(index,1);
+    //       }
+    //     },
+    //     notifyObserver:function(observer){
+    //       var index = this.observers.indexOf(observer)
+    //         if(index>-1){
+    //           this.observers[index].notify(index);
+    //         }
+    //     },
+    //     notifyAllObservers: function(){
+    //       for(var i =0;i<this.observers.length;i++){
+    //         this.observers[i].notify(i)
+    //       }
+    //     }
+    //   }
+    // }
+
+    // var Observer = function(){
+    //   return {
+    //     notify:function(index){
+    //       console.log('Observer '+index+"is notified")
+    //     }
+    //   }
+    // }
+    
+    // var subject = new Subject();
+
+    // var observer1 = new Observer();
+    // var observer2 = new Observer();
+    // var observer3 = new Observer();
+    // var observer4 = new Observer();
+
+    // subject.subscribeObserver(observer2);
+
+    // subject.notifyAllObservers();
+
+      var printer = (function(){
+        var printerInstance;
+
+        function create(){
+          function print(){
+            // underlying printer mechanics
+          }
+          function turnOn(){
+            // warm up
+            // check for paper
+          }
+          return {
+            print:print,
+            turnOn:turnOn
+          }
+        }
+
+        return {
+          getInstance:function(){
+            if(!printerInstance){
+              printerInstance =create();
+            }
+            return printerInstance;
+          }
+        }
+
+        function Singleton(){
+          if(!printerInstance){
+            printerInstance = intialize();
+          }
+        }
+      })();
+
+  </script>
+  <script>
+    console.clear();
+    
+    function jQuery(a,c){
+      if(a && a.constructor == Function && jQuery.fn.ready){
+        return jQuery(document).ready(a);
+      }
+
+      a = a|| jQuery.context ||document;
+
+      if(a.jQuery){
+        return $(jQuery.merge(a,[]));
+      }
+
+      if(c && c.jQuery){
+        return $(c).find(a);
+      }
+
+      if(window == this){
+        return new jQuery(a,c);
+      }
+
+      var m = /^[^<]*(<.+>)*$/.exec(a);
+      if(m)a = jQuery.clean( [m[1]] );
+
+      this.get(
+        a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType?
+        jQuery.merge( a,[] ):
+        jQuery.find(a,c)
+      );
+
+      var fn = arguments[ arguments.length -1 ];
+
+      if( fn && fn.constructor == Function){
+        this.each(fn);
+      }
+    }
+
+    var $ = jQuery;
+
+    // jQuery.fn = jQuery.prototype={
+    //   jquery:"$Rev$",
+    //   size:function(){
+    //     return this.length
+    //   },
+    // }
+
+    // jQuery.extend = jQuery.fn.extend = function(obj,prop){
+    //   if(!prop) {
+    //     prop = obj; obj = this;
+    //   }
+    //   for(var i in prop){
+    //     obj[i] = prop[i];
+    //   }
+    //   return obj;
+    // }
+
+/*
+    (function(global, factory){
+      if(//...code){
+        // ...more code
+      }else {
+        factory(global);
+      }
+    }(window,function(window, noGlobal){//앞에 인자 window가 익명함수 global로 들어가고, 뒤에 function 이 factory로 들어가게됨.
+
+      // ...more code
+    }))
+
+*/
+    /*
+    인자로 전달하는 익명 함수가 jQuery의 실질적인 함수 객체이다.
+    익명 함수를 factory라는 이름의 매개변수로 받는다.
+    
+    즉, 여기서 실행할 함수는 호출문과 넘겨진 매개변수 뒤쪽에 있다.(= 인자)
+    이러한 패턴을 UMD(Universal Module Definition(범용 모듈 정의) 라고 부른다.
+    
+    */
+
+    var jQuery = function(selector,context){
+
+      return new jQuery.fn.init(selector,context);
+    }
+    
+    // jQuery End
+
+    var obj = {};
+    obj.prototype.foo = function(){alert('foo')}
+
+    obj.foo()
+  </script>
+</body>
+
+</html>

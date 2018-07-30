@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .invite__para{
+      text-align: center;
+    }
+    .invite__tx{
+      display: block
+    }
+  </style>
+</head>
+<body>
+  
+  <p class="invite__para">
+    <span class="invite__tx">서로가..~</span>
+    <span class="invite__tx">사랑을 이제~</span>
+    <span class="invite__tx">걸어갈 수 ~</span>
+    <span class="invite__tx">큰 사랑으로~</span>
+    <span class="invite__tx">저희 두 사람이~</span>
+    <span class="invite__tx">지켜나갈수~</span>
+    <span class="invite__tx">감사하겠습니다.~</span>
+  </p>
+  <script>
+    function tt(){
+    for(let i=1;i<=100;i++){
+      if(i%3==0){
+        console.log('fizz',i);
+      }else if (i%5 ==0){
+        console.log('fizzbuzz',i)
+      }
+    }
+  }
+    
+    //jQuery Source
+  function jQuery(a,c){
+    if(a && a.constructor == Function && jQuery.fn.ready){
+      return jQuery(document).ready(a)
+    }
+
+    a= a|| jQuery.context || document;
+
+    if(a.jquery){
+      return $(jQuery.merge(a,[]));
+    }
+
+    if(c && c.jquery){
+      return $(c).find(a);
+    }
+
+    if(window == this){
+      return new jQuery(a,c);
+    }
+
+    var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
+    if(m)a = jQuery.clean([,[1]])
+    this.get(a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType ?
+    jQuery.merge(a,[]):jQuery.find(a,c));
+
+    var fn = arguments[arguments.length -1];
+    if(fn && fn.constructor == Function)
+    this.each(fn);
+  }
+  var $ = jQuery;
+  </script>
+</body>
+</html>
