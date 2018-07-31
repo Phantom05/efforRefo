@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
-  
+  <div class="t"></div>
   <script>
     console.log('Hello!');
 
-    var obj = function(){};
-    obj.prototype.foo = function(){
+    var obj = function () {};
+    obj.prototype.foo = function () {
       console.log('foo');
     }
     // obj.foo() //직접적으로 사용할 수 없고 인스턴스를 생성해야함.
@@ -21,10 +23,10 @@
     var objIns = new obj;
     objIns.foo();
 
-    function base(){}
+    function base() {}
     var obj = new base(); // new가 생성되기 전에 prototype이 설정 되어있어야 한다 안그럼 에러가 발생한다.
     base.prototype = {
-      goo:function(){
+      goo: function () {
         console.log('goo')
       }
     }
@@ -38,10 +40,10 @@
 
     Object.prototype.foo = 'ooo'
     console.log(Object.foo);
-    try{
+    try {
       Object.goo = 'ooo';
       console.log(Object.prototype.goo)
-    }catch(e){
+    } catch (e) {
       console.log(e.message)
     }
     //자기 참조는 되고 있지않다.
@@ -56,14 +58,174 @@
     console.log(Array.hello4) // undefined
     Number.prototype.hello5 = 'hello5';
     console.log(Number.hello5) // undefined
-    Element.prototype.hello6 ='hello6';
+    Element.prototype.hello6 = 'hello6';
     console.log(Element.hello6) // undefined
     // Function 과 Object는 순환구조를 이루고 있으며, Object의 prototype으로 Function의 prototype이 사용된다.
 
-    var jQuery = function(selector,context){
-      return new jQuery.fn.init(selector,context,rootjQuery);
+
+    console.group('test')
+
+    function _test(a) {
+      return a;
     }
+    let t = document.getElementsByClassName('t')[0]
+    console.log(
+      _test({
+        type: Element,
+        target: t,
+        age: 27
+      })
+    )
+    console.groupEnd('test end')
+    //jQuery start
+    var jQuery = function (selector, context) {
+      return new jQuery.fn.init(selector, context, rootjQuery);
+    }
+    // jQuery변수를 하나 선언하면 거기에 function 객체를 생성해서 init 생성자함수에 넣어준다.
+    // 즉, jQuery('...')을 하게되면 객체 하나가 리턴된다라고 일단 생각해보자.
+
+    // jQuery.fn 이라는 Object 객체 생성, 그 안에 constructor와 init이라는 메소드들을 만듬.
+    jQuery.fn = jQuery.prototype = {
+      constructor: jQuery,
+      init: function (selector, context, rootjQuery) {
+
+      }
+    }
+    // console.log(jQuery.fn)
+    // jQuery 함수의 fn 함수는 이런 구조일것이다.
+    // 야기서 init의 기능은, selector인자의 type에 따라 DOM 검색이나, DOM객체 생성 등등을 하여, Array 형태로 만들어 리턴하도록 되어 있다.
+
+    jQuery.fn.init.prototype = jQuery.fn
+    //이렇게하게되면 jQuery.fn의 init의 prototype이 바로 상위 상위객체인 jQuery Function객체로 잡히게 된다.
+    /*
+      이것은 init 함수객체의 prototype에 jQuery.fn 객체를 세팅하게 되는데, 이것게 하게되면 var aaa = new jQuery.fn.init( ... ) 처럼 했을 경우 aaa는 jQuery.fn 객체를 상속받게 된다.
+
+      결국 aaa 객체는 init 함수를 거친 확장집합 객체가 되는데, javascript의 prototype 상속에 의해서  jQuery.fn에 정의된 property를 호출할 수 있게 되는 것이다.
+      마지막에 이에 관해서 자세히 이야기 하겠다.
+    */
+
+    /*
+      jQuery.extend = jQuery.fn.extent = function(){ 
+        //jQuery 객체와 jQuery.fn 객체 모두에 extend 라는 property로 function 객체를 참조하도록 한다.
+        var ...;
+          target = arguments[0] || {},
+          ...
+          length = arguments.length,
+          ...
+
+        ...
+
+        for(;i<length;i++){
+
+        }
+      }
+      */
+    /*
+      extent 함수의 내용은 인자로 넘어온 여러 property를 this 객체에 복사하는 기능을 한다.
+      그런데 javascript에서 this는 호출할 때 결정되는 요소이므로, jQuery.extent(...)을 하면 jQuery 객체에 추가가 되고, jQuery.fn.extend( ... )를 호출하면 jQuery.fn 객체에 추가된다.
+    */
+    /*
+    jQuery.extent({
+      noConfilic:function(deep)...,
+      isReady:...,
+    })
+    */
+
+    /*
+       jQuery.fn 객체에 property 추가
+    jQuery.fn.extend( {
+    
+            data : function( ...,
+    
+            ...
+    이것은 jQuery.fn.xxx = ... 형태로 코딩하는 것과 같은 것이라 볼 수 있다.
+    이후 소스를 보면 대부분이 jQuery 객체에 뭔가를 추가하거나, jQuery.fn 객체에 뭔가를 추가하는 형태라는 것을 알 수 있을 것이다.
+    } );
+    */
+
+    //$와 jQuery를 전역 객체로 만들기
+    window.jQuery = window.$ = jQuery;
+    //window.jQuery로 전역객체를 만들고 window.$에 jQuery를 넣음으로써 $도 전역객체로 만들어준다.
+
+    // jQuery의 핵심은 확장집합이다.
+
+    // var aaa =$('.foo');
+    // aaa는 확장집합을 가리키게 된다.
+    // 즉, jQuery에 selector를 넘겨주면 그 selector에 해당하는 객체를 찾아서 모아놓은 확장집합이라는 객체가 리턴된다.
+
+    // 그런대 사용해 보면 알겠지만, 이 확장집합은 Array처럼 작동한다.
+    // 즉 aaa[2] 이나 aaa.length, aaa.push()등등을 사용할 수 있다는 말이다. 
+    //그러나 이 확장집합에 instanceof Array를 해보면 false가 리턴된다. 즉 Array 객체는 아니라는 말이다.
+    
+    /*
+      Array 타입이라는 말은, 'Array'라는 이름을 가진 함수(function)가 있고, 즉 생성자 함수가 Array이고, 이 Array 함수 객체의 prototype에는 Array타입이 가지게 될 멤버 혹은 property가 추가되어 있다는 의미다.
+
+      new Array()를 한다는 것도, Object객체를 하나 생성해서 Array 함수를 거치게 만든다음, 그 객체에 Array의       prototype을 연결하는 과정이라는 말이다.
+    */
+
+    var push = Array.prototype.push;
+
+    var obj = {};
+    obj.length = 0;
+    push.call(obj,'123');
+    push.call(obj,'456');
+    console.log(obj);
+
+    var obj = {};
+    obj.length = 0;
+    obj.push =push;
+    obj.push('789')
+    obj.push('000')
+    console.log(obj)
+
+    /*
+      ...
+push = Array.prototype.push,
+slice = Array.prototype.slice,
+indexOf = Array.prototype.indexOf,
+...
+
+jQuery.fn = jQuery.prototype = {
+        ...,
+        init : function( ... ) {
+                ...
+                this.length = ...;
+                ...
+        },
+        ...
+        push : push
+        ...
+};
+...
+    */
+    // 사실 생각해 보면, push 같은 함수는 굳이 Array.prototype에 있는 것을 사용하지 않고 새로 작성해도 될 것 같다.
+    // 그런데 jQuery에서는 굳이 Array.prototype에 있는 함수를 사용하는데 바로 최적화 대문이라고 한다.
+
+    // 이 Array는 javascript의 기본 타입이며 아주 자주 사용된다. 보통 이 정도 되면 javascript엔진에서는 이런 것들을 특별히 좀더 빠르게 실행되도록 최적화를 해 두었을 가능성이 크다. 순수 javascript로 만드는 것만으로는 이룰 수 없는 내부적이 최적화 말이다. 그렇기 때문에 이렇게 만들어둔 함수를 사용하는 것은 당연히 빠르게 작동할 확률이 크며, jQuery제작자 들은 이것을 이용한 것이다.
+
+  //jQuery selector 엔진
+  //jQuery는 Selector엔진으로 Sizzle selector엔진을 사용하고 있다.   Sizzle은 원래 jQuery와 별도로 존재하는 selector 엔진인데, jQuery는 이 Sizzle을 가져다가 자신의 selector 엔진으로 사용한다. jQuery의 소스를 보면 주석으로 Sizzle에 대한 copyright를 적은 부분 부터 Sizzle의 코드가 등장하는 것을 볼 수 있다.
+    /*
+      제이쿼리는 보통 3가지로 selector가 나뉜다.
+      1. 직접찾기, 일반적으로 # . tagName에 해당하는 것으로 나뉜다 예를들면 $('h1') 이런식.
+
+      2. 필터적용
+      태그안쪽에서 직접찾기에 필터를 적용해서 찾는데 예를들면 div.abc 이러면 div중에서만 클래스가 abc인것을 찾게 된다.
+
+      3. 진행방향 결정.
+      div~p, div>a 와 같이 진행방향에 적합한 태그들만 확인하여 찾게된다.
+
+    */
+    // 엔진의 엔트리 포인트
+    var Sizzle = function(selector, context, results,seed){
+      // ...
+    }
+
+    
+
+
 
   </script>
 </body>
+
 </html>
