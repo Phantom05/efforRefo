@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    console.log('Hello!');
+
+    var obj = function(){};
+    obj.prototype.foo = function(){
+      console.log('foo');
+    }
+    // obj.foo() //직접적으로 사용할 수 없고 인스턴스를 생성해야함.
+    // 함수가 아니라 원형이 객체일경우도 실행이 되지 않음 반드시 obj가 함수이여야함.
+    // 객체 자체에서 찾지 못하면 그 객체의 프로토타입을 찾게된다.
+    var objIns = new obj;
+    objIns.foo();
+
+    function base(){}
+    var obj = new base(); // new가 생성되기 전에 prototype이 설정 되어있어야 한다 안그럼 에러가 발생한다.
+    base.prototype = {
+      goo:function(){
+        console.log('goo')
+      }
+    }
+    // obj.goo() error
+    var objAfter = new base();
+    objAfter.goo()
+    /*
+      _proto_는 상위에서 물려받아 검색할 연결 고리이고
+      prototype은 하위로 물려줄 연결 고리가 되는 셈이다.
+    */
+
+    Object.prototype.foo = 'ooo'
+    console.log(Object.foo);
+    try{
+      Object.goo = 'ooo';
+      console.log(Object.prototype.goo)
+    }catch(e){
+      console.log(e.message)
+    }
+    //자기 참조는 되고 있지않다.
+    // 여기서 특이한 점은 Function 이나 Object는 함수로 생성 후 바로 호출해도 호출이 되는데 String이나, 기타 다른 객체들은 바로 호출하면 언디파인이 뜨게된다.
+    Function.prototype.hello = 'hello'
+    console.log(Function.hello) // hello
+    Object.prototype.hello2 = 'hello2';
+    console.log(Object.hello2); //hello2
+    String.prototype.hello3 = 'hello3'
+    console.log(String.hello3) // undefined
+    Array.prototype.hello4 = 'hello4';
+    console.log(Array.hello4) // undefined
+    Number.prototype.hello5 = 'hello5';
+    console.log(Number.hello5) // undefined
+    Element.prototype.hello6 ='hello6';
+    console.log(Element.hello6) // undefined
+    // Function 과 Object는 순환구조를 이루고 있으며, Object의 prototype으로 Function의 prototype이 사용된다.
+
+    var jQuery = function(selector,context){
+      return new jQuery.fn.init(selector,context,rootjQuery);
+    }
+
+  </script>
+</body>
+</html>
