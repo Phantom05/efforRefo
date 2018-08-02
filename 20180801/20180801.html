@@ -7,12 +7,67 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-gap: 10px;
+      padding: 10px;
+      background: black;
+      color: white;
+      grid-template-columns: auto auto auto;
+    }
+
+    .grid-item {
+      background: gray;
+      padding: 20px;
+    }
+
+    .test {
+      cursor: default;
+    }
+    #testInput{
+      ime-mode: disabled
+    }
+  </style>
 </head>
 
 <body>
 
+  <input type="text" class="test" readonly>
+  <input type="text" id="testInput">
+  <div class="grid-container">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">5</div>
+    <div class="grid-item">6</div>
+    <div class="grid-item">7</div>
+    <div class="grid-item">8</div>
+    <div class="grid-item">9</div>
+  </div>
 
+  <input type="text" onfocus="blur()">
   <script>
+    let tInput = document.getElementById('testInput');
+    tInput.addEventListener('keydown', function (e) {
+      let k = event.keyCode;
+      let tval = testInput.value;
+      let vHyp = tval + '-';
+      let vLen = tval.length;
+
+      if (k == 8 || k == 39 || k <= 37 || k <= 46) {} 
+      else if ((k >= 96 && k <= 105) || (k >= 48 && k <= 57)) {
+        if (vLen == 3 || (vLen == 8)) {tInput.value = vHyp;} 
+        else if (vLen > 12) {e.preventDefault();}
+      } else {e.preventDefault()}
+      return;
+    })
+
+
+    testInput.hello = 'hello'
+    console.dir(testInput)
+
     $('#element').click(function () {
       $(location).attr('href', 'mailto:?subject=' +
         encodeURIComponent("This is my subject") +
@@ -31,8 +86,12 @@
     // 하나의 전역 객체
     var MYAPP = {};
 
-    MYAPP.Parent = function(){console.log('Parent')};
-    MYAPP.Child = function(){console.log('Child')};
+    MYAPP.Parent = function () {
+      console.log('Parent')
+    };
+    MYAPP.Child = function () {
+      console.log('Child')
+    };
     MYAPP.variable = 1;
 
     // 객체 컨테이너
@@ -40,7 +99,10 @@
 
     // 객체들을 컨테이너 안에 추가합니다.
     MYAPP.modules.module1 = {};
-    MYAPP.modules.module1.data = {a:1,b:2}
+    MYAPP.modules.module1.data = {
+      a: 1,
+      b: 2
+    }
     MYAPP.modules.module2 = {};
 
     MYAPP.Parent();
@@ -56,11 +118,69 @@
     // 매번 객체에 접근하는데다, 이름이 중첩되고 길어지므로 검색이 느려지게 됩니다.
 
     MYAPP.message = "Hi";
-    MYAPP.sayHello = function(){
+    MYAPP.sayHello = function () {
       return MYAPP.message;
     }
     console.log(MYAPP.sayHello())
+    var direct = MYAPP.sayHello;
+    console.log(direct())
 
+
+    //범용 네임스페이스 함수
+    /*
+      프로그램이 복잡해짐에 따라, 코드의 각 부분들이 별개의 파일로 분리되어 문서에 포함되는 경우가 많습니다. 그러다 보면, 네임스페이스로 사용할 객체를 선언하거나 이미 있는것을 재정의하는 일도 생길 수 있습니다. 이를 확인하지 못한 채 지나가면 내용을 덮어쓰는 문제가 생깁니다.
+    */
+
+    // 1번
+    var MYAPP = {};
+
+    // 2번
+    if (typeof MYAPP === 'undefined') {
+      var MYAPP = {};
+    }
+
+    // 3번
+    var MYAPP = MYAPP || {};
+    //MYAPP값이 있으면 MYAPP값이 들어가고 없으면 {}로 들어감
+
+    // 전역 객체의 존재 여부를 확인하기 위해 위의 같은 방식을 사용하는데, 모든 변수에 이런식으로 작업해주면 중복되는 코드가 상당히 많이 생겨날 수 있습니다. 때문에 위의 코드를 함수화 해놓는것이 좋습니다.
+
+    // 가장 상단에 위치할 객체는 먼저 선언합니다.
+    // (namespace 함수를 전역으로 선언하지 않기 위함입니다.)
+    var MYAPP = MYAPP || {};
+
+    MYAPP.nsFunc = function (ns_string) {
+      // '.'으로 구분된 네임스페이스 표기를 쪼갭니다
+      var sections = ns_string.split('.')
+      var parent = MYAPP
+      var i;
+
+      // 최상단의 MYAPP객체는 이미 선언되었으므로 제거합니다.
+      if (sections[0] === 'MYAPP') {
+        sections = sectiosn.slice(1);
+      }
+
+      var s_length = sections.length;
+      for (i = 0; i < s_length; i += 1) {
+
+      }
+    }
+    MYAPP.nsFunc('korea.seoul.heumcheng.gu.jeopa')
+
+    let ttake;
+    // if (typeof ttake =='undefined'){
+    //   let ttake ={}
+    //   console.log(ttake)
+    // }
+    console.log(ttake)
+    ttake = ttake || {};
+    console.log(ttake)
+
+    function Sandbox(){
+      //arguments를 배열로 선언
+      var args = Array.prototype.slice.call(arguments)
+      
+    }
   </script>
 </body>
 
