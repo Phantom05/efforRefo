@@ -250,8 +250,13 @@
   <style>
   
   </style>
-  <input type="text" readonly>
+  <input type="text" id="tput"  onfocus="javascript:blur()">
   <script>
+    // var tput =document.getElementById('tput');
+    // tput.addEventListener('mouseover',function(e){
+    //  this.readOnly=true;
+    // })
+
     let tInput = document.getElementById('testInput');
     tInput.addEventListener('keydown', function (e) {
       let k = event.keyCode;
