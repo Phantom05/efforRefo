@@ -248,9 +248,8 @@
     </li>
   </ul>
   <style>
-  
   </style>
-  <input type="text" id="tput"  onfocus="javascript:blur()">
+  <input type="text" id="tput" onfocus="javascript:blur()">
   <script>
     // var tput =document.getElementById('tput');
     // tput.addEventListener('mouseover',function(e){
@@ -476,7 +475,187 @@
       document.cookie = cookie_name + '=' + cookie_value;
     }
 
-    setCookie('myHobby','game','3')
+    setCookie('myHobby', 'game', '3');
+
+    console.clear()
+    console.log('Hello world!')
+
+
+    function divisors(int) {
+      let arr = [];
+      for (var i = 2; i < int; i++) {
+        if (int % i == 0) arr.push(i)
+      }
+      return (arr.length > 0) ? arr : int + ' is prime';
+    };
+    console.log(
+      divisors(17)
+    )
+
+    function divisors2(int) {
+      let res = [...Array(int).keys()].slice(2).filter(x => int % x == 0);
+      return res.length ? res : int + ' is prime'
+    };
+
+    console.log(
+      divisors2(17)
+    )
+
+    function validatePIN(p) {
+      let n = [...p].map(x => parseInt(x))
+      return n.includes(NaN) ? false : (n.length == 4 || n.length == 6) ? true : false
+    }
+
+    console.log(
+      validatePIN('5354')
+    )
+
+    function validatePIN2(p) {
+      console.log(Number('.'))
+      return Number(p) ? (p.length == 4 || p.length == 6) ? true : false : parseInt(p) == 0 && (p.length == 4 || p.length ==
+        6) ? true : false
+    }
+    console.log(
+      validatePIN2('000000')
+    )
+    console.log(0 == false)
+
+    function validatePIN3(p) {
+      return p.length == 4 || p.length == 6 && parseInt(p) == p
+    }
+    console.log(validatePIN3('54g5f4'))
+  </script>
+
+  <style>
+    * {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .abc {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .abcUl {
+      position: absolute;
+      width: 500%;
+      height: 100%;
+    }
+
+    .abcList {
+      width: 20%;
+      height: 100%;
+      float: left;
+    }
+
+    .a {
+      background: red;
+    }
+
+    .b {
+      background: orange;
+    }
+
+    .c {
+      background: blue;
+    }
+
+    .d {
+      background: purple;
+    }
+
+    .e {
+      background: green;
+    }
+
+    .pbbox {
+      text-align: center;
+    }
+  </style>
+  <div class="abc">
+    <ul class="abcUl">
+      <li class="abcList a"></li>
+      <li class="abcList b"></li>
+      <li class="abcList c"></li>
+      <li class="abcList d"></li>
+      <li class="abcList e"></li>
+    </ul>
+  </div>
+  <div class="pbbox">
+    <button id="prbt">왼쪽 버튼</button>
+    <button id="bxbt">오른쪽 버튼</button>
+  </div>
+
+  <script>
+    let idx = 0;
+    const bxbt = document.getElementById('bxbt');
+    const prbt = document.getElementById('prbt');
+    const $abcUl = $('.abcUl');
+    prbt.addEventListener('click', function () {
+      if (idx == 0) {
+        $abcUl.animate({
+          left: '-100%'
+        },500, function () {
+          $abcUl.find(':first').insertAfter($abcUl.find(':last'))
+          $abcUl.css({
+            left: '0'
+          })
+          idx--;
+        })
+        idx++;
+      }
+    })
+    bxbt.addEventListener('click', function () {
+      if (idx == 0) {
+        $abcUl.find(':last').insertBefore($abcUl.find(':first'))
+        $abcUl.css({
+          left: '-100%'
+        })
+        $abcUl.animate({
+          left: '0'
+        },500, function () {
+          idx--;
+        })
+        idx++;
+      }
+    })
+
+/*
+"no one likes this"
+"Peter likes this"
+"Jacob and Alex like this"
+"Max, John and Mark like this"
+"Alex, Jacob and 2 others like this"
+*/
+// function likes(names) {
+//   let len = names.length;
+//   if(len==0){return 'no one likes this'}
+//   else if (len==1){return names[0]+' likes this'}
+//   else if (len==2){return names[0]+' and '+names[1]+' like this'}
+//   else if (len==3){return names[0]+', '+names[1]+' and '+names[2]+' like this'}
+//   else if (len>=4){return names[0]+', '+names[1]+' and '+(len-2)+' others like this'}
+// }
+function likes(names) {
+  return {
+    0:'no one likes this',
+    1:`${names[0]} likes this`,
+    2:`${names[0]} and ${names[1]} like this`,
+    3:`${names[0]}, ${names[1]} and ${names[2]} like this`,
+    4:`${names[0]}, ${names[1]} and ${names.length-2} others like this`,
+  }[Math.min(4,names.length)]
+}
+
+  console.log(
+    '\n',likes([])+'\n',likes(['준영'])+'\n',likes(['준영','준영1'])+'\n',likes(['준영','준영1','준영2'])+'\n',likes(['준영','준영1','준영2','준영3'])+'\n',likes(['준영','준영1','준영2','준영3','준영5'])+'\n'
+  )
+
+  
   </script>
 </body>
 
