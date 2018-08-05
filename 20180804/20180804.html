@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <!-- <div>
+    <h1>Header-0</h1>
+    <h1>Header-1</h1>
+  </div> -->
+  <script>
+    console.log('Hello world');
+
+  $(function(){
+    // $('h1').empty();
+    $('<h1></h1>').html('Hello Meat .. !').appendTo('body');
+    // $('<img/>').attr('src','https://attach.s.op.gg/forum/20180201022727_615964.png').appendTo('body')
+    $('<img/>',{
+      src:"https://attach.s.op.gg/forum/20180201022727_615964.png",
+      width:"500",
+      height:"500",
+    }).appendTo("body");
+
+    var h1 = "<h1>Header1</h1>";
+    var h2 = "<h2>Header2</h2>";
+    $('body').append(h1,h2,h1,h2)
+  });
+
+  
+  </script>
+</body>
+</html>
