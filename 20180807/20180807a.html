@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<title>Insert title here</title>
+</head>
+<body>
+<pre id="preview">텍스트 파일 내용 출력 영역</pre>
+<input type="file" id="getfile" accept="./ex1.json">
+
+<script type="text/javascript">
+  var file = document.querySelector('#getfile');
+  
+  file.onchange = function () { 
+      var fileList = file.files ;
+      
+      // 읽기
+      var reader = new FileReader();
+      reader.readAsText(fileList [0]);
+  
+      //로드 한 후
+      reader.onload = function  () {
+          document.querySelector('#preview').textContent = reader.result ;
+      }; 
+  }; 
+
+  
+  </script>
+</body>
+</html>

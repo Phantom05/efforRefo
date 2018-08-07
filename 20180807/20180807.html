@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <style>
+    * {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .slideBox {
+      position: relative;
+      width: 400px;
+      margin: 10px;
+      overflow: hidden;
+    }
+
+    .ulTest {
+      overflow: hidden;
+    }
+
+    .imgTest {
+      width: 400px;
+      height: 400px;
+      float: left;
+      transition: .5s;
+      cursor: pointer;
+    }
+
+    .imgTest:hover {
+      transform: scale(2);
+      transition: .5s;
+    }
+
+    .slideBt {
+      position: absolute;
+      width: 60px;
+      height: 70px;
+      top: 50%;
+      text-align: center;
+      line-height: 54px;
+      transform: translateY(-50%);
+      background: rgba(145, 145, 145, 0.342);
+      color: white;
+      font-weight: bold;
+      font-size: 70px;
+      cursor: pointer;
+      transition: .5s;
+      border-radius: 5px;
+    }
+
+    .slideBt:hover {
+      transition: .5s;
+      background: black;
+    }
+
+    .prev {
+      left: 5%;
+    }
+
+    .next {
+      right: 5%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="slide"></div>
+  <button id="autoSlide">auto</button>
+  <input type="checkbox" id="ttt">
+
+
+  <select name="" id="target2">
+    <option value="1">Menu1</option>
+    <option value="2">Menu2</option>
+    <option value="3">Menu3</option>
+    <option value="4">Menu4</option>
+    <option value="5">Menu5</option>
+  </select>
+
+  <div class="testt"></div>
+  <div class="testt"></div>
+  <div class="testt"></div>
+
+  <img class="testtImg" src="https://img.livescore.co.kr/data/editor/1801/6367029032fa4102dac6f5dfd55dfebd_1515929886_5397.jpg"
+    alt="">
+  <img class="testtImg" src="https://t1.daumcdn.net/cfile/tistory/23219F4F58C6B4C417" alt="">
+  <img class="testtImg" src="https://ncache.ilbe.com/files/attach/new/20180220/377678/10346026164/10376134696/18c408220dd41699c443ea022f1b95c8.jpg"
+    alt="">
+  <img class="testtImg" src="https://scontent-lga3-1.cdninstagram.com/vp/f961630d99143ae711761c6620a36ded/5BC5435C/t51.2885-15/s480x480/e35/33879365_377161546111620_5316574668067438592_n.jpg"
+    alt="">
+  <img class="testtImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkdDwgmcdbqoYkPN78ZPMCyugrQSsLAmowfeXmoRi4X85bIxKJ1g"
+    alt="">
+
+
+  <h1 class="hh">hello</h1>
+  <script>
+    $(document).ready(function () {
+      $('.hh').on('click', function () {
+        $(this).html(function (index, html) {
+          return html + '+'
+        })
+      })
+
+      var content = [{
+          name: "윤인성",
+          region: "서울특별시 강서구"
+        },
+        {
+          name: "윤하린",
+          region: "서울특별시 광진구"
+        },
+        {
+          name: "윤인아",
+          region: "미국 메사추세츠"
+        },
+      ];
+
+      $('.testt').append(function (index) {
+        var item = content[index]
+        var output = '';
+        output += "<h4>" + item.name + "</h4>";
+        output += "<h5>" + item.region + "</h5>";
+
+        return output;
+      })
+
+      $('.testtImg').css({
+        width: 250,
+        height: 250
+      })
+      setInterval(function () {
+        $('.testtImg').first().appendTo('body')
+      }, 2000)
+    })
+
+
+
+    $('#target2').change(function () {
+      $("#target2").val("5").prop("selected", true);
+    })
+
+
+    const target = document.getElementById('slide');
+
+    function listMaker() {
+      let slideBox = document.createElement('div');
+      slideBox.classList.add('slideBox');
+      let prevBt = document.createElement('a');
+      let nextBt = document.createElement('a');
+      prevBt.classList.add('slideBt');
+      prevBt.classList.add('prev');
+      prevBt.innerHTML = "＜";
+      nextBt.classList.add('slideBt');
+      nextBt.classList.add('next');
+      nextBt.innerHTML = "＞";
+      let ul = document.createElement('ul');
+      ul.classList.add('ulTest');
+
+      let len = listLen()
+      _for(0, len, function (val) {
+        let li = document.createElement('li');
+        let img = document.createElement('img');
+        img.classList.add('imgTest')
+        img.src = listMaker.data['list' + (val + 1)]
+
+        li.appendChild(img);
+        ul.appendChild(li);
+        slideBox.appendChild(ul);
+        slideBox.appendChild(prevBt);
+        slideBox.appendChild(nextBt);
+      });
+      ul.style.width = len * 100 + '%';
+      return slideBox;
+    }
+
+    function _for(s, e, list) {
+      for (var i = s; i < e; i++) {
+        list(i);
+      }
+    }
+
+    function listLen() {
+      let len = []
+      for (l in listMaker.data) {
+        if (l == 'listLen') continue;
+        len.push(l)
+      }
+      return len.length;
+    }
+
+
+    listMaker.data = {
+      list1: "https://pbs.twimg.com/profile_images/378800000659543047/f6983d1ad4cc9611dd0be5a525ede2d8_400x400.jpeg",
+      list2: "https://www.pokergosu.com/files/attach/images/128/565/638/003/1997f5a4bae76b6611031df8c0148918.jpg",
+      list3: "http://fimg4.pann.com/new/download.jsp?FileID=38125487",
+      list4: "http://www.shebeach.co.kr/web/product/medium/201706/13162_shop1_607968.jpg",
+      list5: "https://www.dajaba.org/files/attach/images/161/140/325/002/9b231711b7996b291ed4235bb05f78ff.jpg",
+      list6: "http://www.dtoday.co.kr/news/photo/201404/119960_66985_2359.jpg",
+      list7: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7WTps-99yZ3wSNsaFxYjwtPZvVjvmg5Gse0UJ_1JE43NM5BY7",
+      list8: "https://scontent-nrt1-1.cdninstagram.com/vp/6c6e33a2aa693d3762bb72beab55f248/5BA617FF/t51.2885-15/e35/31757609_601470423546709_2581295234889547776_n.jpg",
+
+    }
+    /*
+      list9:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2rEitLC73QGpoh3_EwHa_5VtyMGLL-nfmJFlC4PyGJ26gZduCWw",
+
+      이걸 추가해보세요
+    */
+    target.appendChild(listMaker())
+
+    var $ul = $('.ulTest');
+    let sIdx = 0;
+    let prev = document.getElementsByClassName('prev')[0]
+    prev.addEventListener('click', function () {
+      clearInterval(autoSlide)
+      if (sIdx == 0) {
+        $ul.animate({
+          marginLeft: "-100%"
+        }, function () {
+          $ul.find('li:first').insertAfter($ul.find('li:last'));
+          $ul.css({
+            marginLeft: 0
+          });
+          sIdx--;
+        })
+        sIdx++;
+      }
+
+    });
+
+    let next = document.getElementsByClassName('next')[0]
+    next.addEventListener('click', function () {
+      clearInterval(autoSlide)
+      if (sIdx == 0) {
+        $ul.find('li:last').insertBefore($ul.find('li:first'))
+        $ul.css({
+          marginLeft: "-100%"
+        })
+        $ul.animate({
+          marginLeft: "0"
+        }, function () {
+          sIdx--;
+        })
+        sIdx++;
+      }
+    });
+
+
+
+
+    let autoSlideBt = document.getElementById('autoSlide');
+    autoSlideBt.addEventListener('click', function () {
+
+    })
+    let autoSlide =
+      setInterval(function () {
+        if (sIdx == 0) {
+          $ul.animate({
+            marginLeft: "-100%"
+          }, function () {
+            $ul.find('li:first').insertAfter($ul.find('li:last'));
+            $ul.css({
+              marginLeft: 0
+            });
+            sIdx--;
+          })
+          sIdx++;
+        }
+      }, 2000)
+  </script>
+
+  <script>
+    // $(document).ready(function () {
+    //   $.getJSON('./ex1.json', function () {
+    //     var html = [];
+    //     $.each(data, function (entryIndex, entry) {
+    //       html.push('<div >');
+    //       html.push('<h3 >' + item.firstName + '</h3>');
+    //       html.push('<div >' + item.lastName + '</div>');
+    //       html.push('<div >' + item.age + '</div>');
+    //       html.push('<div >' + item.address.streetAddress + '</div>');
+    //       html.push('<div >' + item.phoneNumber[0].type + '</div>');
+    //       html.push('</div>');
+    //       html.push('</div>');
+    //     });
+    //     console.log(html)
+    //   })
+    // })
+  </script>
+</body>
+
+</html>
