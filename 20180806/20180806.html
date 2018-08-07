@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .loginView{
+      transition: .5s;
+      opacity: 0;
+    }
+    .loginViewActive{
+      transition: .5s;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>회원가입</h1>
+  <div><input type="text" placeholder="이름" id="signupName"></div>
+  <div><input type="text" placeholder="아이디" id="signupId"></div>
+  <div><input type="password" placeholder="비밀번호" id="signupPw"></div>
+  <button type="button" id="signup">가입하기</button>
+  <h1>로그인</h1>
+  <div><input type="text" placeholder="아이디" id="signinId"></div>
+  <div><input type="password" placeholder="비밀번호" id="signPw"></div>
+  <button type="button" id="signin">login</button>
+  <button type="button" id="logout">logout</button>
+
+    <div>
+        <button id="locals">로컬스토리지조회</button>
+        <button id="locald">로컬스토리지 삭제</button>
+    </div>
+
+    <div class="loginView">
+    <h2><span id="master"></span>님, 안녕하세요</h2>
+    <ul>
+      <li>
+        <span>이름: </span><span id="loginName"></span>
+      </li>
+      <li>
+        <span>아이디: </span><span id="loginId"></span>
+      </li>
+      <li>
+        <span>비밀번호: </span><span id="loginPw"></span>
+      </li>
+    </ul>
+  </div>
+  <script>
+    console.log('새로고침')
+    var loginName=document.getElementById('loginName');
+    var loginId=document.getElementById('loginId');
+    var loginPw=document.getElementById('loginPw');
+    var master =document.getElementById('master');
+    var loginView=document.getElementsByClassName('loginView')[0];
+
+    var logout=document.getElementById('logout');
+
+    var signup=document.getElementById('signup');
+    var signin=document.getElementById('signin');
+
+    var signupName = document.getElementById('signupName');
+    var signupId=document.getElementById('signupId');
+    var signupPw=document.getElementById('signupPw');
+
+    var signinId =document.getElementById('signinId');
+    var signinPw =document.getElementById('signPw');
+
+    var locals=document.getElementById('locals');
+
+    signup.addEventListener('click',function(){
+      var spNameVal = signupName.value;
+      var spIdVal=signupId.value;
+      var spPwVal =signupPw.value;
+      localStorage.name=spNameVal;
+      localStorage.id=spIdVal;
+      localStorage.paswword=spPwVal;
+      alert('가입되었습니다.');
+      signupName.value='';
+      signupId.value='';
+      signupPw.value='';
+    });
+
+
+    signin.addEventListener('click',function(){
+      var siIdVal =signinId.value;
+      var siPwVal =signinPw.value;
+
+      if(siIdVal==localStorage.id && siPwVal==localStorage.paswword){
+        alert('로그인 되었습니다.')
+        console.log('login!');
+        master.innerHTML=localStorage.name;
+        loginView.classList.add('loginViewActive');
+        loginName.innerHTML=localStorage.name;
+        loginId.innerHTML=localStorage.id;
+        loginPw.innerHTML=localStorage.paswword;
+
+        signinId.value='';
+        signinPw.value='';
+      }else{
+        console.log('아이디, 비밀번호를 확인해주세요')
+      }
+
+    });
+
+    logout.addEventListener('click',function(){
+      loginView.classList.remove('loginViewActive');
+      setTimeout(() => {
+        master.innerHTML='';
+      loginName.innerHTML='';
+      loginId.innerHTML='';
+      loginPw.innerHTML='';
+      }, 1000);
+    })
+
+    locals.addEventListener('click',function(){
+      console.log(
+        localStorage
+      )
+    })
+    locald.addEventListener('click',function(){
+      localStorage.clear()
+      console.log(
+        localStorage
+      )
+    })
+  </script>
+</body>
+</html>
