@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <style>
+    *{list-style: none;margin: 0;padding: 0;box-sizing: border-box;}
+    .slide{
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .slideUl{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .slideList{
+      position: absolute;
+      left: 0;;
+      float: left;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: .5s;
+      transform:scale(0)
+    }
+    .slide1{
+      background: url(https://post-phinf.pstatic.net/MjAxNzEwMjlfMTE5/MDAxNTA5MjIxMTUzMjI1.rofqLQn_8hguXiyPFsh3CraRye5swuB0er7u_r121Sgg.p9X3Y-KDWFRqA4n9FYqPSBM92VALitCIXpKFckQH-fIg.PNG/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%97%A4%EC%96%B4%EC%83%B5_%281%29.png?type=w1200);
+      background-size: 100%;
+    }
+    .slide2{
+      background: url(http://fimg3.pann.com/new/download.jsp?FileID=32519466);
+       background-size: 100%;
+    }
+    .slide3{
+      background: url(https://pbs.twimg.com/profile_images/877930617190612993/NJLfa8Ti_400x400.jpg);
+       background-size: 100%;
+    }
+    .slide4{
+      background: url(http://img.etoday.co.kr/pto_db/2016/11/20161114123702_971571_600_799.jpg);
+       background-size: 100%;
+    }
+    .slide5{
+      background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTotcZvMAqFeisITRbMl_WDS1vmvQjETVttHxZ2l7pZrXBLQs5Zcw);
+       background-size: 100%;
+    }
+    
+    .slideBt{
+      display: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(189, 189, 189, 0.363);
+      cursor: pointer;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      line-height: 40px;
+      font-size: 30px;
+      border-radius: 5px;
+      transition: .5s;
+    }
+    .slideBt:hover{
+      background: rgb(83, 83, 83);
+      transition: .5s;
+    }
+    .prevBt{
+      left: 0;
+    }
+    .nextBt{
+      right: 0;
+    }
+    .pos{
+      display: none;
+    }
+    input:checked+.slideList{
+      opacity: 1;
+      transition: .5s ease-in-out;
+      transform: scale(1)
+    }
+    input:checked+.slideList .slideBt{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  
+  <canvas id="canvas" width="700" height="400" style="border:3px solid black"></canvas>
+
+  <div class="slide">
+    <ul class="slideUl">
+
+      <input type="radio" id="sl1" class="pos" checked name="sli">
+      <li class="slideList slide1">
+          <label for="sl5" class="prevBt slideBt">＜</label>
+          <label for="sl2" class="nextBt slideBt">＞</label>
+      </li>
+
+      <input type="radio" id="sl2" class="pos" name="sli">
+      <li class="slideList slide2">
+          <label for="sl1" class="prevBt slideBt">＜</label>
+          <label for="sl3" class="nextBt slideBt">＞</label>
+      </li>
+
+      <input type="radio" id="sl3" class="pos" name="sli">
+      <li class="slideList slide3">
+          <label for="sl2" class="prevBt slideBt">＜</label>
+          <label for="sl4" class="nextBt slideBt">＞</label>
+      </li>
+
+      <input type="radio" id="sl4" class="pos" name="sli">
+      <li class="slideList slide4">
+          <label for="sl3" class="prevBt slideBt">＜</label>
+          <label for="sl5" class="nextBt slideBt">＞</label>
+      </li>
+
+      <input type="radio" id="sl5" class="pos" name="sli">
+      <li class="slideList slide5">
+          <label for="sl4" class="prevBt slideBt">＜</label>
+          <label for="sl1" class="nextBt slideBt">＞</label>
+      </li>
+
+    </ul>
+  </div>
+
+
+  <script>
+    $(document).ready(function(){
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+
+      $(canvas).on({
+        mousedown:function(event){
+          var position = $(this).offset();
+          var x =event.pageX - position.left;
+        },
+        mouseup:function(event){
+
+        }
+      })
+    })
+  </script>
+</body>
+</html>
