@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 보조함수 -->
+    <script>
+        //랜덤정수 생성
+        function nextRandomInteger(limit){
+            return Math.round(Math.random() * limit);
+        }
+
+        //랜덤문자 생성
+        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        function randomAlphabet(){
+            return alphabet.charAt(nextRandomInteger(25));
+        }
+
+        //랜덤속도로 생산
+        function randomSpeed(maxSpeed){
+            return Math.random() * maxSpeed - Math.random() * maxSpeed;
+        }
+    </script>
+
+    <!-- 생성자 함수 -->
+    <script>
+        var canvasWidth = 700;
+        var canvasHeight = 400;
+
+        function MovingText(){
+            this.x = nextRandomInteger(canvasWidth);
+            this.y = nextRandomInteger(canvasHeight);
+            this.vx = randomSpeed(10);
+            this.vy = randomSpeed(10);
+
+            this.body = document.createElement('h1');
+            this.body.innerHTML = randomAlphabet();
+            this.body.style.position = 'absolute';
+
+            document.body.appendChild(this.body);
+        }
+
+        MovingText.prototype.move = function(){
+            if(this.x < 0 || this.x > canvasWidth){this.vx *= -1}
+            if(this.y < 0 || this.y > canvasHeight){this.vy *= -1}
+
+            this.x += this.vx;
+            this.y += this.vy;
+
+            this.body.style.left = this.x + 'px';
+            this.body.style.top  = this.y + 'px';
+        }
+    </script>
+
+    <!-- window.onload -->
+    <script>
+        window.onload = function(){
+            var movingTexts = [];
+
+            for (var i = 0; i < 100; i++){
+                movingTexts.push(new MovingText());
+            }
+        
+
+        setInterval(function(){
+            for(var i in movingTexts){
+                movingTexts[i].move();
+            }
+        },1000/30);
+    }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
