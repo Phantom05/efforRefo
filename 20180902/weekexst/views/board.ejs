@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/upload.css">
+</head>
+
+<body>
+  <h1>upload file</h1>
+  <form action="/uploads/create" method="POST" enctype="multipart/form-data">
+    <div class="inputRow">
+      <label for="fileup" class="fileinputLabel">File Select</label>
+      <input type="file" name="imgFile" class="fileinput" id="fileup" data-multiple-caption="{count} files selected"
+        multiple>
+    </div>
+    <div class="inputRow">
+      <input type="submit" value="Upload" class="uploadbt">
+    </div>
+  </form>
+
+  <div class="previewBox">
+
+  </div>
+  <script>
+    const fileup = document.getElementById('fileup');
+    const fileinputLabel = document.getElementsByClassName('fileinputLabel')[0];
+    const previewBox =document.getElementsByClassName('previewBox')[0];
+    fileup.addEventListener('change', function () {
+      fileinputLabel.innerHTML = "Uploading!";
+
+      var fileList = fileup.files;
+      // 읽기
+      var reader = new FileReader();
+      reader.readAsDataURL(fileList[0]);
+
+      //로드 한 후
+      reader.onload = function () {
+        let img = document.createElement('img');
+        img.src = reader.result;
+        img.classList.add('previewImg')
+        previewBox.appendChild(img);
+        
+        // document.querySelector('#preview').src = reader.result;
+      };
+    })
+  </script>
+</body>
+
+</html>
